@@ -3,12 +3,6 @@ import {useIntl} from 'react-intl'
 import {CustomSVG} from '@/components/elements/SVG/CustomSVG'
 
 const OrderDocuments = ({order}) => {
-  const [data, setData] = useState(order)
-
-  useEffect(() => {
-    setData(order)
-  }, [order])
-
   return (
     <div className='card card-flush py-4 flex-row-fluid'>
       <div className='card-header'>
@@ -25,7 +19,7 @@ const OrderDocuments = ({order}) => {
                   <div className='d-flex align-items-center'>
                     <CustomSVG
                       className='svg-icon svg-icon-2 me-2'
-                      path='/public/media/icons/ecommerce/scroll.svg'
+                      path='/media/icons/ecommerce/scroll.svg'
                     />
                     Invoice
                   </div>
@@ -44,7 +38,7 @@ const OrderDocuments = ({order}) => {
                   <div className='d-flex align-items-center'>
                     <CustomSVG
                       className='svg-icon svg-icon-2 me-2'
-                      path='/public/media/icons/ecommerce/delivery.svg'
+                      path='/media/icons/ecommerce/delivery.svg'
                     />
                     Shipping
                   </div>

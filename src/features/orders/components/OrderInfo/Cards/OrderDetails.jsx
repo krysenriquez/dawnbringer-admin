@@ -4,18 +4,13 @@ import {CustomSVG} from '@/components/elements/SVG/CustomSVG'
 import {format} from 'date-fns'
 
 const OrderDetails = ({order}) => {
-  const [data, setData] = useState(order)
   const intl = useIntl()
-
-  useEffect(() => {
-    setData(order)
-  }, [order])
 
   return (
     <div className='card card-flush py-4 flex-row-fluid'>
       <div className='card-header'>
         <div className='card-title'>
-          <h2>Order (#000001)</h2>
+          <h2>Order (#{order.order_number})</h2>
         </div>
       </div>
       <div className='card-body pt-0'>
@@ -27,13 +22,13 @@ const OrderDetails = ({order}) => {
                   <div className='d-flex align-items-center'>
                     <CustomSVG
                       className='svg-icon svg-icon-2 me-2'
-                      path='/public/media/icons/general/calendar.svg'
+                      path='/media/icons/general/calendar.svg'
                     />
                     Date Added
                   </div>
                 </td>
                 <td className='fw-bold text-end'>
-                  {format(Date.parse(data.created), 'dd/MM/yyyy')}
+                  {format(Date.parse(order.created), 'dd/MM/yyyy')}
                 </td>
               </tr>
               <tr>
@@ -41,13 +36,13 @@ const OrderDetails = ({order}) => {
                   <div className='d-flex align-items-center'>
                     <CustomSVG
                       className='svg-icon svg-icon-2 me-2'
-                      path='/public/media/icons/finance/wallet.svg'
+                      path='/media/icons/finance/wallet.svg'
                     />
                     Payment Method
                   </div>
                 </td>
                 <td className='fw-bold text-end'>
-                  {intl.formatMessage({id: data.payment_method})}
+                  {intl.formatMessage({id: order.payment_method})}
                 </td>
               </tr>
               <tr>
@@ -55,12 +50,12 @@ const OrderDetails = ({order}) => {
                   <div className='d-flex align-items-center'>
                     <CustomSVG
                       className='svg-icon svg-icon-2 me-2'
-                      path='/public/media/icons/ecommerce/delivery.svg'
+                      path='/media/icons/ecommerce/delivery.svg'
                     />
                     Delivery Method
                   </div>
                 </td>
-                <td className='fw-bold text-end'>{intl.formatMessage({id: data.order_type})}</td>
+                <td className='fw-bold text-end'>{intl.formatMessage({id: order.order_type})}</td>
               </tr>
             </tbody>
           </table>

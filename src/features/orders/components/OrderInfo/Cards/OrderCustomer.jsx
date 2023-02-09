@@ -2,13 +2,8 @@ import {useEffect, useState} from 'react'
 import {useIntl} from 'react-intl'
 import {CustomSVG} from '@/components/elements/SVG/CustomSVG'
 
-const OrderCustomer = ({order}) => {
-  const [data, setData] = useState(order)
+const OrderCustomer = ({customer}) => {
   const intl = useIntl()
-
-  useEffect(() => {
-    setData(order.customer)
-  }, [order])
 
   return (
     <div className='card card-flush py-4 flex-row-fluid'>
@@ -26,36 +21,36 @@ const OrderCustomer = ({order}) => {
                   <div className='d-flex align-items-center'>
                     <CustomSVG
                       className='svg-icon svg-icon-2 me-2'
-                      path='/public/media/icons/communication/user.svg'
+                      path='/media/icons/communication/user.svg'
                     />
                     Customer
                   </div>
                 </td>
-                <td className='fw-bold text-end'>{data.name}</td>
+                <td className='fw-bold text-end'>{customer.name}</td>
               </tr>
               <tr>
                 <td className='text-muted'>
                   <div className='d-flex align-items-center'>
                     <CustomSVG
                       className='svg-icon svg-icon-2 me-2'
-                      path='/public/media/icons/communication/mail.svg'
+                      path='/media/icons/communication/mail.svg'
                     />
                     Email
                   </div>
                 </td>
-                <td className='fw-bold text-end'>{data.email_address}</td>
+                <td className='fw-bold text-end'>{customer.email_address}</td>
               </tr>
               <tr>
                 <td className='text-muted'>
                   <div className='d-flex align-items-center'>
                     <CustomSVG
                       className='svg-icon svg-icon-2 me-2'
-                      path='/public/media/icons/communication/mobile.svg'
+                      path='/media/icons/communication/mobile.svg'
                     />
                     Phone
                   </div>
                 </td>
-                <td className='fw-bold text-end'>{data.contact_number}</td>
+                <td className='fw-bold text-end'>{customer.contact_number}</td>
               </tr>
             </tbody>
           </table>

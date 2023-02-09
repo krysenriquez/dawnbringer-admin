@@ -3,14 +3,8 @@ import {useIntl} from 'react-intl'
 import clsx from 'clsx'
 import {format} from 'date-fns'
 
-const OrderHistory = ({history}) => {
-  const [data, setData] = useState(history)
+const OrderHistory = ({histories}) => {
   const intl = useIntl()
-
-  useEffect(() => {
-    setData(history)
-  }, [history])
-
   return (
     <div className='card card-flush py-4 flex-row-fluid'>
       <div className='card-header'>
@@ -29,10 +23,13 @@ const OrderHistory = ({history}) => {
               </tr>
             </thead>
             <tbody className='fw-semibold text-gray-600'>
-              {data.map((history) => {
+              {histories.map((history) => {
                 return (
-                  <tr key={history.created}>
-                    <td>{format(Date.parse(history.created), 'dd/MM/yyyy hh:mm:ss aa')}</td>
+                  <tr key={history.id}>
+                    <td>
+                      {history.created &&
+                        format(Date.parse(history.created), 'dd/MM/yyyy hh:mm:ss aa')}
+                    </td>
                     <td>{history.comment}</td>
                     <td>
                       <div

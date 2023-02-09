@@ -5,6 +5,7 @@ const CORE_URL = `${API_URL}/products
 `
 export const GET_ORDERS_URL = `${CORE_URL}/getorders`
 export const GET_ORDER_INFO_URL = `${CORE_URL}/getorder`
+export const CREATE_ORDER_HISTORY_URL = `${CORE_URL}/updateorder/`
 
 export const getOrders = () => {
   return axios.get(`${GET_ORDERS_URL}`).then((d) => d.data)
@@ -18,4 +19,8 @@ export const getOrderInfo = (id) => {
       },
     })
     .then((d) => d.data[0])
+}
+
+export function postOrderHistory(values) {
+  return axios.post(`${CREATE_ORDER_HISTORY_URL}`, values)
 }

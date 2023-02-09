@@ -3,6 +3,7 @@ import {createRoot} from 'react-dom/client'
 import {QueryClient, QueryClientProvider} from 'react-query'
 import {ReactQueryDevtools} from 'react-query/devtools'
 // Styles
+import 'react-toastify/dist/ReactToastify.css'
 import './assets/sass/plugins.scss'
 import './assets/sass/style.scss'
 import './assets/sass/style.react.scss'

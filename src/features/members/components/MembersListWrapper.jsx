@@ -38,7 +38,7 @@ const MembersListWrapper = () => {
   return (
     <>
       <PageTitle breadcrumbs={[]} description='Members'>
-        {intl.formatMessage({id: 'MENU.MEMBERS'})}
+        {intl.formatMessage({id: 'MEMBERS'})}
       </PageTitle>
       <MembersListQueryProvider>
         <MembersListPage />

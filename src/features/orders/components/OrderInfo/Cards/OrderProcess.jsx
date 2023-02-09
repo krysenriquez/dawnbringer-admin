@@ -2,21 +2,18 @@ import {useEffect, useState} from 'react'
 import {useIntl} from 'react-intl'
 import clsx from 'clsx'
 
-const OrderProcess = ({order}) => {
-  const [data, setData] = useState(order)
+const OrderProcess = ({histories, latest_order_stage}) => {
   const [steps, setSteps] = useState([])
   const intl = useIntl()
 
   useEffect(() => {
-    setData(order)
-  }, [order])
-
-  useEffect(() => {
-    const sortedSteps = data.histories.sort((a, b) => (a.order_stage > b.order_stage ? 1 : -1))
+    const sortedSteps = [...histories].sort((a, b) => (a.order_stage > b.order_stage ? 1 : -1))
     for (var i = 0; i < 4; i++) {
-      if (i < data.latest_order_stage) {
-        sortedSteps[i].order_stage == data.latest_order_stage
-          ? (sortedSteps[i].stage = 'current')
+      if (i < latest_order_stage) {
+        sortedSteps[i].order_stage == latest_order_stage
+          ? sortedSteps[i].order_stage == 4
+            ? (sortedSteps[i].stage = 'completed')
+            : (sortedSteps[i].stage = 'current')
           : (sortedSteps[i].stage = 'completed')
       } else {
         sortedSteps[i] = {
@@ -26,9 +23,9 @@ const OrderProcess = ({order}) => {
         }
       }
     }
-    console.log(sortedSteps)
+    console.log(histories)
     setSteps(sortedSteps)
-  }, [data])
+  }, [histories])
 
   return (
     <div className='stepper stepper-pills'>

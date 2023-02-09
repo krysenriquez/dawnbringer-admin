@@ -5,13 +5,14 @@ import {Logout} from '@/features/auth/components/Logout'
 import {I18nProvider} from '@/providers/i18n/i18nProvider'
 import {LayoutProvider} from '@/providers/layout/LayoutProvider'
 import {LayoutSplashScreen} from '@/providers/SplashScreen'
-import {MasterInit} from '@/components/ui/MasterInit'
+import {MasterInit} from '@/components/layouts/MasterInit'
+import {BranchProvider} from '@/providers/BranchProvider'
 // import {ErrorsPage} from 'features/errors/ErrorsPage'
 import PublicRoutes from './PublicRoutes'
 import PrivateRoutes from './PrivateRoutes'
+import {ToastContainer} from 'react-toastify'
 
 const {PUBLIC_URL} = import.meta.env
-
 const App = () => {
   return (
     <Suspense fallback={<LayoutSplashScreen />}>
@@ -19,6 +20,7 @@ const App = () => {
         <LayoutProvider>
           <AuthInit>
             <Outlet />
+            <ToastContainer />
             <MasterInit />
           </AuthInit>
         </LayoutProvider>
@@ -37,7 +39,14 @@ export const AppRoutes = () => {
           <Route path='logout' element={<Logout />} />
           {auth ? (
             <>
-              <Route path='/*' element={<PrivateRoutes />} />
+              <Route
+                path='/*'
+                element={
+                  <BranchProvider>
+                    <PrivateRoutes />
+                  </BranchProvider>
+                }
+              />
             </>
           ) : (
             <>

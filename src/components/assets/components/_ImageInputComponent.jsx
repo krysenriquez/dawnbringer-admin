@@ -2,13 +2,13 @@ import {EventHandlerUtil, DataUtil, getUniqueIdWithPrefix, getCSS} from '../_uti
 
 const defaultImageInputOptions = {}
 
-const defaultImageInputQueires = {
+const defaultImageInputQueries = {
   componentName: 'image-input',
-  instanseQuery: '[data-kt-image-input]',
+  instanseQuery: '[data-image-input]',
   inputQuery: 'input[type="file"]',
   wrapperQuery: '.image-input-wrapper',
-  cancelQuery: '[data-kt-image-input-action="cancel"]',
-  removeQuery: '[data-kt-image-input-action="remove"]',
+  cancelQuery: '[data-image-input-action="cancel"]',
+  removeQuery: '[data-image-input-action="remove"]',
   hiddenQuery: 'input[type="hidden"]',
 }
 
@@ -155,7 +155,7 @@ class ImageInputComponent {
   }
 
   // Static methods
-  static getInstance = (el, componentName = defaultImageInputQueires.componentName) => {
+  static getInstance = (el, componentName = defaultImageInputQueries.componentName) => {
     const ImageInput = DataUtil.get(el, componentName)
     if (ImageInput) {
       return ImageInput
@@ -163,9 +163,9 @@ class ImageInputComponent {
   }
 
   static createInstances = (
-    selector = defaultImageInputQueires.instanseQuery,
+    selector = defaultImageInputQueries.instanseQuery,
     options = defaultImageInputOptions,
-    queries = defaultImageInputQueires
+    queries = defaultImageInputQueries
   ) => {
     const elements = document.body.querySelectorAll(selector)
     elements.forEach((el) => {
@@ -178,9 +178,9 @@ class ImageInputComponent {
   }
 
   static createInsance = (
-    selector = defaultImageInputQueires.instanseQuery,
+    selector = defaultImageInputQueries.instanseQuery,
     options = defaultImageInputOptions,
-    queries = defaultImageInputQueires
+    queries = defaultImageInputQueries
   ) => {
     const element = document.body.querySelector(selector)
     if (!element) {
@@ -194,12 +194,12 @@ class ImageInputComponent {
     return ImageInput
   }
 
-  static bootstrap = (selector = defaultImageInputQueires.instanseQuery) => {
+  static bootstrap = (selector = defaultImageInputQueries.instanseQuery) => {
     ImageInputComponent.createInstances(selector)
   }
 
-  static reinitialization = (selector = defaultImageInputQueires.instanseQuery) => {
+  static reinitialization = (selector = defaultImageInputQueries.instanseQuery) => {
     ImageInputComponent.createInstances(selector)
   }
 }
-export {ImageInputComponent, defaultImageInputOptions, defaultImageInputQueires}
+export {ImageInputComponent, defaultImageInputOptions, defaultImageInputQueries}

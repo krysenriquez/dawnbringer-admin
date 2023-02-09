@@ -1,15 +1,10 @@
 import {useEffect, useState} from 'react'
 import {useIntl} from 'react-intl'
 import {toCurrency} from '@/utils/toCurrency'
+import {useThemeMode} from '@/providers/ThemeModeProvider'
 
 const OrderTable = ({order}) => {
-  const [data, setData] = useState(order)
   const intl = useIntl()
-
-  useEffect(() => {
-    setData(order)
-  }, [order])
-
   return (
     <div className='card card-flush py-4 flex-row-fluid overflow-hidden'>
       <div className='card-header'>
@@ -31,22 +26,34 @@ const OrderTable = ({order}) => {
             </thead>
             <tbody className='fw-semibold text-gray-600'>
               {order.details.map((detail) => {
+                const theme = useThemeMode()
+                const defaultThumbnail =
+                  `/media/files/blank-image` + (theme.mode === 'light' ? '.svg' : '-dark.svg')
+                const [thumbnail, setThumbnail] = useState({})
+                const [hasNoThumbnail, setHasNoThumbnail] = useState(false)
+                useEffect(() => {
+                  if (detail.product_variant_thumbnail) {
+                    setThumbnail(detail.product_variant_thumbnail)
+                    setHasNoThumbnail(false)
+                  } else {
+                    setThumbnail(defaultThumbnail)
+                    setHasNoThumbnail(true)
+                  }
+                }, [detail])
+
+                useEffect(() => {
+                  if (hasNoThumbnail) {
+                    setThumbnail(defaultThumbnail)
+                  }
+                }, [theme])
+
                 return (
                   <tr key={detail.product_variant_sku}>
                     <td>
                       <div className='d-flex align-items-center'>
-                        <a
-                          href='/metronic8/demo6/../demo6/apps/ecommerce/catalog/edit-product.html'
-                          className='symbol symbol-50px'
-                        >
-                          <span
-                            className='symbol-label'
-                            style={{
-                              backgroundImage:
-                                'url(/metronic8/demo6/assets/media//stock/ecommerce/1.gif)',
-                            }}
-                          />
-                        </a>
+                        <div className='symbol symbol-50px me-5 ps-4'>
+                          <img src={`${thumbnail}`} className='' alt='' />
+                        </div>
                         <div className='ms-5'>
                           <a
                             href='/metronic8/demo6/../demo6/apps/ecommerce/catalog/edit-product.html'

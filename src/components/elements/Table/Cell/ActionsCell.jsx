@@ -1,61 +1,45 @@
 import {useEffect} from 'react'
 import {MenuComponent} from '@/components/assets/components'
 import {CustomSVG} from '../../SVG/CustomSVG'
-import {useNavigate} from 'react-router-dom'
+import Dropdown from 'react-bootstrap/Dropdown'
+import DropdownButton from 'react-bootstrap/DropdownButton'
 
-const ActionsCell = ({id}) => {
+const ActionsCell = (props) => {
+  const {buttons, label} = props
+
   useEffect(() => {
     MenuComponent.reinitialization()
   }, [])
-
-  const navigate = useNavigate()
-
-  const editProduct = () => {
-    console.log('Edit' + id)
-    navigate('info', {state: {id: id}})
-  }
-
-  const deleteProduct = () => {
-    console.log('Delete' + id)
-  }
 
   return (
     <>
       <a
         href='#'
         className='btn btn-light btn-active-light-primary btn-sm'
-        data-kt-menu-trigger='click'
-        data-kt-menu-placement='bottom-end'
+        data-menu-trigger='click'
+        data-menu-placement='bottom-end'
       >
-        Actions
-        <CustomSVG path='/media/icons/duotune/arrows/arr072.svg' className='svg-icon-5 m-0' />
+        {label}
+        <CustomSVG path='/media/icons/arrows/caret-down.svg' className='svg-icon-5 m-0' />
       </a>
-      {/* begin::Menu */}
       <div
         className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4'
-        data-kt-menu='true'
+        data-menu='true'
       >
-        {/* begin::Menu item */}
-        <div className='menu-item px-3'>
-          <a className='menu-link px-3' onClick={() => editProduct()}>
-            Edit
-          </a>
-        </div>
-        {/* end::Menu item */}
-
-        {/* begin::Menu item */}
-        <div className='menu-item px-3'>
-          <a
-            className='menu-link px-3'
-            data-kt-users-table-filter='delete_row'
-            onClick={() => deleteProduct()}
-          >
-            Delete
-          </a>
-        </div>
-        {/* end::Menu item */}
+        {buttons ? (
+          buttons.map((button) => {
+            return (
+              <div className='menu-item px-3' key={button.label}>
+                <a className='menu-link px-3' onClick={button.handleClick}>
+                  {button.label}
+                </a>
+              </div>
+            )
+          })
+        ) : (
+          <></>
+        )}
       </div>
-      {/* end::Menu */}
     </>
   )
 }

@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import * as Yup from 'yup'
+import {object, string} from 'yup'
 import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 import {useFormik} from 'formik'
@@ -8,14 +8,14 @@ import {getUserByToken, login} from '../api'
 import {useAuth} from '@/providers/AuthProvider'
 import {toast} from 'react-toastify'
 
-const loginSchema = Yup.object().shape({
-  username: Yup.string()
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
+const loginSchema = object({
+  username: string()
+    .min(3, 'Minimum 3 characters')
+    .max(50, 'Maximum 50 characters')
     .required('Username is required'),
-  password: Yup.string()
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
+  password: string()
+    .min(3, 'Minimum 3 characters')
+    .max(50, 'Maximum 50 characters')
     .required('Password is required'),
 })
 

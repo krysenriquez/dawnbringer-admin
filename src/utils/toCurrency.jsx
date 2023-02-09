@@ -3,3 +3,7 @@ export const toCurrency = (value) =>
     style: 'currency',
     currency: 'PHP',
   }).format(value)
+
+export const toNumber = (value) => {
+  return value.toLocaleString('en-PH', {minimumFractionDigits: 2})
+}
