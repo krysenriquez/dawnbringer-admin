@@ -2,11 +2,12 @@ import axios from 'axios'
 import humps from 'humps'
 
 const API_URL = import.meta.env.VITE_API_URL
-const CORE_URL = `${API_URL}/products`
+const PRODUCTS_URL = `${API_URL}/products`
 
-const GET_PRODUCT_TYPE_OPTIONS_URL = `${CORE_URL}/getproducttypesoptions`
-export const GET_PRODUCT_TYPES_URL = `${CORE_URL}/getproducttypes`
-const CREATE_PRODUCT_TYPES_URL = `${CORE_URL}/createproducttype/`
+export const GET_PRODUCT_TYPES_URL = `${PRODUCTS_URL}/getproducttypes/`
+export const GET_PRODUCT_TYPE_INFO_URL = `${PRODUCTS_URL}/getproducttype/`
+const GET_PRODUCT_TYPE_OPTIONS_URL = `${PRODUCTS_URL}/getproducttypesoptions/`
+const CREATE_PRODUCT_TYPES_URL = `${PRODUCTS_URL}/createproducttype/`
 
 export const getProductTypeOptions = () => {
   return axios.get(`${GET_PRODUCT_TYPE_OPTIONS_URL}`).then((d) => humps.camelizeKeys(d.data))
@@ -14,6 +15,19 @@ export const getProductTypeOptions = () => {
 
 export const getProductTypes = () => {
   return axios.get(`${GET_PRODUCT_TYPES_URL}`).then((d) => humps.camelizeKeys(d.data))
+}
+
+export const getProductTypeInfo = (productTypeId) => {
+  return axios
+    .get(
+      `${GET_PRODUCT_TYPE_INFO_URL}`,
+      humps.decamelizeKeys({
+        params: {
+          productTypeId: productTypeId,
+        },
+      })
+    )
+    .then((d) => humps.camelizeKeys(d.data[0]))
 }
 
 export const createProductType = (productType) => {

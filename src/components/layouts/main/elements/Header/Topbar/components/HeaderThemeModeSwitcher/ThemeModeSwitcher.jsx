@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {CustomSVG} from '@/components/elements/SVG/CustomSVG'
+import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import {useThemeMode, systemMode} from '@/providers/ThemeModeProvider'
 
 export const HeaderThemeModeSwitcher = () => {

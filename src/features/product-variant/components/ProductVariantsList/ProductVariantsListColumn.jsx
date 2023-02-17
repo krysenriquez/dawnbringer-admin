@@ -2,9 +2,9 @@ import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import clsx from 'clsx'
 import {useThemeMode} from '@/providers/ThemeModeProvider'
-import {CustomSVG} from '@/components/elements/SVG/CustomSVG'
+import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import {toCurrency} from '@/utils/toCurrency'
-import {ActionCell} from '@/components/elements/Table/Cell/ActionCell'
+import ActionCell from '@/components/elements/Table/Cell/ActionCell'
 
 export const productVariantsColumn = [
   {
@@ -67,7 +67,7 @@ export const productVariantsColumn = [
   {
     header: 'Stocks',
     accessorFn: (row) => row.stocks,
-    id: 'price',
+    id: 'stocks',
     cell: (info) => info.getValue(),
   },
   {

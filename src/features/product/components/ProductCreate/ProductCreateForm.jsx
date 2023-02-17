@@ -87,9 +87,9 @@ const ProductCreateForm = () => {
     actions.setSubmitting(true)
     try {
       const {data: response} = await createProduct(formData)
-      swal.fire('Product Created', response.message, 'success')
+      swal.fire('Product Created', response.detail, 'success')
     } catch (ex) {
-      toast.error(ex.response.data.message)
+      toast.error(ex.response.data.detail)
     } finally {
       actions.setSubmitting(true)
       actions.resetForm()

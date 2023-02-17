@@ -28,8 +28,8 @@ const SidebarMenuItems = () => {
         fontIcon='bi-bookmarks-fill'
       />
       <SidebarMenuItem
-        to='/product-supplies'
-        title={intl.formatMessage({id: 'PRODUCTS.SUPPLIES'})}
+        to='/supplies'
+        title={intl.formatMessage({id: 'SUPPLIES'})}
         fontIcon='bi-truck'
       />
       <SidebarMenuItem

@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
 import {MenuComponent} from '@/components/assets/components'
-import {CustomSVG} from '@/components/elements/SVG/CustomSVG'
+import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import {useNavigate} from 'react-router-dom'
 
 const ViewCell = ({id, route}) => {

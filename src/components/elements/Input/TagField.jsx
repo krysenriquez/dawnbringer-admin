@@ -5,7 +5,7 @@ import {useEffect, useRef} from 'react'
 
 export default function TagField(props) {
   const {setFieldValue} = useFormikContext()
-  const {placecholder, label, required, initialValue = [], suggestions = [], className} = props
+  const {placecholder, label, required, suggestions = [], className} = props
   const [field, meta] = useField(props)
   const tagifyRef = useRef()
 
@@ -25,9 +25,11 @@ export default function TagField(props) {
   }
 
   useEffect(() => {
-    if (field.value.length < 1) {
-      // @ts-ignore
-      tagifyRef.current && tagifyRef.current.removeAllTags()
+    if (field.value) {
+      if (field.value.length < 1) {
+        // @ts-ignore
+        tagifyRef.current && tagifyRef.current.removeAllTags()
+      }
     }
   }, [field.value])
 
@@ -51,6 +53,7 @@ export default function TagField(props) {
     <>
       {label && <label className={clsx('form-label mb-3', {required: required})}>{label}</label>}
       <Tags
+        defaultValue={meta.initialValue}
         tagifyRef={tagifyRef}
         settings={settings}
         className={clsx('form-control', className && className)}

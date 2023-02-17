@@ -1,7 +1,7 @@
 import {useState, useEffect, createContext, useContext, useRef} from 'react'
 import {toast} from 'react-toastify'
 import {getProductOptions} from '@/features/product/api'
-import {getmembershiplevels} from '@/features/membership/api'
+import {getMembershipLevels} from '@/features/membership/api'
 
 const ProductVariantCreateContext = createContext({
   products: undefined,
@@ -39,7 +39,7 @@ const ProductVariantCreateProvider = ({children}) => {
     const requestMembershipLevels = async () => {
       try {
         if (!didRequestMembershipLevels.current) {
-          const data = await getmembershiplevels()
+          const data = await getMembershipLevels()
           if (data.length > 0) {
             setMembershipLevels(data)
           }

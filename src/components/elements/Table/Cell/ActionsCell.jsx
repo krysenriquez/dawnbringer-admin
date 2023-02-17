@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
 import {MenuComponent} from '@/components/assets/components'
-import {CustomSVG} from '../../SVG/CustomSVG'
+import CustomSVG from '../../SVG/CustomSVG'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 

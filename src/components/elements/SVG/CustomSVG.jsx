@@ -1,4 +1,3 @@
-import React from 'react'
 import SVG from 'react-inlinesvg'
 import {toAbsoluteUrl} from '@/utils/toAbsoluteUrl'
 
@@ -10,4 +9,4 @@ const CustomSVG = ({className = '', path, svgClassName = 'mh-50px'}) => {
   )
 }
 
-export {CustomSVG}
+export default CustomSVG

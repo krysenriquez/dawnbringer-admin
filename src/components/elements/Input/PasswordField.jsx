@@ -3,7 +3,7 @@ import {useField} from 'formik'
 import clsx from 'clsx'
 
 export default function PasswordField(props) {
-  const {label, required, errorText, ...rest} = props
+  const {label, required, helperText, errorText, ...rest} = props
   const [field, meta] = useField(props)
   const {touched, error, value} = meta
   const isError = touched && error && true
@@ -22,9 +22,7 @@ export default function PasswordField(props) {
 
   return (
     <>
-      <label className='form-label mb-3'>
-        <span className={clsx({required: required})}>{label}</span>
-      </label>
+      {label && <label className={clsx('form-label mb-3', {required: required})}>{label}</label>}
       <div className='position-relative mb-3'>
         <input
           type={showPassword ? 'text' : 'password'}
@@ -47,6 +45,7 @@ export default function PasswordField(props) {
           ></i>
         </span>
       </div>
+      {helperText && <div className='text-muted fs-7'>{helperText}</div>}
       <div className='fv-plugins-message-container'>
         <div className='fv-help-block'>
           <span role='alert'>{renderErrorMessage()}</span>

@@ -2,7 +2,7 @@ import {useField} from 'formik'
 import clsx from 'clsx'
 
 export default function InputField(props) {
-  const {label, required, errorText, className, ...rest} = props
+  const {label, required, errorText, helperText, className, ...rest} = props
   const [field, meta] = useField(props)
   const {touched, error, value} = meta
   const isError = touched && error && true
@@ -29,6 +29,7 @@ export default function InputField(props) {
         {...field}
         {...rest}
       />
+      {helperText && <div className='text-muted fs-7'>{helperText}</div>}
       <div className='fv-plugins-message-container'>
         <div className='fv-help-block'>
           <span role='alert'>{renderErrorMessage()}</span>

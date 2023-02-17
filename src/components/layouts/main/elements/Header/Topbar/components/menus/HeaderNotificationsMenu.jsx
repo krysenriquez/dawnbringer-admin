@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom'
-import {CustomSVG} from '@/components/elements/SVG/CustomSVG'
+import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import {toAbsoluteUrl} from '@/utils/toAbsoluteUrl'
 import {defaultLogs} from '@/mocks/dataExamples'
 

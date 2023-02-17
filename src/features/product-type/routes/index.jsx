@@ -3,6 +3,7 @@ import {useIntl} from 'react-intl'
 import {PageTitle} from '@/providers/PageDataProvider'
 import ProductTypesList from './ProductTypesList'
 import ProductTypeCreate from './ProductTypeCreate'
+import ProductTypeInfo from './ProductTypeInfo'
 
 const ProductTypeRoutes = () => {
   const intl = useIntl()
@@ -43,6 +44,17 @@ const ProductTypeRoutes = () => {
               {intl.formatMessage({id: 'PRODUCTS.TYPES.CREATE'})}
             </PageTitle>
             <ProductTypeCreate />
+          </>
+        }
+      />
+      <Route
+        path=':productTypeId'
+        element={
+          <>
+            <PageTitle breadcrumbs={productTypeBreadCrumbs} description=''>
+              {intl.formatMessage({id: 'PRODUCTS.TYPES.INFO'})}
+            </PageTitle>
+            <ProductTypeInfo />
           </>
         }
       />

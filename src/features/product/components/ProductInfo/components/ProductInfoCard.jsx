@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import {useState, useEffect} from 'react'
 import {toAbsoluteUrl} from '@/utils/toAbsoluteUrl'
-import {CustomSVG} from '@/components/elements/SVG/CustomSVG'
+import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import {useThemeMode} from '@/providers/ThemeModeProvider'
 import {useProductInfoQueryData} from '@/features/product/stores/ProductInfoQueryProvider'
 

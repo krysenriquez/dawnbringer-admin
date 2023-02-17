@@ -137,12 +137,12 @@ const ProductVariantCreateForm = () => {
     actions.setSubmitting(true)
     try {
       const {data: response} = await createProductVariant(formData)
-      swal.fire('Product Variant Created', response.message, 'success')
+      swal.fire('Product Variant Created', response.detail, 'success')
     } catch (ex) {
-      toast.error(ex.response.data.message)
+      toast.error(ex.response.data.detail)
     } finally {
       actions.setSubmitting(true)
-      // actions.resetForm()
+      actions.resetForm()
     }
   }
 

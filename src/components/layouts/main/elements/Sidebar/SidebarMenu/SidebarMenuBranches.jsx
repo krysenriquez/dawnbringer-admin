@@ -1,6 +1,6 @@
 import React from 'react'
 import clsx from 'clsx'
-import {CustomSVG} from '@/components/elements/SVG/CustomSVG'
+import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import {useBranch} from '@/providers/BranchProvider'
 
 function SidebarMenuBranches() {
@@ -28,7 +28,7 @@ function SidebarMenuBranches() {
             data-menu-width='230px'
           >
             <span className='d-flex flex-column align-items-start flex-grow-1'>
-              <span className='fs-5 fw-bold text-white text-uppercase' data-element='title'>
+              <span className='fs-5 fw-bold text-dark text-uppercase' data-element='title'>
                 {defaultBranch && defaultBranch.branchName}
               </span>
             </span>
@@ -59,7 +59,7 @@ function SidebarMenuBranches() {
                       >
                         <span className='d-flex flex-column align-items-start'>
                           <span
-                            className='fs-5 fw-bold text-white text-uppercase'
+                            className='fs-5 fw-bold text-dark text-uppercase'
                             data-element='title'
                           >
                             {branch.branchName}

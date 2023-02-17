@@ -2,7 +2,7 @@ import {useEffect} from 'react'
 import {useState} from 'react'
 import Dropzone from 'react-dropzone'
 import {useDropzone} from 'react-dropzone'
-import {CustomSVG} from '@/components/elements/SVG/CustomSVG'
+import CustomSVG from '@/components/elements/SVG/CustomSVG'
 
 const ProductVariantMedia = ({variant}) => {
   const [data, setData] = useState(variant)

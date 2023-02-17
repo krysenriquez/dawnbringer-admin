@@ -28,6 +28,7 @@ export const LoginForm = () => {
   const intl = useIntl()
   const [loading, setLoading] = useState(false)
   const {saveAuth, setCurrentUser} = useAuth()
+
   const formik = useFormik({
     initialValues,
     validationSchema: loginSchema,

@@ -5,6 +5,7 @@ export default function InputGroupField(props) {
   const {
     label,
     required,
+    helperText,
     errorText,
     labelPrepend,
     labelAppend,
@@ -25,9 +26,7 @@ export default function InputGroupField(props) {
 
   return (
     <>
-      <label className='form-label mb-3'>
-        <span className={clsx({required: required})}>{label}</span>
-      </label>
+      {label && <label className={clsx('form-label mb-3', {required: required})}>{label}</label>}
       <div className={clsx('input-group', groupClassName && groupClassName)}>
         {labelPrepend ? <span className='input-group-text'>{labelPrepend}</span> : <></>}
         <input
@@ -45,6 +44,7 @@ export default function InputGroupField(props) {
         />
         {labelAppend ? <span className='input-group-text'>{labelAppend}</span> : <></>}
       </div>
+      {helperText && <div className='text-muted fs-7'>{helperText}</div>}
       <div className='fv-plugins-message-container'>
         <div className='fv-help-block'>
           <span role='alert'>{renderErrorMessage()}</span>

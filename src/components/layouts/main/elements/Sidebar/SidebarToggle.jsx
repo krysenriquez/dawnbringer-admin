@@ -1,5 +1,5 @@
 import React from 'react'
-import {CustomSVG} from '@/components/elements/SVG/CustomSVG'
+import CustomSVG from '@/components/elements/SVG/CustomSVG'
 export const SidebarToggle = () => {
   return (
     <div

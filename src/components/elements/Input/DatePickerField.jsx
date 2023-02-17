@@ -50,9 +50,7 @@ export default function DatePickerField(props) {
 
   return (
     <>
-      <label className='form-label mb-3'>
-        <span className={clsx({required: required})}>{label}</span>
-      </label>
+      {label && <label className={clsx('form-label mb-3', {required: required})}>{label}</label>}
       <DatePicker
         {...field}
         {...props}

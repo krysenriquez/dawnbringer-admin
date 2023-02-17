@@ -11,6 +11,24 @@ export const arrayObjectToSelectOptions = (array, value, label, defaultLabel) =>
       label: arr[`${label}`],
     })
   })
+  return return_arr
+}
+
+export const arrayObjectToSelectOptionsFiltered = (array, value, label, filter, defaultLabel) => {
+  let return_arr = [
+    {
+      value: '',
+      label: defaultLabel,
+    },
+  ]
+  array.map((arr) => {
+    if (arr[`${filter}`]) {
+      return_arr.push({
+        value: arr[`${value}`],
+        label: arr[`${label}`],
+      })
+    }
+  })
 
   return return_arr
 }

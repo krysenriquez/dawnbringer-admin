@@ -2,8 +2,8 @@ import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import clsx from 'clsx'
 import {useThemeMode} from '@/providers/ThemeModeProvider'
-import {CustomSVG} from '@/components/elements/SVG/CustomSVG'
-import {ActionCell} from '@/components/elements/Table/Cell/ActionCell'
+import CustomSVG from '@/components/elements/SVG/CustomSVG'
+import ActionCell from '@/components/elements/Table/Cell/ActionCell'
 
 const productTypesColumn = [
   {

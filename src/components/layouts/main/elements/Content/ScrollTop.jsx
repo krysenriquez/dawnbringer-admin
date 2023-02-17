@@ -6,7 +6,7 @@ import {
   ToggleComponent,
   StickyComponent,
 } from '@/components/assets/components'
-import {CustomSVG} from '@/components/elements/SVG/CustomSVG'
+import CustomSVG from '@/components/elements/SVG/CustomSVG'
 
 export function ScrollTop() {
   const {pathname} = useLocation()

@@ -9,7 +9,7 @@ import {
   flexRender,
 } from '@tanstack/react-table'
 import {DebouncedInput} from '../Input/DebouncedInput'
-import {CustomSVG} from '../SVG/CustomSVG'
+import CustomSVG from '../SVG/CustomSVG'
 import {CustomCardBody} from '../Card'
 
 export function CustomTable2(props) {

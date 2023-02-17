@@ -59,9 +59,9 @@ export default {
       discount: {
         key: 'discount',
         name: 'price.discount',
-        label: 'Discount',
-        requiredErrorMsg: 'Discount is required',
-        invalidErrorMsg: 'Invalid Discount format',
+        label: 'Discounted Price',
+        requiredErrorMsg: 'Discounted Price is required',
+        invalidErrorMsg: 'Invalid Discounted Price format',
       },
     },
     media: {

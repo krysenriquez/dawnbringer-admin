@@ -22,7 +22,12 @@
   "PRODUCTS.TYPES": "Product Types",
   "PRODUCTS.TYPES.LIST": "Product Type Create",
   "PRODUCTS.TYPES.CREATE": "Product Types",
-  "PRODUCTS.SUPPLIES": "Product Supplies",
+  "PRODUCTS.TYPES.INFO": "Product Type Info",
+
+  "SUPPLIES": "Supplies",
+  "SUPPLIES.LIST": "Supplies List",
+  "SUPPLIES.CREATE": "Supply Create",
+  "SUPPLIES.INFO": "Supply Info",
 
   "ORDERS": "Orders",
   "ORDERS.LIST": "Order List",
@@ -39,12 +44,14 @@
   "AWAITING_DELIVERY": "Awaiting Delivery",
   "AWAITING_PICKUP": "Awaiting Pickup",
   "ON_DELIVERY": "On Delivery",
+  "ON_PICKUP": "For Pickup",
   "CANCELLED": "Cancelled",
   "COMPLETED": "Completed",
   "REFUNDED": "Refunded",
   "PICKUP": "Pickup",
   "DELIVERY": "Delivery",
   "CASH": "Cash",
+  "GCASH": "G-Cash",
   "CARD": "Card",
   "BANK_TRANSFER": "Bank Transfer"
 }

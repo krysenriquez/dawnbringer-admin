@@ -3,7 +3,7 @@ import {useLocation} from 'react-router'
 import {OverlayTrigger, Tooltip} from 'react-bootstrap'
 import {checkIsActive} from '@/utils/checkIsActive'
 import {useLayout} from '@/providers/layout/LayoutProvider'
-import {CustomSVG} from '@/components/elements/SVG/CustomSVG'
+import CustomSVG from '@/components/elements/SVG/CustomSVG'
 
 const SidebarMenuItemWithSub = (props) => {
   const {children, to, title, icon, fontIcon, hasBullet, bsTitle} = props
@@ -11,7 +11,7 @@ const SidebarMenuItemWithSub = (props) => {
   const isActive = checkIsActive(pathname, to)
   const {config} = useLayout()
   console.log(pathname)
-  
+
   return (
     <div
       className={clsx('menu-item', {'here show': isActive}, 'menu-accordion')}

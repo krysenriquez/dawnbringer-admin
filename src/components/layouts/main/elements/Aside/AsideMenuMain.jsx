@@ -37,9 +37,9 @@ export function AsideMenuMain() {
         />
         <AsideMenuItem
           to='/products/supplies'
-          title={intl.formatMessage({id: 'PRODUCTS.SUPPLIES'})}
+          title={intl.formatMessage({id: 'SUPPLIES'})}
           hasBullet={true}
-          bsTitle={intl.formatMessage({id: 'PRODUCTS.SUPPLIES'})}
+          bsTitle={intl.formatMessage({id: 'SUPPLIES'})}
         />
         <AsideMenuItem
           to='/products/types'

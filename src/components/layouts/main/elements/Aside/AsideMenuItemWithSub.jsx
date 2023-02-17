@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import {useLocation} from 'react-router'
-import {CustomSVG} from '@/components/elements/SVG/CustomSVG'
+import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import {checkIsActive} from '@/utils/checkIsActive'
 import {useLayout} from '@/providers/layout/LayoutProvider'
 

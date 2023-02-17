@@ -1,8 +1,8 @@
 import {Route, Routes, Outlet} from 'react-router-dom'
 import {useIntl} from 'react-intl'
 import {PageTitle} from '@/providers/PageDataProvider'
-import {OrdersListWrapper} from '../components/OrdersList/OrdersListWrapper'
-import {OrderInfoWrapper} from '../components/OrderInfo/OrderInfoWrapper'
+import OrdersList from './OrdersList'
+import OrderInfo from './OrderInfo'
 
 const OrdersRoutes = () => {
   const intl = useIntl()
@@ -30,18 +30,18 @@ const OrdersRoutes = () => {
             <PageTitle breadcrumbs={ordersBreadCrumbs} description=''>
               {intl.formatMessage({id: 'ORDERS.LIST'})}
             </PageTitle>
-            <OrdersListWrapper />
+            <OrdersList />
           </>
         }
       />
       <Route
-        path=':order_id'
+        path=':orderId'
         element={
           <>
             <PageTitle breadcrumbs={ordersBreadCrumbs} description=''>
               {intl.formatMessage({id: 'ORDERS.INFO'})}
             </PageTitle>
-            <OrderInfoWrapper />
+            <OrderInfo />
           </>
         }
       />

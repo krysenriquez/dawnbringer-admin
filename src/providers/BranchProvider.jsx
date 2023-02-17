@@ -2,14 +2,7 @@ import {createContext, useContext, useState, useEffect, useRef} from 'react'
 import {useAuth} from './AuthProvider'
 import axios from 'axios'
 import humps from 'humps'
-
-const API_URL = import.meta.env.VITE_API_URL
-const SETTINGS_URL = `${API_URL}/settings`
-const GET_BRANCHES_URL = `${SETTINGS_URL}/getbranchassignments/`
-
-const getBranches = () => {
-  return axios.get(`${GET_BRANCHES_URL}`).then((d) => humps.camelizeKeys(d.data[0]))
-}
+import {getBranchAssignments} from '@/features/branches/api'
 
 const BranchContext = createContext({
   branches: undefined,
@@ -27,7 +20,7 @@ const BranchProvider = ({children}) => {
     const requestBranches = async () => {
       try {
         if (!didRequest.current) {
-          const data = await getBranches()
+          const data = await getBranchAssignments()
           if (data && data.branch.length > 0) {
             setBranches(data.branch)
             setDefaultBranch(data.branch[0])

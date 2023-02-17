@@ -4,6 +4,7 @@ import {useParams} from 'react-router-dom'
 import {useQuery} from 'react-query'
 import {initialQuery} from '@/config/const'
 import {getProductInfo, GET_PRODUCT_INFO_URL} from '@/features/product/api'
+
 const ProductInfoQueryContext = createContext(initialQuery)
 
 const ProductInfoQueryProvider = ({children}) => {

@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import {useField} from 'formik'
 
 export function InputMaskField(props) {
-  const {label, required, errorText, mask, ...rest} = props
+  const {label, required, helperText, errorText, mask, ...rest} = props
   const [field, meta] = useField(props)
   const {touched, error, value} = meta
   const isError = touched && error && true
@@ -18,9 +18,7 @@ export function InputMaskField(props) {
 
   return (
     <>
-      <label className='form-label mb-3'>
-        <span className={clsx({required: required})}>{label}</span>
-      </label>
+      {label && <label className={clsx('form-label mb-3', {required: required})}>{label}</label>}
       <InputMask
         mask={mask}
         type='text'
@@ -31,6 +29,7 @@ export function InputMaskField(props) {
         {...field}
         {...rest}
       />
+      {helperText && <div className='text-muted fs-7'>{helperText}</div>}
       <div className='fv-plugins-message-container'>
         <div className='fv-help-block'>
           <span role='alert'>{renderErrorMessage()}</span>

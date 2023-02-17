@@ -1,7 +1,7 @@
-import {CustomSVG} from '@/components/elements/SVG/CustomSVG'
+import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import clsx from 'clsx'
 
-export const ActionCell = (props) => {
+const ActionCell = (props) => {
   const {id, route, handleClick, children, className} = props
 
   return (
@@ -12,3 +12,5 @@ export const ActionCell = (props) => {
     </>
   )
 }
+
+export default ActionCell

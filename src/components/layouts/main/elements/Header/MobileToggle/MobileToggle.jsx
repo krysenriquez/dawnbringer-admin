@@ -1,4 +1,4 @@
-import {CustomSVG} from '@/components/elements/SVG/CustomSVG'
+import CustomSVG from '@/components/elements/SVG/CustomSVG'
 
 const MobileToggle = () => {
   return (
