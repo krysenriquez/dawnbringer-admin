@@ -1,13 +1,14 @@
 import clsx from 'clsx'
 import {useField, useFormikContext} from 'formik'
 import Tags from '@yaireo/tagify/dist/react.tagify'
-import {useEffect, useRef} from 'react'
+import {useEffect, useRef, useState} from 'react'
 
 export default function TagField(props) {
   const {setFieldValue} = useFormikContext()
   const {placecholder, label, required, suggestions = [], className} = props
   const [field, meta] = useField(props)
   const tagifyRef = useRef()
+  const [tags, setTags] = useState([])
 
   const baseTagifySettings = {
     blacklist: [],
@@ -23,6 +24,12 @@ export default function TagField(props) {
     const tags = e.detail.tagify.value.map((item) => item.value)
     setFieldValue(field.name, tags)
   }
+
+  useEffect(() => {
+    if (meta.initialValue) {
+      setTags(meta.initialValue)
+    }
+  }, [meta.initialValue])
 
   useEffect(() => {
     if (field.value) {
@@ -53,7 +60,7 @@ export default function TagField(props) {
     <>
       {label && <label className={clsx('form-label mb-3', {required: required})}>{label}</label>}
       <Tags
-        defaultValue={meta.initialValue}
+        value={tags}
         tagifyRef={tagifyRef}
         settings={settings}
         className={clsx('form-control', className && className)}

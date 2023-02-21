@@ -3,21 +3,23 @@ import {createContext, useContext} from 'react'
 import {useParams} from 'react-router-dom'
 import {useQuery} from 'react-query'
 import {initialQuery} from '@/config/const'
+import {useBranch} from '@/providers/BranchProvider'
 import {getProductVariantInfo, GET_PRODUCT_VARIANT_INFO_URL} from '../api'
 
 const ProductVariantInfoQueryContext = createContext(initialQuery)
 
 const ProductVariantInfoQueryProvider = ({children}) => {
   const searchParams = useParams()
+  const {defaultBranch} = useBranch()
 
   const {
     isFetching,
     refetch,
     data: response,
   } = useQuery(
-    `${GET_PRODUCT_VARIANT_INFO_URL}-${searchParams.sku}`,
+    `${GET_PRODUCT_VARIANT_INFO_URL}-${searchParams.sku}-${defaultBranch.branchId}`,
     () => {
-      return getProductVariantInfo(searchParams.sku)
+      return getProductVariantInfo(searchParams.sku, defaultBranch.branchId)
     },
     {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
   )

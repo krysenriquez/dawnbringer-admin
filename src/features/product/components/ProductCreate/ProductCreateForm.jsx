@@ -8,15 +8,15 @@ import withReactContent from 'sweetalert2-react-content'
 import {useProductCreate} from '@/features/product/stores/ProductCreateProvider'
 import {arrayObjectToSelectOptions, arrayToSelectOptions} from '@/utils/arrayToSelectOptions'
 import {createProduct} from '../../api'
-import CustomFormCard from '@/components/elements/Card/CustomFormCard'
+import CustomCard from '@/components/elements/Card/CustomCard'
 import ImageInputField from '@/components/elements/Input/ImageInputField'
 import InputField from '@/components/elements/Input/InputField'
 import SelectField from '@/components/elements/Input/SelectField'
 import QuillField from '@/components/elements/Input/QuillField'
 import TagField from '@/components/elements/Input/TagField'
-import productCreateFormModel from '../../models/productCreateFormModel'
-import productCreateInitialValues from '../../models/productCreateInitialValues'
-import productCreateSchema from '../../models/productCreateSchema'
+import productFormModel from '../../models/productFormModel'
+import productInitialValues from '../../models/productInitialValues'
+import productSchema from '../../models/productSchema'
 
 const productStatuses = [
   {
@@ -41,7 +41,7 @@ const ProductCreateForm = () => {
   const {productTypes} = useProductCreate()
   const navigate = useNavigate()
   const swal = withReactContent(Swal)
-  const [initialProduct, setInitialProduct] = useState(productCreateInitialValues)
+  const [initialProduct, setInitialProduct] = useState(productInitialValues)
 
   const {
     formId,
@@ -54,7 +54,7 @@ const ProductCreateForm = () => {
       productTags,
       meta: {metaTagTitle, metaTagDescription, pageSlug},
     },
-  } = productCreateFormModel
+  } = productFormModel
 
   const [productTypeOptions, setProductTypeOptions] = useState([])
   useEffect(() => {
@@ -69,7 +69,37 @@ const ProductCreateForm = () => {
     navigate('/products')
   }
 
-  const submit = async (values, actions) => {
+  const submit = (values, actions) => {
+    swal
+      .fire({
+        title: 'Create Product?',
+        icon: 'question',
+        showCancelButton: true,
+        showConfirmButton: true,
+        confirmButtonColor: 'btn btn-primary',
+        cancelButtonColor: 'btn btn-info',
+        confirmButtonText: 'Create',
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          const formData = transformToFormData(values)
+          actions.setSubmitting(true)
+          try {
+            const {data: response} = await createProduct(formData)
+            swal.fire('Product Created', response.detail, 'success')
+          } catch (ex) {
+            toast.error(ex.response.data.detail)
+          } finally {
+            actions.resetForm()
+          }
+        }
+      })
+      .finally(() => {
+        actions.setSubmitting(false)
+      })
+  }
+
+  const transformToFormData = (values) => {
     const formData = new FormData()
     const thumbnail = values.productImage
     const decamelizedValues = humps.decamelizeKeys(values)
@@ -84,30 +114,21 @@ const ProductCreateForm = () => {
       formData.append(`product_image`, thumbnail)
     }
 
-    actions.setSubmitting(true)
-    try {
-      const {data: response} = await createProduct(formData)
-      swal.fire('Product Created', response.detail, 'success')
-    } catch (ex) {
-      toast.error(ex.response.data.detail)
-    } finally {
-      actions.setSubmitting(true)
-      actions.resetForm()
-    }
+    return formData
   }
 
   return (
     <Formik
       enableReinitialize
       validateOnChange={false}
-      validationSchema={productCreateSchema}
+      validationSchema={productSchema}
       initialValues={initialProduct}
       onSubmit={submit}
     >
       {(actions) => (
         <Form className='form d-flex flex-column flex-lg-row' id={formId}>
           <div className='d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10'>
-            <CustomFormCard
+            <CustomCard
               cardClassName='card-flush py-4'
               hasHeader={true}
               header={<h2>Thumbnail</h2>}
@@ -118,8 +139,8 @@ const ProductCreateForm = () => {
                 Set the category thumbnail image. Only *.png, *.jpg and *.jpeg image files are
                 accepted
               </div>
-            </CustomFormCard>
-            <CustomFormCard
+            </CustomCard>
+            <CustomCard
               cardClassName='card-flush py-4'
               hasHeader={true}
               header={<h2>Status</h2>}
@@ -130,8 +151,8 @@ const ProductCreateForm = () => {
                 name={productStatus.name}
                 data={productStatuses}
               />
-            </CustomFormCard>
-            <CustomFormCard
+            </CustomCard>
+            <CustomCard
               cardClassName='card-flush py-4'
               hasHeader={true}
               header={<h2>Details</h2>}
@@ -148,10 +169,10 @@ const ProductCreateForm = () => {
               <div className='mb-0'>
                 <TagField name={productTags.name} label={productTags.label} />
               </div>
-            </CustomFormCard>
+            </CustomCard>
           </div>
           <div className='d-flex flex-column flex-row-fluid gap-7 gap-lg-10'>
-            <CustomFormCard
+            <CustomCard
               cardClassName='card-flush py-4'
               hasHeader={true}
               header={<h2>General</h2>}
@@ -169,8 +190,8 @@ const ProductCreateForm = () => {
               <div>
                 <QuillField name={productDescription.name} label={productDescription.label} />
               </div>
-            </CustomFormCard>
-            <CustomFormCard
+            </CustomCard>
+            <CustomCard
               cardClassName='card-flush py-4'
               hasHeader={true}
               header={<h2>Meta Options</h2>}
@@ -197,7 +218,7 @@ const ProductCreateForm = () => {
                   required
                 />
               </div>
-            </CustomFormCard>
+            </CustomCard>
             <div className='d-flex justify-content-end'>
               <button
                 type='reset'

@@ -3,11 +3,12 @@ const {
   formField: {
     branchFrom,
     branchTo,
-    trackingNumber,
-    carrier,
     referenceNumber,
+    carrier,
+    carrierContactNumber,
+    trackingNumber,
     comment,
-    selectedVariant,
+    setStatusToDelivered,
     details: [{variant, quantity}],
   },
 } = supplyCreateFormModel
@@ -15,10 +16,11 @@ const {
 export default {
   [branchFrom.key]: '',
   [branchTo.key]: '',
-  [trackingNumber.key]: '',
-  [carrier.key]: '',
   [referenceNumber.key]: '',
-  [selectedVariant.key]: '',
+  [carrier.key]: '',
+  [carrierContactNumber.key]: '',
+  [trackingNumber.key]: '',
+  [setStatusToDelivered.key]: false,
   [comment.key]: '',
   details: [],
 }

@@ -15,4 +15,4 @@ const TableLoading = () => {
   return <div style={{...styles, position: 'absolute', textAlign: 'center'}}>Processing...</div>
 }
 
-export {TableLoading}
+export default TableLoading

@@ -6,6 +6,7 @@ import {I18nProvider} from '@/providers/i18n/i18nProvider'
 import {LayoutProvider} from '@/providers/layout/LayoutProvider'
 import {LayoutSplashScreen} from '@/providers/SplashScreen'
 import {MasterInit} from '@/components/layouts/MasterInit'
+import {CompanyProvider} from '@/providers/CompanyProvider'
 import {BranchProvider} from '@/providers/BranchProvider'
 // import {ErrorsPage} from 'features/errors/ErrorsPage'
 import PublicRoutes from './PublicRoutes'
@@ -18,11 +19,13 @@ const App = () => {
     <Suspense fallback={<LayoutSplashScreen />}>
       <I18nProvider>
         <LayoutProvider>
-          <AuthInit>
-            <Outlet />
-            <ToastContainer />
-            <MasterInit />
-          </AuthInit>
+          <CompanyProvider>
+            <AuthInit>
+              <Outlet />
+              <ToastContainer />
+              <MasterInit />
+            </AuthInit>
+          </CompanyProvider>
         </LayoutProvider>
       </I18nProvider>
     </Suspense>

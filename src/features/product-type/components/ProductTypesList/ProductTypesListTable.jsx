@@ -1,8 +1,8 @@
 import {useEffect, useMemo} from 'react'
 import {useNavigate} from 'react-router-dom'
-import {CustomCard} from '@/components/elements/Card'
-import {CustomTable2} from '@/components/elements/Table/CustomTable2'
-import {TableLoading} from '@/components/elements/Table/TableLoading'
+import CustomCardWithoutHeader from '@/components/elements/Card/CustomCardWithoutHeader'
+import CustomTable from '@/components/elements/Table/CustomTable'
+import TableLoading from '@/components/elements/Table/TableLoading'
 import {
   useProductTypesListQueryData,
   useProductTypesListQueryLoading,
@@ -22,22 +22,22 @@ const ProductTypesListTable = () => {
 
   return (
     <>
-      <CustomCard className='card card-flush py-4'>
+      <CustomCardWithoutHeader>
         {tableData ? (
-          <CustomTable2
+          <CustomTable
             {...{
               data: tableData,
               columns: tableColumns,
               hasToolbar: true,
               toolbarButtonName: 'Add Product Type',
-              handletoolbarButtonClick: createProductType,
+              handleToolbarButtonClick: createProductType,
             }}
           />
         ) : (
           <></>
         )}
         {isLoading && <TableLoading />}
-      </CustomCard>
+      </CustomCardWithoutHeader>
     </>
   )
 }

@@ -6,15 +6,15 @@ import {toast} from 'react-toastify'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import {createProductType} from '../../api'
-import CustomFormCard from '@/components/elements/Card/CustomFormCard'
+import CustomCard from '@/components/elements/Card/CustomCard'
 import ImageInputField from '@/components/elements/Input/ImageInputField'
 import InputField from '@/components/elements/Input/InputField'
 import SelectField from '@/components/elements/Input/SelectField'
 import QuillField from '@/components/elements/Input/QuillField'
 import TagField from '@/components/elements/Input/TagField'
-import productTypeCreateFormModel from '../../models/productTypeCreateFormModel'
-import productTypeCreateInitialValues from '../../models/productTypeCreateInitialValues'
-import productTypeCreateSchema from '../../models/productTypeCreateSchema'
+import productTypeFormModel from '@/features/product-type/models/productTypeFormModel'
+import productTypeInitialValues from '@/features/product-type/models/productTypeInitialValues'
+import productTypeSchema from '@/features/product-type/models/productTypeSchema'
 
 const productTypeStatuses = [
   {
@@ -38,7 +38,7 @@ const productTypeStatuses = [
 const ProductTypeCreateForm = () => {
   const navigate = useNavigate()
   const swal = withReactContent(Swal)
-  const [initialProductType, setInitialProductType] = useState(productTypeCreateInitialValues)
+  const [initialProductType, setInitialProductType] = useState(productTypeInitialValues)
 
   const {
     formId,
@@ -50,13 +50,43 @@ const ProductTypeCreateForm = () => {
       productTypeTags,
       meta: {metaTagTitle, metaTagDescription, pageSlug},
     },
-  } = productTypeCreateFormModel
+  } = productTypeFormModel
 
   const cancel = () => {
     navigate('/product-types')
   }
 
-  const submit = async (values, actions) => {
+  const submit = (values, actions) => {
+    swal
+      .fire({
+        title: 'Create Product Type?',
+        icon: 'question',
+        showCancelButton: true,
+        showConfirmButton: true,
+        confirmButtonColor: 'btn btn-primary',
+        cancelButtonColor: 'btn btn-info',
+        confirmButtonText: 'Create',
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          const formData = transformToFormData(values)
+          actions.setSubmitting(true)
+          try {
+            const {data: response} = await createProductType(formData)
+            swal.fire('Product Type Created', response.detail, 'success')
+          } catch (ex) {
+            toast.error(ex.response.data.detail)
+          } finally {
+            actions.resetForm()
+          }
+        }
+      })
+      .finally(() => {
+        actions.setSubmitting(false)
+      })
+  }
+
+  const transformToFormData = (values) => {
     const formData = new FormData()
     const thumbnail = values.productTypeImage
     const decamelizedValues = humps.decamelizeKeys(values)
@@ -71,30 +101,21 @@ const ProductTypeCreateForm = () => {
       formData.append(`product_type_image`, thumbnail)
     }
 
-    actions.setSubmitting(true)
-    try {
-      const {data: response} = await createProductType(formData)
-      swal.fire('Product Type Created', response.detail, 'success')
-    } catch (ex) {
-      toast.error(ex.response.data.detail)
-    } finally {
-      actions.setSubmitting(true)
-      actions.resetForm()
-    }
+    return formData
   }
 
   return (
     <Formik
       enableReinitialize
       validateOnChange={false}
-      validationSchema={productTypeCreateSchema}
+      validationSchema={productTypeSchema}
       initialValues={initialProductType}
       onSubmit={submit}
     >
       {(actions) => (
         <Form className='form d-flex flex-column flex-lg-row' id={formId}>
           <div className='d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10'>
-            <CustomFormCard
+            <CustomCard
               cardClassName='card-flush py-4'
               hasHeader={true}
               header={<h2>Thumbnail</h2>}
@@ -105,8 +126,8 @@ const ProductTypeCreateForm = () => {
                 Set the category thumbnail image. Only *.png, *.jpg and *.jpeg image files are
                 accepted
               </div>
-            </CustomFormCard>
-            <CustomFormCard
+            </CustomCard>
+            <CustomCard
               cardClassName='card-flush py-4'
               hasHeader={true}
               header={<h2>Status</h2>}
@@ -117,18 +138,18 @@ const ProductTypeCreateForm = () => {
                 name={productTypeStatus.name}
                 data={productTypeStatuses}
               />
-            </CustomFormCard>
-            <CustomFormCard
+            </CustomCard>
+            <CustomCard
               cardClassName='card-flush py-4'
               hasHeader={true}
               header={<h2>Details</h2>}
               bodyClassName='pt-0'
             >
               <TagField name={productTypeTags.name} label={productTypeTags.label} />
-            </CustomFormCard>
+            </CustomCard>
           </div>
           <div className='d-flex flex-column flex-row-fluid gap-7 gap-lg-10'>
-            <CustomFormCard
+            <CustomCard
               cardClassName='card-flush py-4'
               hasHeader={true}
               header={<h2>General</h2>}
@@ -149,8 +170,8 @@ const ProductTypeCreateForm = () => {
                   label={productTypeDescription.label}
                 />
               </div>
-            </CustomFormCard>
-            <CustomFormCard
+            </CustomCard>
+            <CustomCard
               cardClassName='card-flush py-4'
               hasHeader={true}
               header={<h2>Meta Options</h2>}
@@ -177,7 +198,7 @@ const ProductTypeCreateForm = () => {
                   required
                 />
               </div>
-            </CustomFormCard>
+            </CustomCard>
             <div className='d-flex justify-content-end'>
               <button
                 type='reset'

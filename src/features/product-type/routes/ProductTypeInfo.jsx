@@ -1,10 +1,10 @@
 import {ProductTypeInfoQueryProvider} from '../stores/ProductTypeInfoQueryProvider'
-import ProductTypeInfoForm from '../components/ProductTypeInfo/ProductTypeInfoForm'
+import ProductTypeInfoPage from '../components/ProductTypeInfo/ProductTypeInfoPage'
 
 const ProductTypeInfo = () => {
   return (
     <ProductTypeInfoQueryProvider>
-      <ProductTypeInfoForm />
+      <ProductTypeInfoPage />
     </ProductTypeInfoQueryProvider>
   )
 }

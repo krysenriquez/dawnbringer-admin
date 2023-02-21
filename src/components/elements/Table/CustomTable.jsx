@@ -10,18 +10,19 @@ import {
 } from '@tanstack/react-table'
 import {DebouncedInput} from '../Input/DebouncedInput'
 import CustomSVG from '../SVG/CustomSVG'
-import {CustomCardBody} from '../Card'
+import CustomCardBody from '../Card/CustomCardBody'
 
-export function CustomTable(props) {
-  const {data, columns, handleClick, hasToolbar, toolbarButtonName, handletoolbarButtonClick} =
-    props
+const CustomTable = (props) => {
+  const {data, columns, hasToolbar, toolbarButtonName, handleToolbarButtonClick} = props
   const [globalFilter, setGlobalFilter] = useState('')
+  const [columnVisibility, setColumnVisibility] = useState({})
 
   const table = useReactTable({
     data,
     columns,
     state: {
       globalFilter,
+      columnVisibility,
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -47,19 +48,19 @@ export function CustomTable(props) {
             />
           </div>
         </h3>
-        <div className='card-toolbar gap-5'>
-          {hasToolbar ? (
+        {hasToolbar ? (
+          <div className='card-toolbar gap-5'>
             <button
               type='button'
               className='btn btn-light-primary'
-              onClick={handletoolbarButtonClick}
+              onClick={handleToolbarButtonClick}
             >
               {toolbarButtonName}
             </button>
-          ) : (
-            <></>
-          )}
-        </div>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
       <CustomCardBody className='py-4'>
         <div className='dataTables_wrapper dt-bootstrap4'>
@@ -119,11 +120,7 @@ export function CustomTable(props) {
                 {table.getRowModel().rows.length > 0 ? (
                   table.getRowModel().rows.map((row) => {
                     return (
-                      <tr
-                        key={row.id}
-                        className='bg-hover-light text-hover-inverse-light'
-                        onClick={() => handleClick(row.original)}
-                      >
+                      <tr key={row.id}>
                         {row.getVisibleCells().map((cell) => {
                           return (
                             <td key={cell.id}>
@@ -238,3 +235,5 @@ export function CustomTable(props) {
     </div>
   )
 }
+
+export default CustomTable

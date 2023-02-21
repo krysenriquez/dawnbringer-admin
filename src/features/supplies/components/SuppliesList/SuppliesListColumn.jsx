@@ -41,7 +41,7 @@ const suppliesColumn = [
           className={clsx('badge fw-bolder d-inline', {
             'badge-light-warning': info.getValue() == 'PENDING',
             'badge-light-primary':
-              info.getValue() == 'ORDER_RECEIVED' || info.getValue() == 'BACK_ORDERED',
+              info.getValue() == 'REQUEST_RECEIVED' || info.getValue() == 'BACK_ORDERED',
             'badge-light-info': info.getValue() == 'PREPARING' || info.getValue() == 'IN_TRANSIT',
             'badge-light-danger': info.getValue() == 'CANCELLED' || info.getValue() == 'DENIED',
             'badge-light-success': info.getValue() == 'DELIVERED',

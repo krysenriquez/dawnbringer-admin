@@ -1,8 +1,8 @@
 import {useMemo} from 'react'
 import {useNavigate} from 'react-router-dom'
-import {CustomCard} from '@/components/elements/Card'
-import {CustomTable2} from '@/components/elements/Table/CustomTable2'
-import {TableLoading} from '@/components/elements/Table/TableLoading'
+import CustomCardWithoutHeader from '@/components/elements/Card/CustomCardWithoutHeader'
+import CustomTable from '@/components/elements/Table/CustomTable'
+import TableLoading from '@/components/elements/Table/TableLoading'
 import {
   useProductsListQueryData,
   useProductsListQueryLoading,
@@ -22,22 +22,22 @@ const ProductsListTable = () => {
 
   return (
     <>
-      <CustomCard>
+      <CustomCardWithoutHeader>
         {tableData ? (
-          <CustomTable2
+          <CustomTable
             {...{
               data: tableData,
               columns: tableColumns,
               hasToolbar: true,
               toolbarButtonName: 'Add Product',
-              handletoolbarButtonClick: createProduct,
+              handleToolbarButtonClick: createProduct,
             }}
           />
         ) : (
           <></>
         )}
         {isLoading && <TableLoading />}
-      </CustomCard>
+      </CustomCardWithoutHeader>
     </>
   )
 }

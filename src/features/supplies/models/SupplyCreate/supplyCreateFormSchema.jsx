@@ -4,9 +4,10 @@ const {
   formField: {
     branchFrom,
     branchTo,
-    trackingNumber,
-    carrier,
     referenceNumber,
+    carrier,
+    carrierContactNumber,
+    trackingNumber,
     comment,
     details: [{variant, quantity}],
   },
@@ -15,9 +16,10 @@ const {
 export default object().shape({
   [branchFrom.key]: string().required(`${branchFrom.requiredErrorMsg}`),
   [branchTo.key]: string().required(`${branchTo.requiredErrorMsg}`),
-  [trackingNumber.key]: string(),
-  [carrier.key]: string(),
   [referenceNumber.key]: string(),
+  [carrier.key]: string(),
+  [carrierContactNumber.key]: string(),
+  [trackingNumber.key]: string(),
   [comment.key]: string(),
   details: array().of(
     object({

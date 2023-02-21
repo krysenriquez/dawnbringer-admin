@@ -12,6 +12,8 @@ const PrivateRoutes = () => {
   const ProductTypes = lazy(() => import('@/features/product-type/routes'))
   const Orders = lazy(() => import('@/features/orders/routes'))
   const Supplies = lazy(() => import('@/features/supplies/routes'))
+  const Customers = lazy(() => import('@/features/customers/routes'))
+  const Settings = lazy(() => import('@/features/settings/routes'))
 
   const routes = useRoutes([
     {
@@ -65,6 +67,22 @@ const PrivateRoutes = () => {
           element: (
             <SuspensedView>
               <Supplies />
+            </SuspensedView>
+          ),
+        },
+        {
+          path: 'customers/*',
+          element: (
+            <SuspensedView>
+              <Customers />
+            </SuspensedView>
+          ),
+        },
+        {
+          path: 'settings/*',
+          element: (
+            <SuspensedView>
+              <Settings />
             </SuspensedView>
           ),
         },

@@ -1,6 +1,8 @@
 import CustomSVG from '@/components/elements/SVG/CustomSVG'
+import {useCompany} from '@/providers/CompanyProvider'
 
 const MobileToggle = () => {
+  const {companyLogo} = useCompany()
   return (
     <div className='d-flex align-items-center d-block d-lg-none ms-n3' title='Show sidebar menu'>
       <div

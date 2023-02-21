@@ -4,6 +4,7 @@ import {PageTitle} from '@/providers/PageDataProvider'
 import ProductInfo from './ProductInfo'
 import ProductsList from './ProductsList'
 import ProductCreate from './ProductCreate'
+import ProductEdit from './ProductEdit'
 
 const ProductRoutes = () => {
   const intl = useIntl()
@@ -37,7 +38,18 @@ const ProductRoutes = () => {
         }
       />
       <Route
-        path=':product_id'
+        path='/create'
+        element={
+          <>
+            <PageTitle breadcrumbs={productBreadCrumbs} description=''>
+              {intl.formatMessage({id: 'PRODUCTS.CREATE'})}
+            </PageTitle>
+            <ProductCreate />
+          </>
+        }
+      />
+      <Route
+        path=':productId'
         element={
           <>
             <PageTitle breadcrumbs={productBreadCrumbs} description=''>
@@ -48,13 +60,13 @@ const ProductRoutes = () => {
         }
       />
       <Route
-        path='/create'
+        path=':productId/edit'
         element={
           <>
             <PageTitle breadcrumbs={productBreadCrumbs} description=''>
-              {intl.formatMessage({id: 'PRODUCTS.CREATE'})}
+              {intl.formatMessage({id: 'PRODUCTS.INFO'})}
             </PageTitle>
-            <ProductCreate />
+            <ProductEdit />
           </>
         }
       />

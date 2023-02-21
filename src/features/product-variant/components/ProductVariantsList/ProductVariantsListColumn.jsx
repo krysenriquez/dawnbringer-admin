@@ -65,7 +65,7 @@ export const productVariantsColumn = [
     cell: (info) => toCurrency(info.getValue()),
   },
   {
-    header: 'Stocks',
+    header: 'Total Stocks',
     accessorFn: (row) => row.stocks,
     id: 'stocks',
     cell: (info) => info.getValue(),

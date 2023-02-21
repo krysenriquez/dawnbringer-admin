@@ -7,7 +7,8 @@ const PRODUCTS_URL = `${API_URL}/products`
 export const GET_PRODUCT_TYPES_URL = `${PRODUCTS_URL}/getproducttypes/`
 export const GET_PRODUCT_TYPE_INFO_URL = `${PRODUCTS_URL}/getproducttype/`
 const GET_PRODUCT_TYPE_OPTIONS_URL = `${PRODUCTS_URL}/getproducttypesoptions/`
-const CREATE_PRODUCT_TYPES_URL = `${PRODUCTS_URL}/createproducttype/`
+const CREATE_PRODUCT_TYPE_URL = `${PRODUCTS_URL}/createproducttype/`
+const UPDATE_PRODUCT_TYPE_URL = `${PRODUCTS_URL}/updateproducttype/`
 
 export const getProductTypeOptions = () => {
   return axios.get(`${GET_PRODUCT_TYPE_OPTIONS_URL}`).then((d) => humps.camelizeKeys(d.data))
@@ -31,7 +32,13 @@ export const getProductTypeInfo = (productTypeId) => {
 }
 
 export const createProductType = (productType) => {
-  return axios.post(`${CREATE_PRODUCT_TYPES_URL}`, productType, {
+  return axios.post(`${CREATE_PRODUCT_TYPE_URL}`, productType, {
+    headers: {'Content-Type': 'multipart/form-data'},
+  })
+}
+
+export const updateProductType = (productType) => {
+  return axios.post(`${UPDATE_PRODUCT_TYPE_URL}`, productType, {
     headers: {'Content-Type': 'multipart/form-data'},
   })
 }

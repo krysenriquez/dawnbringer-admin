@@ -1,4 +1,5 @@
 import {string, object, array, number} from 'yup'
+import {verifySku} from '../api'
 import productVariantCreateFormModel from './productVariantCreateFormModel'
 const {
   formField: {
@@ -15,9 +16,25 @@ const {
   },
 } = productVariantCreateFormModel
 
+const validateSku = async (ctx) => {
+  return await verifySku(ctx.parent.sku)
+    .then((response) => {
+      return true
+    })
+    .catch((err) => {
+      return ctx.createError({path: 'sku', message: err.response.data.message})
+    })
+}
+
 export default object().shape({
   [product.key]: string().required(`${product.requiredErrorMsg}`),
-  [sku.key]: string().required(`${sku.requiredErrorMsg}`),
+  [sku.key]: string()
+    .required(`${sku.requiredErrorMsg}`)
+    .test({
+      name: 'is-valid-sku',
+      test: (value, ctx) => validateSku(ctx),
+      exclusive: true,
+    }),
   [variantName.key]: string().required(`${variantName.requiredErrorMsg}`),
   [variantStatus.key]: string().required(`${variantStatus.requiredErrorMsg}`),
   [variantDescription.key]: string().required(`${variantDescription.requiredErrorMsg}`),

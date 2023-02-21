@@ -18,4 +18,4 @@ const CustomCardBody = (props) => {
   )
 }
 
-export {CustomCardBody}
+export default CustomCardBody

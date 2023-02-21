@@ -13,11 +13,11 @@ export default {
       label: 'Branch To',
       requiredErrorMsg: 'Branch To is required',
     },
-    trackingNumber: {
-      key: 'trackingNumber',
-      name: 'trackingNumber',
-      label: 'Tracking Number',
-      requiredErrorMsg: 'Tracking Number is required',
+    referenceNumber: {
+      key: 'referenceNumber',
+      name: 'referenceNumber',
+      label: 'Reference Number',
+      requiredErrorMsg: 'Reference Number is required',
     },
     carrier: {
       key: 'carrier',
@@ -25,21 +25,27 @@ export default {
       label: 'Carrier',
       requiredErrorMsg: 'Carrier is required',
     },
-    referenceNumber: {
-      key: 'referenceNumber',
-      name: 'referenceNumber',
-      label: 'Reference Number',
-      requiredErrorMsg: 'Reference Number is required',
+    carrierContactNumber: {
+      key: 'carrierContactNumber',
+      name: 'carrierContactNumber',
+      label: 'Carrier Contact Number',
+      requiredErrorMsg: 'Carrier Contact Number is required',
+    },
+    trackingNumber: {
+      key: 'trackingNumber',
+      name: 'trackingNumber',
+      label: 'Tracking Number',
+      requiredErrorMsg: 'Tracking Number is required',
     },
     comment: {
       key: 'comment',
       name: 'comment',
       label: 'Comment',
     },
-    selectedVariant: {
-      key: 'selectedVariant',
-      name: 'selectedVariant',
-      label: 'Selected Variant',
+    setStatusToDelivered: {
+      key: 'setStatusToDelivered',
+      name: 'setStatusToDelivered',
+      label: 'Set Status to Delivered?',
     },
     details: [
       {

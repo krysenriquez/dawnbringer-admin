@@ -10,19 +10,18 @@ import {
 } from '@tanstack/react-table'
 import {DebouncedInput} from '../Input/DebouncedInput'
 import CustomSVG from '../SVG/CustomSVG'
-import {CustomCardBody} from '../Card'
+import CustomCardBody from '../Card/CustomCardBody'
+import TableLoading from './TableLoading'
 
-export function CustomTable2(props) {
-  const {data, columns, hasToolbar, toolbarButtonName, handletoolbarButtonClick} = props
+const CustomTable2 = (props) => {
+  const {data, columns, title, handleClick} = props
   const [globalFilter, setGlobalFilter] = useState('')
-  const [columnVisibility, setColumnVisibility] = useState({})
 
   const table = useReactTable({
     data,
     columns,
     state: {
       globalFilter,
-      columnVisibility,
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -34,7 +33,8 @@ export function CustomTable2(props) {
   return (
     <div>
       <div className='card-header pt-6 border-0'>
-        <h3 className='card-title align-items-start flex-column'>
+        {title && <div className='card-title align-items-start flex-column'>{title}</div>}
+        <div className='card-toolbar gap-5'>
           <div className='d-flex align-items-center position-relative my-1'>
             <CustomSVG
               path='/media/icons/search.svg'
@@ -47,19 +47,6 @@ export function CustomTable2(props) {
               placeholder='Search all columns...'
             />
           </div>
-        </h3>
-        <div className='card-toolbar gap-5'>
-          {hasToolbar ? (
-            <button
-              type='button'
-              className='btn btn-light-primary'
-              onClick={handletoolbarButtonClick}
-            >
-              {toolbarButtonName}
-            </button>
-          ) : (
-            <></>
-          )}
         </div>
       </div>
       <CustomCardBody className='py-4'>
@@ -120,7 +107,11 @@ export function CustomTable2(props) {
                 {table.getRowModel().rows.length > 0 ? (
                   table.getRowModel().rows.map((row) => {
                     return (
-                      <tr key={row.id} className='bg-hover-light text-hover-inverse-light'>
+                      <tr
+                        key={row.id}
+                        className='bg-hover-light text-hover-inverse-light'
+                        onClick={() => handleClick(row.original)}
+                      >
                         {row.getVisibleCells().map((cell) => {
                           return (
                             <td key={cell.id}>
@@ -235,3 +226,5 @@ export function CustomTable2(props) {
     </div>
   )
 }
+
+export default CustomTable2

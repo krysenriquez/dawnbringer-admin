@@ -10,53 +10,64 @@ const SidebarMenuItems = () => {
       <SidebarMenuItem
         to='/dashboard'
         title={intl.formatMessage({id: 'DASHBOARD'})}
-        fontIcon='bi-house-fill'
-      />
-      <SidebarMenuItem
-        to='/products'
-        title={intl.formatMessage({id: 'PRODUCTS'})}
-        fontIcon='bi-box-seam-fill'
-      />
-      <SidebarMenuItem
-        to='/product-variants'
-        title={intl.formatMessage({id: 'PRODUCTS.VARIANTS'})}
-        fontIcon='bi-boxes'
+        fontIcon='fa-solid fa-house fs-2'
       />
       <SidebarMenuItem
         to='/product-types'
         title={intl.formatMessage({id: 'PRODUCTS.TYPES'})}
-        fontIcon='bi-bookmarks-fill'
+        fontIcon='fa-solid fa-tag fs-2'
+      />
+      <SidebarMenuItem
+        to='/products'
+        title={intl.formatMessage({id: 'PRODUCTS'})}
+        fontIcon='fa-solid fa-gift fs-2'
+      />
+      <SidebarMenuItem
+        to='/product-variants'
+        title={intl.formatMessage({id: 'PRODUCTS.VARIANTS'})}
+        fontIcon='fa-solid fa-gifts fs-2'
       />
       <SidebarMenuItem
         to='/supplies'
         title={intl.formatMessage({id: 'SUPPLIES'})}
-        fontIcon='bi-truck'
+        fontIcon='fa-solid fa-truck fs-2'
       />
       <SidebarMenuItem
         to='/orders'
         title={intl.formatMessage({id: 'ORDERS'})}
-        fontIcon='bi-cart fs-2'
+        fontIcon='fa-solid fa-cart-shopping fs-2'
       />
       <SidebarMenuItem
         to='/members'
         title={intl.formatMessage({id: 'MEMBERS'})}
-        fontIcon='bi-person-fill fs-2'
+        fontIcon='fa-solid fa-user-group fs-2'
+      />
+      <SidebarMenuItem
+        to='/customers'
+        title={intl.formatMessage({id: 'CUSTOMERS'})}
+        fontIcon='fa-solid fa-users fs-2'
       />
       <SidebarMenuItem
         to='/cashouts'
         title={intl.formatMessage({id: 'CASHOUTS'})}
-        fontIcon='bi-cash-coin fs-2'
+        fontIcon='fa-solid fa-money-check-dollar fs-2'
       />
       <SidebarMenuItem
         to='/website'
         title={intl.formatMessage({id: 'WEBSITE'})}
-        fontIcon='bi-globe2 fs-2'
+        fontIcon='fa-solid fa-globe fs-2'
       />
-      <SidebarMenuItem
+      <SidebarMenuItemWithSub
         to='/settings'
         title={intl.formatMessage({id: 'SETTINGS'})}
-        fontIcon='bi-gear fs-2'
-      />
+        fontIcon='fa-solid fa-gears fs-2'
+      >
+        <SidebarMenuItem
+          to='/settings/branches'
+          title={intl.formatMessage({id: 'SETTINGS.BRANCHES'})}
+          hasBullet={true}
+        />
+      </SidebarMenuItemWithSub>
     </>
   )
 }

@@ -8,7 +8,8 @@ import {
 } from '@/features/orders/stores/OrderInfoQueryProvider'
 import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import {CustomModal} from '@/components/elements/Modal/CustomModal'
-import ProcessOrderForm from './ProcessOrderForm'
+import OrderStatusForm from './OrderStatusForm'
+
 import classnames from 'classnames'
 
 const ProcessOrder = (prop) => {
@@ -23,7 +24,7 @@ const ProcessOrder = (prop) => {
 
   return (
     <CustomModal {...value}>
-      <ProcessOrderForm />
+      <OrderStatusForm />
     </CustomModal>
   )
 }

@@ -23,6 +23,7 @@ export default function SelectField(props) {
       {label && <label className={clsx('form-label mb-3', {required: required})}>{label}</label>}
       <select
         {...field}
+        {...rest}
         value={selectedValue ? selectedValue : ''}
         className={clsx(className && className, {
           'is-invalid': isError,

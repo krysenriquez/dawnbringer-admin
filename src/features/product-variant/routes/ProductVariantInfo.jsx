@@ -1,12 +1,11 @@
 import {ProductVariantInfoQueryProvider} from '../stores/ProductVariantInfoQueryProvider'
-import {ProductVariantInfoPage} from '../components/ProductVariantInfo/ProductVariantInfoPage'
-import ProductVariantInfoForm from '../components/ProductVariantInfo/ProductVariantInfoForm'
+import ProductVariantInfoPage from '../components/ProductVariantInfo/ProductVariantInfoPage'
 
 const ProductVariantInfo = () => {
   return (
     <>
       <ProductVariantInfoQueryProvider>
-        <ProductVariantInfoForm />
+        <ProductVariantInfoPage />
       </ProductVariantInfoQueryProvider>
     </>
   )

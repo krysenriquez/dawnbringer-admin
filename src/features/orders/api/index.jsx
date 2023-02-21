@@ -6,8 +6,8 @@ const ORDERS_URL = `${API_URL}/orders
 `
 export const GET_ORDERS_URL = `${ORDERS_URL}/getadminorders/`
 export const GET_ORDER_INFO_URL = `${ORDERS_URL}/getadminorder/`
-export const GET_ORDER_STATUSES_URL = `${ORDERS_URL}/getorderstatus/`
-export const CREATE_ORDER_HISTORY_URL = `${ORDERS_URL}/updateorder/`
+const GET_ORDER_STATUSES_URL = `${ORDERS_URL}/getorderstatus/`
+const CREATE_ORDER_HISTORY_URL = `${ORDERS_URL}/updateorder/`
 
 export const getOrders = (branchId) => {
   return axios

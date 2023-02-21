@@ -14,7 +14,7 @@ import {
 import {createProductVariant} from '../../api'
 import CustomTabs from '@/components/elements/Tabs/CustomTabs'
 import {Tab} from 'react-bootstrap'
-import CustomFormCard from '@/components/elements/Card/CustomFormCard'
+import CustomCard from '@/components/elements/Card/CustomCard'
 import ImageInputField from '@/components/elements/Input/ImageInputField'
 import ImageDropzoneField from '@/components/elements/Input/ImageDropzoneField'
 import InputField from '@/components/elements/Input/InputField'
@@ -157,7 +157,7 @@ const ProductVariantCreateForm = () => {
       {(actions) => (
         <Form className='form d-flex flex-column flex-lg-row' id={formId}>
           <div className='d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10'>
-            <CustomFormCard
+            <CustomCard
               cardClassName='card-flush py-4'
               hasHeader={true}
               header={<h2>Thumbnail</h2>}
@@ -168,8 +168,8 @@ const ProductVariantCreateForm = () => {
                 Set the category thumbnail image. Only *.png, *.jpg and *.jpeg image files are
                 accepted
               </div>
-            </CustomFormCard>
-            <CustomFormCard
+            </CustomCard>
+            <CustomCard
               cardClassName='card-flush py-4'
               hasHeader={true}
               header={<h2>Status</h2>}
@@ -180,8 +180,8 @@ const ProductVariantCreateForm = () => {
                 name={variantStatus.name}
                 data={variantStatuses}
               />
-            </CustomFormCard>
-            <CustomFormCard
+            </CustomCard>
+            <CustomCard
               cardClassName='card-flush py-4'
               hasHeader={true}
               header={<h2>Details</h2>}
@@ -193,7 +193,7 @@ const ProductVariantCreateForm = () => {
               <div className='mb-0'>
                 <TagField name={variantTags.name} label={variantTags.label} />
               </div>
-            </CustomFormCard>
+            </CustomCard>
           </div>
           <div className='d-flex flex-column flex-row-fluid gap-7 gap-lg-10'>
             <CustomTabs
@@ -210,7 +210,7 @@ const ProductVariantCreateForm = () => {
               >
                 {tab == 'general' ? (
                   <>
-                    <CustomFormCard
+                    <CustomCard
                       cardClassName='card-flush py-4'
                       hasHeader={true}
                       header={<h2>General</h2>}
@@ -249,8 +249,8 @@ const ProductVariantCreateForm = () => {
                           label={variantDescription.label}
                         />
                       </div>
-                    </CustomFormCard>
-                    <CustomFormCard
+                    </CustomCard>
+                    <CustomCard
                       cardClassName='card-flush py-4'
                       hasHeader={true}
                       header={<h2>Pricing</h2>}
@@ -276,15 +276,15 @@ const ProductVariantCreateForm = () => {
                           required
                         />
                       </div>
-                    </CustomFormCard>
-                    <CustomFormCard
+                    </CustomCard>
+                    <CustomCard
                       cardClassName='card-flush py-4'
                       hasHeader={true}
                       header={<h2>Media</h2>}
                       bodyClassName='pt-0'
                     >
                       <ImageDropzoneField name={media.name} />
-                    </CustomFormCard>
+                    </CustomCard>
                   </>
                 ) : (
                   <></>
@@ -298,7 +298,7 @@ const ProductVariantCreateForm = () => {
               >
                 {tab == 'advanced' ? (
                   <>
-                    <CustomFormCard
+                    <CustomCard
                       cardClassName='card-flush py-4'
                       hasHeader={true}
                       header={<h2>Point Values</h2>}
@@ -329,8 +329,8 @@ const ProductVariantCreateForm = () => {
                           </div>
                         )}
                       />
-                    </CustomFormCard>
-                    <CustomFormCard
+                    </CustomCard>
+                    <CustomCard
                       cardClassName='card-flush py-4'
                       hasHeader={true}
                       header={<h2>Meta Options</h2>}
@@ -360,7 +360,7 @@ const ProductVariantCreateForm = () => {
                           required
                         />
                       </div>
-                    </CustomFormCard>
+                    </CustomCard>
                   </>
                 ) : (
                   <></>

@@ -10,7 +10,6 @@ const SidebarMenuItemWithSub = (props) => {
   const {pathname} = useLocation()
   const isActive = checkIsActive(pathname, to)
   const {config} = useLayout()
-  console.log(pathname)
 
   return (
     <div
@@ -30,7 +29,7 @@ const SidebarMenuItemWithSub = (props) => {
         )}
         {fontIcon && config.app.sidebar.menu.iconType === 'font' && (
           <span className='menu-icon'>
-            <i className={clsx('bi fs-3', fontIcon)}></i>
+            <i className={clsx(fontIcon)}></i>
           </span>
         )}
         <span className='menu-title'>{title}</span>

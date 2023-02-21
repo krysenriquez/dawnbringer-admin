@@ -15,9 +15,9 @@ const ProductInfoQueryProvider = ({children}) => {
     refetch,
     data: response,
   } = useQuery(
-    `${GET_PRODUCT_INFO_URL}-${searchParams.product_id}`,
+    `${GET_PRODUCT_INFO_URL}-${searchParams.productId}`,
     () => {
-      return getProductInfo(searchParams.product_id)
+      return getProductInfo(searchParams.productId)
     },
     {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
   )
