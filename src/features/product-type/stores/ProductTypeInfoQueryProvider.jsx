@@ -41,10 +41,10 @@ const useProductTypeInfoQueryContext = () => {
 const useProductTypeInfoQueryData = () => {
   const {response} = useProductTypeInfoQueryContext()
   if (!response) {
-    return {}
+    return []
   }
 
-  return response || {}
+  return response || []
 }
 
 const useProductTypeInfoQueryLoading = () => {

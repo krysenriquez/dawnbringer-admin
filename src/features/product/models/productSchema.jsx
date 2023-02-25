@@ -13,13 +13,12 @@ const {
 } = productFormModel
 
 const validateProductName = async (ctx) => {
-  console.log(ctx)
   return await verifyProductName(ctx.parent.productName, ctx.parent.productId)
     .then((response) => {
       return true
     })
     .catch((err) => {
-      return ctx.createError({path: 'productName', message: err.response.data.message})
+      return true
     })
 }
 

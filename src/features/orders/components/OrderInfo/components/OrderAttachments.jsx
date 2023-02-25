@@ -7,20 +7,20 @@ import 'yet-another-react-lightbox/plugins/thumbnails.css'
 import {useOrderInfoQueryData} from '@/features/orders/stores/OrderInfoQueryProvider'
 
 const OrderAttachments = () => {
-  const order = useOrderInfoQueryData()
+  const orderInfo = useOrderInfoQueryData()
   const [orderAttachments, setOrderAttachments] = useState([])
 
   useEffect(() => {
-    if (order.attachments) {
+    if (orderInfo.attachments) {
       let attachment_arr = []
-      order.attachments.map((attachment) => {
+      orderInfo.attachments.map((attachment) => {
         if (attachment.attachment) {
           attachment_arr.push({src: attachment.attachment})
         }
       })
       setOrderAttachments(attachment_arr)
     }
-  }, [order])
+  }, [orderInfo])
 
   return (
     <>

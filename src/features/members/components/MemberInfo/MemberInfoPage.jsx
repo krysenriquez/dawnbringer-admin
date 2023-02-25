@@ -11,13 +11,13 @@ import MemberOrdersTable from './components/MemberOrders/MemberOrdersTable'
 import MemberActivitiesTable from './components/MemberActivities/MemberActivitiesTable'
 
 const MemberInfoPage = () => {
-  const member = useMemberInfoQueryData()
+  const memberInfo = useMemberInfoQueryData()
   const isLoading = useMemberInfoQueryLoading()
   const [tab, setTab] = useState('orders')
 
   return (
     <>
-      {Object.keys(member).length > 0 && !isLoading ? (
+      {Object.keys(memberInfo).length > 0 && !isLoading ? (
         <>
           <div className='d-flex flex-column flex-lg-row gap-5'>
             <div className='d-lg-flex flex-column flex-lg-row-auto w-100 w-xl-350px'>

@@ -6,12 +6,12 @@ import CustomerDetails from './components/CustomerDetails'
 import CustomerOrdersTable from './components/CustomerOrders/CustomerOrdersTable'
 
 const CustomerInfoPage = () => {
-  const customer = useCustomerInfoQueryData()
+  const customerInfo = useCustomerInfoQueryData()
   const isLoading = useCustomerInfoQueryLoading()
 
   return (
     <>
-      {Object.keys(customer).length > 0 && !isLoading ? (
+      {Object.keys(customerInfo).length > 0 && !isLoading ? (
         <>
           <div className='d-flex flex-column flex-lg-row gap-5'>
             <div className='d-lg-flex flex-column flex-lg-row-auto w-100 w-xl-350px'>

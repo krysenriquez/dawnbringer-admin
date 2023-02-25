@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import {useNavigate} from 'react-router-dom'
-import {toCurrency} from '@/utils/toCurrency'
 import {useIntl} from 'react-intl'
 import ActionCell from '@/components/elements/Table/Cell/ActionCell'
 import CustomSVG from '@/components/elements/SVG/CustomSVG'

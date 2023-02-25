@@ -49,16 +49,16 @@ export default {
       invalidErrorMsg: 'Invalid Initial Quantity format',
     },
     price: {
-      price: {
-        key: 'price',
-        name: 'price.price',
+      basePrice: {
+        key: 'basePrice',
+        name: 'price.basePrice',
         label: 'Price',
         requiredErrorMsg: 'Price is required',
         invalidErrorMsg: 'Invalid Price format',
       },
-      discount: {
-        key: 'discount',
-        name: 'price.discount',
+      discountedPrice: {
+        key: 'discountedPrice',
+        name: 'price.discountedPrice',
         label: 'Discounted Price',
         requiredErrorMsg: 'Discounted Price is required',
         invalidErrorMsg: 'Invalid Discounted Price format',

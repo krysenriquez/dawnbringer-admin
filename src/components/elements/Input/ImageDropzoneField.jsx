@@ -1,5 +1,5 @@
 import {useField, useFormikContext} from 'formik'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {useDropzone} from 'react-dropzone'
 
 export default function ImageDropzoneField(props) {
@@ -7,6 +7,7 @@ export default function ImageDropzoneField(props) {
   const {name} = props
   const [field, meta] = useField(props)
 
+  const [initialFiles, setInitialFiles] = useState([])
   const [files, setFiles] = useState([])
   const {getRootProps, getInputProps} = useDropzone({
     accept: {
@@ -20,15 +21,38 @@ export default function ImageDropzoneField(props) {
           })
         )
       )
-      setFieldValue(name, acceptedFiles)
     },
   })
+
+  useEffect(() => {
+    if (meta.initialValue) {
+      setInitialFiles(meta.initialValue)
+    }
+  }, [meta.initialValue])
+
+  useEffect(() => {
+    let images_arr = []
+    initialFiles.map((file) => {
+      images_arr.push(file)
+    })
+    files.map((file) => {
+      images_arr.push(file)
+    })
+    setFieldValue(name, images_arr)
+  }, [initialFiles, files])
 
   const removeFile = (e, file) => {
     e.stopPropagation()
     const newFiles = [...files]
     newFiles.splice(newFiles.indexOf(file), 1)
     setFiles(newFiles)
+  }
+
+  const removeThumb = (e, file) => {
+    e.stopPropagation()
+    const newThumbs = [...initialFiles]
+    newThumbs.splice(newThumbs.indexOf(file), 1)
+    setInitialFiles(newThumbs)
   }
 
   const thumbs = files.map((file) => (
@@ -47,10 +71,21 @@ export default function ImageDropzoneField(props) {
     </div>
   ))
 
+  const initialThumbs = initialFiles.map((file) => (
+    <div className='dz-preview dz-image-preview dz-complete' key={file.id}>
+      <div className='dz-image'>
+        <img src={file.attachment} />
+      </div>
+      <span className='dz-remove' onClick={(e) => removeThumb(e, file)} data-dz-remove=''>
+        Remove file
+      </span>
+    </div>
+  ))
+
   return (
     <div className='dropzone dz-clickable' {...getRootProps({className: 'dropzone dz-clickable'})}>
       <input {...getInputProps()} />
-      {files.length == 0 && (
+      {files.length == 0 && initialFiles.length == 0 && (
         <div className='dz-message'>
           <i className='bi bi-file-earmark-arrow-up text-primary fs-3x' />
           <div className='ms-4'>
@@ -60,6 +95,7 @@ export default function ImageDropzoneField(props) {
         </div>
       )}
       {thumbs}
+      {initialThumbs}
     </div>
   )
 }

@@ -19,7 +19,7 @@ import ImageInputField from '@/components/elements/Input/ImageInputField'
 import ImageDropzoneField from '@/components/elements/Input/ImageDropzoneField'
 import InputField from '@/components/elements/Input/InputField'
 import SelectField from '@/components/elements/Input/SelectField'
-import SelectInputField from '@/components/elements/Input/SelectInputField'
+import SelectInputFieldWithGrouping from '@/components/elements/Input/SelectInputFieldWithGrouping'
 import QuillField from '@/components/elements/Input/QuillField'
 import TagField from '@/components/elements/Input/TagField'
 import InputGroupField from '@/components/elements/Input/InputGroupField'
@@ -68,7 +68,7 @@ const ProductVariantCreateForm = () => {
       variantTags,
       quantity,
       media,
-      price: {price, discount},
+      price: {basePrice, discountedPrice},
       meta: {metaTagTitle, metaTagDescription, pageSlug},
       pointValues: [{pointValue, membershipLevel}],
     },
@@ -113,6 +113,36 @@ const ProductVariantCreateForm = () => {
   }
 
   const submit = async (values, actions) => {
+    swal
+      .fire({
+        title: 'Create Product Variant?',
+        icon: 'question',
+        showCancelButton: true,
+        showConfirmButton: true,
+        confirmButtonColor: 'btn btn-primary',
+        cancelButtonColor: 'btn btn-info',
+        confirmButtonText: 'Create',
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          const formData = transformToFormData(values)
+          actions.setSubmitting(true)
+          try {
+            const {data: response} = await createProductVariant(formData)
+            swal.fire('Product Variant Created', response.detail, 'success')
+          } catch (ex) {
+            toast.error(ex.response.data.detail)
+          } finally {
+            actions.resetForm()
+          }
+        }
+      })
+      .finally(() => {
+        actions.setSubmitting(false)
+      })
+  }
+
+  const transformToFormData = (values) => {
     const formData = new FormData()
     const thumbnail = values.variantImage
     const medias = values.media
@@ -134,16 +164,7 @@ const ProductVariantCreateForm = () => {
       })
     }
 
-    actions.setSubmitting(true)
-    try {
-      const {data: response} = await createProductVariant(formData)
-      swal.fire('Product Variant Created', response.detail, 'success')
-    } catch (ex) {
-      toast.error(ex.response.data.detail)
-    } finally {
-      actions.setSubmitting(true)
-      actions.resetForm()
-    }
+    return formData
   }
 
   return (
@@ -188,7 +209,11 @@ const ProductVariantCreateForm = () => {
               bodyClassName='pt-0'
             >
               <div className='mb-10'>
-                <SelectInputField name={product.name} label={product.label} data={productOptions} />
+                <SelectInputFieldWithGrouping
+                  name={product.name}
+                  label={product.label}
+                  data={productOptions}
+                />
               </div>
               <div className='mb-0'>
                 <TagField name={variantTags.name} label={variantTags.label} />
@@ -234,7 +259,7 @@ const ProductVariantCreateForm = () => {
                           required
                         />
                       </div>
-                      <div className='mb-10'>
+                      {/* <div className='mb-10'>
                         <InputField
                           className='form-control'
                           name={quantity.name}
@@ -242,7 +267,7 @@ const ProductVariantCreateForm = () => {
                           placeholder='Initial Quantity'
                           required
                         />
-                      </div>
+                      </div> */}
                       <div>
                         <QuillField
                           name={variantDescription.name}
@@ -259,8 +284,8 @@ const ProductVariantCreateForm = () => {
                       <div className='mb-10'>
                         <InputGroupField
                           className='form-control'
-                          name={price.name}
-                          label={price.label}
+                          name={basePrice.name}
+                          label={basePrice.label}
                           labelPrepend='₱'
                           placeholder='Product Variant Price'
                           required
@@ -269,8 +294,8 @@ const ProductVariantCreateForm = () => {
                       <div className='mb-10'>
                         <InputGroupField
                           className='form-control'
-                          name={discount.name}
-                          label={discount.label}
+                          name={discountedPrice.name}
+                          label={discountedPrice.label}
                           labelPrepend='₱'
                           placeholder='Product Variant Discount'
                           required

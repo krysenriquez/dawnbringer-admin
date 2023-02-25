@@ -8,12 +8,12 @@ import {
 
 const OrderHistory = () => {
   const intl = useIntl()
-  const order = useOrderInfoQueryData()
+  const orderInfo = useOrderInfoQueryData()
   const isLoading = useOrderInfoQueryLoading()
 
   return (
     <>
-      {order && order.histories && !isLoading ? (
+      {orderInfo && orderInfo.histories && !isLoading ? (
         <div className='card card-flush py-4'>
           <div className='card-header'>
             <div className='card-title'>
@@ -31,7 +31,7 @@ const OrderHistory = () => {
                   </tr>
                 </thead>
                 <tbody className='fw-semibold text-gray-600'>
-                  {order.histories.map((history) => {
+                  {orderInfo.histories.map((history) => {
                     return (
                       <tr key={history.id}>
                         <td>

@@ -8,13 +8,6 @@ export default function SelectInputFieldNonFormik(props) {
     setValue(e.value)
   }
 
-  const formatGroupLabel = (data) => (
-    <div className='react-select-group-label'>
-      <span>{data.label}</span>
-      <span className='badge badge-primary badge-circle badge-sm'>{data.options.length}</span>
-    </div>
-  )
-
   return (
     <>
       {label && <label className={clsx('form-label mb-3')}>{label}</label>}
@@ -30,7 +23,6 @@ export default function SelectInputFieldNonFormik(props) {
           option: (state) =>
             state.isFocused ? 'react-select-option focused' : 'react-select-option',
         }}
-        formatGroupLabel={formatGroupLabel}
       />
     </>
   )

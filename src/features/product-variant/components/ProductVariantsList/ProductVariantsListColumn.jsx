@@ -59,12 +59,6 @@ export const productVariantsColumn = [
     cell: (info) => info.getValue(),
   },
   {
-    header: 'Price',
-    accessorFn: (row) => row.price,
-    id: 'price',
-    cell: (info) => toCurrency(info.getValue()),
-  },
-  {
     header: 'Total Stocks',
     accessorFn: (row) => row.stocks,
     id: 'stocks',
@@ -95,7 +89,7 @@ export const productVariantsColumn = [
   {
     header: 'Actions',
     accessorFn: (row) => row.productId,
-    id: 'productAction',
+    id: 'productVariantAction',
     cell: (info) => {
       const navigate = useNavigate()
 

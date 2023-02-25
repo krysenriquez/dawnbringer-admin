@@ -1,4 +1,5 @@
 import axios from 'axios'
+import humps from 'humps'
 
 const API_URL = import.meta.env.VITE_API_URL
 const AUTH_URL = `${API_URL}/vanguard`
@@ -25,5 +26,5 @@ export function requestPassword(username) {
 }
 
 export function getUserByToken(token) {
-  return axios.post(`${GET_USER_BY_ACCESSTOKEN_URL}`)
+  return axios.post(`${GET_USER_BY_ACCESSTOKEN_URL}`).then((d) => humps.camelizeKeys(d.data))
 }

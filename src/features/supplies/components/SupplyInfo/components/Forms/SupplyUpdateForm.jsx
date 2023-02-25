@@ -25,7 +25,7 @@ const SupplyUpdateForm = () => {
   const swal = withReactContent(Swal)
   const {toggleModal} = useModalContext()
   const {refetch} = useSupplyInfoQueryContext()
-  const supply = useSupplyInfoQueryData()
+  const supplyInfo = useSupplyInfoQueryData()
   const [initialSupply, setInitialSupply] = useState(processSupplyInitialValues)
 
   const {
@@ -34,20 +34,20 @@ const SupplyUpdateForm = () => {
   } = processSupplyFormModel
 
   useEffect(() => {
-    if (supply) {
+    if (supplyInfo) {
       setInitialSupply((prevState) => {
         return {
           ...prevState,
           supplyId: searchParams.supplyId,
-          referenceNumber: supply.referenceNumber,
-          carrier: supply.carrier,
-          carrierContactNumber: supply.carrierContactNumber,
-          trackingNumber: supply.trackingNumber,
-          comment: supply.comment,
+          referenceNumber: supplyInfo.referenceNumber,
+          carrier: supplyInfo.carrier,
+          carrierContactNumber: supplyInfo.carrierContactNumber,
+          trackingNumber: supplyInfo.trackingNumber,
+          comment: supplyInfo.comment,
         }
       })
     }
-  }, [supply])
+  }, [supplyInfo])
 
   const cancel = (withRefresh) => {
     if (withRefresh) {
@@ -57,16 +57,33 @@ const SupplyUpdateForm = () => {
   }
 
   const submit = async (values, actions) => {
-    actions.setSubmitting(true)
-    try {
-      const {data: response} = await updateSupply(values)
-      swal.fire('Supply Updated!', response.detail, 'success')
-    } catch (ex) {
-      toast.error(ex.response.data.detail)
-    } finally {
-      actions.setSubmitting(true)
-      cancel(true)
-    }
+    swal
+      .fire({
+        title: 'Update Supply?',
+        icon: 'question',
+        showCancelButton: true,
+        showConfirmButton: true,
+        confirmButtonColor: 'btn btn-primary',
+        cancelButtonColor: 'btn btn-info',
+        confirmButtonText: 'Update',
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          actions.setSubmitting(true)
+          try {
+            const {data: response} = await updateSupply(values)
+            swal.fire('Supply Updated!', response.detail, 'success')
+          } catch (ex) {
+            toast.error(ex.response.data.detail)
+          } finally {
+            actions.setSubmitting(true)
+          }
+        }
+      })
+      .finally(() => {
+        actions.setSubmitting(false)
+        cancel(true)
+      })
   }
 
   return (

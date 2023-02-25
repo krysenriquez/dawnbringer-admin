@@ -7,12 +7,12 @@ import {
 
 const SupplyBranchTo = () => {
   const intl = useIntl()
-  const supply = useSupplyInfoQueryData()
+  const supplyInfo = useSupplyInfoQueryData()
   const isLoading = useSupplyInfoQueryLoading()
 
   return (
     <>
-      {supply && supply.branchTo && !isLoading ? (
+      {supplyInfo && supplyInfo.branchTo && !isLoading ? (
         <div className='card card-flush py-4 flex-row-fluid overflow-hidden'>
           <div className='position-absolute top-0 end-0 opacity-10 pe-none text-end'>
             <img src='/media/icons/ecommerce/delivery.svg' className='w-175px' />
@@ -23,12 +23,12 @@ const SupplyBranchTo = () => {
             </div>
           </div>
           <div className='card-body pt-0'>
-            <h4>{supply.branchToName}</h4>
-            {supply.branchTo.address1} {supply.branchTo.address2}
+            <h4>{supplyInfo.branchToName}</h4>
+            {supplyInfo.branchTo.address1} {supplyInfo.branchTo.address2}
             <br />
-            {supply.branchTo.city} {supply.branchTo.province} {supply.branchTo.zip}
+            {supplyInfo.branchTo.city} {supplyInfo.branchTo.province} {supplyInfo.branchTo.zip}
             <br />
-            {supply.branchTo.country}
+            {supplyInfo.branchTo.country}
           </div>
         </div>
       ) : (

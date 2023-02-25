@@ -30,7 +30,7 @@ const ProcessSupplyStatus = (prop) => {
 
 const SupplyStatus = () => {
   const intl = useIntl()
-  const supply = useSupplyInfoQueryData()
+  const supplyInfo = useSupplyInfoQueryData()
   const isLoading = useSupplyInfoQueryLoading()
 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -41,14 +41,14 @@ const SupplyStatus = () => {
 
   return (
     <>
-      {supply && supply.histories && !isLoading ? (
+      {supplyInfo && supplyInfo.histories && !isLoading ? (
         <div className='card card-flush py-4'>
           <div className='card-header'>
             <div className='card-title'>
               <h2>History</h2>
             </div>
             <div className='card-toolbar'>
-              {supply.currentSupplyStage < 5 && supply.canUpdateSupplyStatus ? (
+              {supplyInfo.currentSupplyStage < 5 && supplyInfo.canUpdateSupplyStatus ? (
                 <button
                   className='btn btn-sm btn-light btn-active-primary'
                   onClick={() => toggleModal()}
@@ -62,7 +62,7 @@ const SupplyStatus = () => {
           </div>
           <div className='card-body pt-0'>
             <div className='timeline ms-n1'>
-              {supply.histories.map((history, index) => {
+              {supplyInfo.histories.map((history, index) => {
                 return (
                   <div className='timeline-item align-items-center mb-4' key={history.id}>
                     <div className='timeline-line w-20px mt-12 mb-n14' />

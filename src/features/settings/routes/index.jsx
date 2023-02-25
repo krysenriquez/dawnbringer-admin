@@ -1,36 +1,33 @@
+import {lazy} from 'react'
 import {Route, Routes, Outlet} from 'react-router-dom'
 import {useIntl} from 'react-intl'
 import {PageTitle} from '@/providers/PageDataProvider'
-import BranchesList from './BranchesList'
+import {SuspensedView} from '@/utils/suspensedView'
+import BranchesList from '@/features/branches/routes/BranchesList'
 
 const SettingsRoutes = () => {
-  const intl = useIntl()
-
-  const settingsBreadCrumbs = [
-    {
-      title: intl.formatMessage({id: 'SETTINGS'}),
-      path: '/orders',
-      isSeparator: false,
-      isActive: false,
-    },
-    {
-      title: '',
-      path: '',
-      isSeparator: true,
-      isActive: false,
-    },
-  ]
+  const Branches = lazy(() => import('@/features/branches/routes'))
+  const Users = lazy(() => import('@/features/users/routes'))
 
   return (
     <Routes>
       <Route
-        path='/branches'
+        path='/branches/*'
         element={
           <>
-            <PageTitle breadcrumbs={settingsBreadCrumbs} description=''>
-              {intl.formatMessage({id: 'SETTINGS.BRANCHES'})}
-            </PageTitle>
-            <BranchesList />
+            <SuspensedView>
+              <Branches />
+            </SuspensedView>
+          </>
+        }
+      />
+      <Route
+        path='/users/*'
+        element={
+          <>
+            <SuspensedView>
+              <Users />
+            </SuspensedView>
           </>
         }
       />

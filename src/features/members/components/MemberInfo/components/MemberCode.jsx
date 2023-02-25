@@ -10,7 +10,7 @@ import {
 import CustomCard from '@/components/elements/Card/CustomCard'
 
 const MemberCode = () => {
-  const member = useMemberInfoQueryData()
+  const memberInfo = useMemberInfoQueryData()
   const isLoading = useMemberInfoQueryLoading()
 
   const copyToClipBoard = (referralLink) => {
@@ -20,7 +20,7 @@ const MemberCode = () => {
 
   return (
     <>
-      {member && !isLoading ? (
+      {memberInfo && !isLoading ? (
         <CustomCard
           cardClassName='card-flush'
           hasHeader={true}
@@ -30,7 +30,7 @@ const MemberCode = () => {
           <div className='row'>
             <div className='col-xl-6 col-12 text-center mb-5'>
               <QRCodeSVG
-                value={member.code.referralLink}
+                value={memberInfo.code.referralLink}
                 size={180}
                 bgColor={'#ffffff'}
                 fgColor={'#000000'}
@@ -58,11 +58,11 @@ const MemberCode = () => {
                     type='text'
                     className='form-control form-control-solid me-3 flex-grow-1'
                     name='search'
-                    defaultValue={member.code.referralLink}
+                    defaultValue={memberInfo.code.referralLink}
                   />
                   <button
                     className='btn btn-light btn-active-light-primary fw-bold flex-shrink-0'
-                    onClick={() => copyToClipBoard(member.code.referralLink)}
+                    onClick={() => copyToClipBoard(memberInfo.code.referralLink)}
                   >
                     Copy Link
                   </button>
@@ -71,8 +71,8 @@ const MemberCode = () => {
             </div>
           </div>
           <div className='row'>
-            {member.membershipLevelPoints &&
-              member.membershipLevelPoints.map((points, index) => {
+            {memberInfo.membershipLevelPoints &&
+              memberInfo.membershipLevelPoints.map((points, index) => {
                 return (
                   <div className='col' key={index}>
                     <div className='card card-dashed flex-center min-w-175px my-3 p-6'>

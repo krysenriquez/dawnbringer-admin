@@ -28,7 +28,7 @@ const SupplyStatusForm = () => {
   const swal = withReactContent(Swal)
   const {toggleModal} = useModalContext()
   const {refetch} = useSupplyInfoQueryContext()
-  const supply = useSupplyInfoQueryData()
+  const supplyInfo = useSupplyInfoQueryData()
   const [initialSupplyStatus, setInitialSupplyStatus] = useState(processSupplyStatusInitialValues)
   const [supplyStatuses, setSupplyStatuses] = useState([])
 
@@ -63,13 +63,13 @@ const SupplyStatusForm = () => {
   }
 
   useEffect(() => {
-    if (supply) {
+    if (supplyInfo) {
       setInitialSupplyStatus((prevState) => {
         return {...prevState, supplyId: searchParams.supplyId}
       })
-      handleGetSupplyStatuses(supply)
+      handleGetSupplyStatuses(supplyInfo)
     }
-  }, [supply])
+  }, [supplyInfo])
 
   const cancel = (withRefresh) => {
     if (withRefresh) {
@@ -79,16 +79,33 @@ const SupplyStatusForm = () => {
   }
 
   const submit = async (values, actions) => {
-    actions.setSubmitting(true)
-    try {
-      const {data: response} = await processSupplyStatus(values)
-      swal.fire('Supply Updated!', response.detail, 'success')
-    } catch (ex) {
-      toast.error(ex.response.data.detail)
-    } finally {
-      actions.setSubmitting(true)
-      cancel(true)
-    }
+    swal
+      .fire({
+        title: 'Update Supply Status?',
+        icon: 'question',
+        showCancelButton: true,
+        showConfirmButton: true,
+        confirmButtonColor: 'btn btn-primary',
+        cancelButtonColor: 'btn btn-info',
+        confirmButtonText: 'Update',
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          actions.setSubmitting(true)
+          try {
+            const {data: response} = await processSupplyStatus(values)
+            swal.fire('Supply Updated!', response.detail, 'success')
+          } catch (ex) {
+            toast.error(ex.response.data.detail)
+          } finally {
+            actions.setSubmitting(true)
+          }
+        }
+      })
+      .finally(() => {
+        actions.setSubmitting(false)
+        cancel(true)
+      })
   }
 
   return (

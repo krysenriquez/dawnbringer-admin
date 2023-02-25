@@ -9,16 +9,16 @@ import CustomCard from '@/components/elements/Card/CustomCard'
 
 const SupplyDetails = () => {
   const intl = useIntl()
-  const supply = useSupplyInfoQueryData()
+  const supplyInfo = useSupplyInfoQueryData()
   const isLoading = useSupplyInfoQueryLoading()
 
   return (
     <>
-      {supply && !isLoading ? (
+      {supplyInfo && !isLoading ? (
         <CustomCard
           cardClassName='card-flush py-4 flex-row-fluid'
           hasHeader={true}
-          header={<h2>Supply (#{supply.supplyNumber})</h2>}
+          header={<h2>Supply (#{supplyInfo.supplyNumber})</h2>}
           bodyClassName='pt-0'
         >
           <div className='table-responsive'>
@@ -35,7 +35,7 @@ const SupplyDetails = () => {
                     </div>
                   </td>
                   <td className='fw-bold text-end'>
-                    {format(Date.parse(supply.created), 'dd/MM/yyyy')}
+                    {format(Date.parse(supplyInfo.created), 'dd/MM/yyyy')}
                   </td>
                 </tr>
                 <tr>
@@ -48,7 +48,7 @@ const SupplyDetails = () => {
                       Reference Number
                     </div>
                   </td>
-                  <td className='fw-bold text-end'>{supply.referenceNumber}</td>
+                  <td className='fw-bold text-end'>{supplyInfo.referenceNumber}</td>
                 </tr>
                 <tr>
                   <td className='text-muted'>
@@ -60,7 +60,7 @@ const SupplyDetails = () => {
                       Comment
                     </div>
                   </td>
-                  <td className='fw-bold text-end'>{supply.comment}</td>
+                  <td className='fw-bold text-end'>{supplyInfo.comment}</td>
                 </tr>
               </tbody>
             </table>

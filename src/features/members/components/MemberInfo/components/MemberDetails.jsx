@@ -9,7 +9,7 @@ import CustomCard from '@/components/elements/Card/CustomCard'
 
 const MemberDetails = () => {
   const intl = useIntl()
-  const member = useMemberInfoQueryData()
+  const memberInfo = useMemberInfoQueryData()
   const isLoading = useMemberInfoQueryLoading()
 
   const theme = useThemeMode()
@@ -18,7 +18,7 @@ const MemberDetails = () => {
 
   return (
     <>
-      {member && !isLoading ? (
+      {memberInfo && !isLoading ? (
         <CustomCard
           cardClassName='card-flush mb-5 mb-xl-8'
           hasHeader={true}
@@ -30,53 +30,53 @@ const MemberDetails = () => {
               <div className='symbol symbol-150px symbol-lg-160px symbol-circle mb-7'>
                 <img
                   src={`${
-                    member.avatarInfo.fileAttachment
-                      ? member.avatarInfo.fileAttachment
+                    memberInfo.avatarInfo.fileAttachment
+                      ? memberInfo.avatarInfo.fileAttachment
                       : defaultThumbnail
                   }`}
                   alt='image'
                 />
               </div>
-              <div className='fs-3 text-gray-800 fw-bold mb-1'>{member.fullName}</div>
+              <div className='fs-3 text-gray-800 fw-bold mb-1'>{memberInfo.fullName}</div>
               <div
                 className={clsx('badge d-inline fw-bolder mb-6', {
-                  'badge-light-success': member.accountStatus == 'ACTIVE',
+                  'badge-light-success': memberInfo.accountStatus == 'ACTIVE',
                   'badge-light-warning':
-                    member.accountStatus == 'DRAFT' || member.accountStatus == 'PENDING',
+                    memberInfo.accountStatus == 'DRAFT' || memberInfo.accountStatus == 'PENDING',
                   'badge-light-danger':
-                    member.accountStatus == 'INACTIVE' ||
-                    member.accountStatus == 'DEACTIVATED' ||
-                    member.accountStatus == 'CLOSED',
+                    memberInfo.accountStatus == 'INACTIVE' ||
+                    memberInfo.accountStatus == 'DEACTIVATED' ||
+                    memberInfo.accountStatus == 'CLOSED',
                 })}
               >
-                {intl.formatMessage({id: member.accountStatus})}
+                {intl.formatMessage({id: memberInfo.accountStatus})}
               </div>
             </div>
             <div className='pb-5 fs-6'>
               <div className='fw-bold mt-5'>Account Number</div>
-              <div className='text-gray-600'>{member.accountNumber}</div>
+              <div className='text-gray-600'>{memberInfo.accountNumber}</div>
               <div className='fw-bold mt-5'>Birthdate</div>
-              {member.personalInfo && (
+              {memberInfo.personalInfo && (
                 <>
                   <div className='text-gray-600'>
-                    {member.personalInfo.birthdate ? member.personalInfo.birthdate : '--'}
+                    {memberInfo.personalInfo.birthdate ? memberInfo.personalInfo.birthdate : '--'}
                   </div>
                   <div className='fw-bold mt-5'>Gender</div>
                   <div className='text-gray-600'>
-                    {member.personalInfo.gender ? member.personalInfo.gender : '--'}
+                    {memberInfo.personalInfo.gender ? memberInfo.personalInfo.gender : '--'}
                   </div>
                 </>
               )}
-              {member.contactInfo && (
+              {memberInfo.contactInfo && (
                 <>
                   <div className='fw-bold mt-5'>Contact Number</div>
                   <div className='text-gray-600'>
-                    {member.contactInfo.contactNumber ? member.contactInfo.contactNumber : '--'}
+                    {memberInfo.contactInfo.contactNumber ? memberInfo.contactInfo.contactNumber : '--'}
                   </div>
                 </>
               )}
-              {member.addressInfo &&
-                member.addressInfo.map((address) => {
+              {memberInfo.addressInfo &&
+                memberInfo.addressInfo.map((address) => {
                   return (
                     <div key={address.addressType}>
                       <div className='fw-bold mt-5'>

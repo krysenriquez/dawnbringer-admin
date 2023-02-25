@@ -37,10 +37,10 @@ const useMemberInfoQueryContext = () => {
 const useMemberInfoQueryData = () => {
   const {response} = useMemberInfoQueryContext()
   if (!response) {
-    return {}
+    return []
   }
 
-  return response || {}
+  return response || []
 }
 
 const useMemberInfoQueryLoading = () => {

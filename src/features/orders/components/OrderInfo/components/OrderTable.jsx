@@ -9,7 +9,7 @@ import CustomCard from '@/components/elements/Card/CustomCard'
 
 const OrderTable = () => {
   const navigate = useNavigate()
-  const order = useOrderInfoQueryData()
+  const orderInfo = useOrderInfoQueryData()
   const isLoading = useOrderInfoQueryLoading()
 
   const theme = useThemeMode()
@@ -24,7 +24,7 @@ const OrderTable = () => {
 
   return (
     <>
-      {order && !isLoading ? (
+      {orderInfo && !isLoading ? (
         <CustomCard
           cardClassName='card-flush py-4 flex-row-fluid overflow-hidden'
           hasHeader={true}
@@ -43,7 +43,7 @@ const OrderTable = () => {
                 </tr>
               </thead>
               <tbody className='fw-semibold text-gray-600'>
-                {order.details.map((detail) => {
+                {orderInfo.details.map((detail) => {
                   return (
                     <tr key={detail.variantSku}>
                       <td>
@@ -80,11 +80,11 @@ const OrderTable = () => {
                   </td>
                   <td className='text-end'>
                     {toCurrency(
-                      order.details.reduce((a, v) => (a = a + parseFloat(v.totalAmount)), 0)
+                      orderInfo.details.reduce((a, v) => (a = a + parseFloat(v.totalAmount)), 0)
                     )}
                   </td>
                 </tr>
-                {order.fees.map((fee) => {
+                {orderInfo.fees.map((fee) => {
                   return (
                     <tr key={fee.feeType}>
                       <td colSpan={4} className='text-end'>
@@ -99,7 +99,7 @@ const OrderTable = () => {
                     Grand Total
                   </td>
                   <td className='text-dark fs-3 fw-bolder text-end'>
-                    {toCurrency(order.totalAmount)}
+                    {toCurrency(orderInfo.totalAmount)}
                   </td>
                 </tr>
               </tbody>

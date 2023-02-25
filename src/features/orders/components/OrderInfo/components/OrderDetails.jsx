@@ -10,16 +10,16 @@ import CustomCard from '@/components/elements/Card/CustomCard'
 
 const OrderDetails = () => {
   const intl = useIntl()
-  const order = useOrderInfoQueryData()
+  const orderInfo = useOrderInfoQueryData()
   const isLoading = useOrderInfoQueryLoading()
 
   return (
     <>
-      {order && !isLoading ? (
+      {orderInfo && !isLoading ? (
         <CustomCard
           cardClassName='card-flush py-4 flex-row-fluid'
           hasHeader={true}
-          header={<h2>Order (#{order.orderNumber})</h2>}
+          header={<h2>Order (#{orderInfo.orderNumber})</h2>}
           bodyClassName='pt-0'
         >
           <div className='table-responsive'>
@@ -36,7 +36,7 @@ const OrderDetails = () => {
                     </div>
                   </td>
                   <td className='fw-bold text-end'>
-                    {order.orderDate && format(Date.parse(order.orderDate), 'dd/MM/yyyy hh:mm:ss')}
+                    {orderInfo.orderDate && format(Date.parse(orderInfo.orderDate), 'dd/MM/yyyy hh:mm:ss')}
                   </td>
                 </tr>
                 <tr>
@@ -50,7 +50,7 @@ const OrderDetails = () => {
                     </div>
                   </td>
                   <td className='fw-bold text-end'>
-                    {intl.formatMessage({id: order.paymentMethod})}
+                    {intl.formatMessage({id: orderInfo.paymentMethod})}
                   </td>
                 </tr>
                 <tr>
@@ -63,7 +63,7 @@ const OrderDetails = () => {
                       Delivery Method
                     </div>
                   </td>
-                  <td className='fw-bold text-end'>{intl.formatMessage({id: order.orderType})}</td>
+                  <td className='fw-bold text-end'>{intl.formatMessage({id: orderInfo.orderType})}</td>
                 </tr>
               </tbody>
             </table>

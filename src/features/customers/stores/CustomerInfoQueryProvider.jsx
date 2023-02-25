@@ -39,10 +39,10 @@ const useCustomerInfoQueryContext = () => {
 const useCustomerInfoQueryData = () => {
   const {response} = useCustomerInfoQueryContext()
   if (!response) {
-    return {}
+    return []
   }
 
-  return response || {}
+  return response || []
 }
 
 const useCustomerInfoQueryLoading = () => {

@@ -11,12 +11,12 @@ import OrderTable from './components/OrderTable'
 import OrderStatus from './components/OrderStatus'
 
 const OrderInfoPage = () => {
-  const order = useOrderInfoQueryData()
+  const orderInfo = useOrderInfoQueryData()
   const isLoading = useOrderInfoQueryLoading()
 
   return (
     <>
-      {Object.keys(order).length > 0 && !isLoading ? (
+      {Object.keys(orderInfo).length > 0 && !isLoading ? (
         <div className='d-flex flex-column flex-lg-row gap-7'>
           <div className='d-lg-flex flex-column flex-lg-row-auto w-100 w-lg-300px'>
             <OrderStatus />

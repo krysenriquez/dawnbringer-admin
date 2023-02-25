@@ -37,7 +37,7 @@ export const LoginForm = () => {
       try {
         const {data: auth} = await login(values.username, values.password)
         saveAuth(auth)
-        const {data: user} = await getUserByToken(auth.access)
+        const user = await getUserByToken(auth.access)
         setCurrentUser(user)
         toast.success('Login Success!')
       } catch (error) {

@@ -32,7 +32,7 @@ const ProcessSupplyUpdate = (prop) => {
 
 const SupplyInfoPage = () => {
   const navigate = useNavigate()
-  const supply = useSupplyInfoQueryData()
+  const supplyInfo = useSupplyInfoQueryData()
   const isLoading = useSupplyInfoQueryLoading()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -46,7 +46,7 @@ const SupplyInfoPage = () => {
 
   return (
     <>
-      {Object.keys(supply).length > 0 && !isLoading ? (
+      {Object.keys(supplyInfo).length > 0 && !isLoading ? (
         <div className='d-flex flex-column flex-lg-row gap-7'>
           <div className='d-lg-flex flex-column flex-lg-row-auto w-100 w-lg-300px'>
             <SupplyStatus />
@@ -62,7 +62,7 @@ const SupplyInfoPage = () => {
                 <SupplyBranchTo />
               </div>
               <SupplyTable />
-              {supply.currentSupplyStage < 5 && supply.canUpdateSupplyStatus && (
+              {supplyInfo.currentSupplyStage < 5 && supplyInfo.canUpdateSupplyStatus && (
                 <div className='d-flex justify-content-end'>
                   <button type='reset' onClick={() => cancel()} className='btn btn-light me-3'>
                     Cancel

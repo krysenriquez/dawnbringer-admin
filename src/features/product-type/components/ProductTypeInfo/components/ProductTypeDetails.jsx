@@ -14,9 +14,7 @@ const ProductTypeDetails = () => {
   const isLoading = useProductTypeInfoQueryLoading()
 
   const edit = () => {
-    navigate(`edit`, {
-      state: {productTypeId: productTypeInfo.productTypeId},
-    })
+    navigate(`edit`)
   }
 
   const defaultThumbnail =

@@ -9,17 +9,17 @@ import {
 const OrderSteps = () => {
   const [steps, setSteps] = useState([])
   const intl = useIntl()
-  const order = useOrderInfoQueryData()
+  const orderInfo = useOrderInfoQueryData()
   const isLoading = useOrderInfoQueryLoading()
 
   useEffect(() => {
-    if (order.histories) {
-      const sortedSteps = [...order.histories].sort((a, b) =>
+    if (orderInfo.histories) {
+      const sortedSteps = [...orderInfo.histories].sort((a, b) =>
         a.orderStage > b.orderStage ? 1 : -1
       )
       for (var i = 0; i < 4; i++) {
-        if (i < order.currentOrderStage) {
-          sortedSteps[i].orderStage == order.currentOrderStage
+        if (i < orderInfo.currentOrderStage) {
+          sortedSteps[i].orderStage == orderInfo.currentOrderStage
             ? sortedSteps[i].orderStage == 4
               ? (sortedSteps[i].stage = 'completed')
               : (sortedSteps[i].stage = 'current')
@@ -34,11 +34,11 @@ const OrderSteps = () => {
       }
       setSteps(sortedSteps)
     }
-  }, [order])
+  }, [orderInfo])
 
   return (
     <>
-      {order && order.histories && !isLoading ? (
+      {orderInfo && orderInfo.histories && !isLoading ? (
         <div className='stepper stepper-pills'>
           <div className='stepper-nav flex-center flex-wrap'>
             {steps ? (

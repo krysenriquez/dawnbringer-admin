@@ -10,14 +10,14 @@ const {
     variantDescription,
     variantTags,
     quantity,
-    price: {price, discount},
+    price: {basePrice, discountedPrice},
     meta: {metaTagTitle, metaTagDescription, pageSlug},
     pointValues: [{pointValue, membershipLevel}],
   },
 } = productVariantCreateFormModel
 
 const validateSku = async (ctx) => {
-  return await verifySku(ctx.parent.sku)
+  return await verifySku(ctx.parent.sku, ctx.parent.variantId)
     .then((response) => {
       return true
     })
@@ -40,18 +40,18 @@ export default object().shape({
   [variantDescription.key]: string().required(`${variantDescription.requiredErrorMsg}`),
   [variantTags.key]: array().of(string()),
   [quantity.key]: number()
-    .min(1)
+    .min(0)
     .integer(`${quantity.invalidErrorMsg}`)
     .required(`${quantity.requiredErrorMsg}`),
   price: object({
-    [price.key]: number()
+    [basePrice.key]: number()
       .min(0)
-      .integer(`${price.invalidErrorMsg}`)
-      .required(`${price.requiredErrorMsg}`),
-    [discount.key]: number()
+      .integer(`${basePrice.invalidErrorMsg}`)
+      .required(`${basePrice.requiredErrorMsg}`),
+    [discountedPrice.key]: number()
       .min(0)
-      .integer(`${discount.invalidErrorMsg}`)
-      .required(`${discount.requiredErrorMsg}`),
+      .integer(`${discountedPrice.invalidErrorMsg}`)
+      .required(`${discountedPrice.requiredErrorMsg}`),
   }),
   meta: object({
     [metaTagTitle.key]: string().required(`${metaTagTitle.requiredErrorMsg}`),

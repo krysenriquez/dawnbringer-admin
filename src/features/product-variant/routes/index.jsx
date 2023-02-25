@@ -4,6 +4,8 @@ import {PageTitle} from '@/providers/PageDataProvider'
 import ProductVariantInfo from './ProductVariantInfo'
 import ProductVariantsList from './ProductVariantsList'
 import ProductVariantCreate from './ProductVariantCreate'
+import ProductVariantEdit from './ProductVariantEdit'
+
 const ProductVariantRoutes = () => {
   const intl = useIntl()
 
@@ -36,6 +38,17 @@ const ProductVariantRoutes = () => {
         }
       />
       <Route
+        path='/create'
+        element={
+          <>
+            <PageTitle breadcrumbs={productVariantBreadCrumbs} description=''>
+              {intl.formatMessage({id: 'PRODUCTS.VARIANTS.CREATE'})}
+            </PageTitle>
+            <ProductVariantCreate />
+          </>
+        }
+      />
+      <Route
         path=':sku'
         element={
           <>
@@ -47,13 +60,13 @@ const ProductVariantRoutes = () => {
         }
       />
       <Route
-        path='/create'
+        path=':sku/edit'
         element={
           <>
             <PageTitle breadcrumbs={productVariantBreadCrumbs} description=''>
-              {intl.formatMessage({id: 'PRODUCTS.VARIANTS.CREATE'})}
+              {intl.formatMessage({id: 'PRODUCTS.VARIANTS.EDIT'})}
             </PageTitle>
-            <ProductVariantCreate />
+            <ProductVariantEdit />
           </>
         }
       />

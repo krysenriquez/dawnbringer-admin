@@ -47,16 +47,27 @@ const SidebarMenuItems = () => {
         title={intl.formatMessage({id: 'CUSTOMERS'})}
         fontIcon='fa-solid fa-users fs-2'
       />
-      <SidebarMenuItem
+      {/* <SidebarMenuItem
         to='/cashouts'
         title={intl.formatMessage({id: 'CASHOUTS'})}
         fontIcon='fa-solid fa-money-check-dollar fs-2'
-      />
-      <SidebarMenuItem
+      /> */}
+      <SidebarMenuItemWithSub
         to='/website'
         title={intl.formatMessage({id: 'WEBSITE'})}
         fontIcon='fa-solid fa-globe fs-2'
-      />
+      >
+        <SidebarMenuItem
+          to='/website/page-contents'
+          title={intl.formatMessage({id: 'WEBSITE.PAGECONTENTS'})}
+          hasBullet={true}
+        />
+        <SidebarMenuItem
+          to='/website/section-components'
+          title={intl.formatMessage({id: 'WEBSITE.SECTIONCOMPONENTS'})}
+          hasBullet={true}
+        />
+      </SidebarMenuItemWithSub>
       <SidebarMenuItemWithSub
         to='/settings'
         title={intl.formatMessage({id: 'SETTINGS'})}
@@ -65,6 +76,11 @@ const SidebarMenuItems = () => {
         <SidebarMenuItem
           to='/settings/branches'
           title={intl.formatMessage({id: 'SETTINGS.BRANCHES'})}
+          hasBullet={true}
+        />
+        <SidebarMenuItem
+          to='/settings/users'
+          title={intl.formatMessage({id: 'SETTINGS.USERS'})}
           hasBullet={true}
         />
       </SidebarMenuItemWithSub>

@@ -31,7 +31,7 @@ const ProcessOrder = (prop) => {
 
 const OrderStatus = () => {
   const intl = useIntl()
-  const order = useOrderInfoQueryData()
+  const orderInfo = useOrderInfoQueryData()
   const isLoading = useOrderInfoQueryLoading()
 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -42,14 +42,14 @@ const OrderStatus = () => {
 
   return (
     <>
-      {order && order.histories && !isLoading ? (
+      {orderInfo && orderInfo.histories && !isLoading ? (
         <div className='card card-flush py-4'>
           <div className='card-header'>
             <div className='card-title'>
               <h2>History</h2>
             </div>
             <div className='card-toolbar'>
-              {order.currentOrderStage < 4 ? (
+              {orderInfo.currentOrderStage < 4 ? (
                 <button
                   className='btn btn-sm btn-light btn-active-primary'
                   onClick={() => toggleModal()}
@@ -63,7 +63,7 @@ const OrderStatus = () => {
           </div>
           <div className='card-body pt-0'>
             <div className='timeline ms-n1'>
-              {order.histories.map((history, index) => {
+              {orderInfo.histories.map((history, index) => {
                 return (
                   <div className='timeline-item align-items-center mb-4' key={history.id}>
                     <div className='timeline-line w-20px mt-12 mb-n14' />

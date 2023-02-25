@@ -1,5 +1,7 @@
 import clsx from 'clsx'
-import {toCurrency} from '@/utils/toCurrency'
+import {useNavigate} from 'react-router-dom'
+import {useThemeMode} from '@/providers/ThemeModeProvider'
+import {toCurrency, toPoints} from '@/utils/toCurrency'
 import {
   useProductVariantInfoQueryData,
   useProductVariantInfoQueryLoading,
@@ -7,8 +9,17 @@ import {
 import CustomCard from '@/components/elements/Card/CustomCard'
 
 const ProductVariantDetails = () => {
+  const navigate = useNavigate()
+  const theme = useThemeMode()
   const productVariantInfo = useProductVariantInfoQueryData()
   const isLoading = useProductVariantInfoQueryLoading()
+
+  const edit = () => {
+    navigate(`edit`)
+  }
+
+  const defaultThumbnail =
+    `/media/files/blank-image` + (theme.mode === 'light' ? '.svg' : '-dark.svg')
 
   return (
     <>
@@ -17,12 +28,22 @@ const ProductVariantDetails = () => {
           cardClassName='card-flush mb-5 mb-xl-8'
           hasHeader={true}
           header={<h2>Summary</h2>}
+          hasToolbar={true}
+          toolbarButtonName='Edit'
+          handleToolbarButtonClick={edit}
           bodyClassName='pt-0'
         >
           <>
             <div className='d-flex flex-center flex-column mb-5'>
               <div className='symbol symbol-150px symbol-lg-160px mb-7'>
-                <img src={productVariantInfo.variantImage} alt='image' />
+                <img
+                  src={
+                    productVariantInfo.variantImage
+                      ? productVariantInfo.variantImage
+                      : defaultThumbnail
+                  }
+                  alt='image'
+                />
               </div>
               <div className='fs-3 text-gray-800 fw-bold mb-1'>
                 {productVariantInfo.variantName}
@@ -42,19 +63,42 @@ const ProductVariantDetails = () => {
               </div>
             </div>
             <div className='pb-5 fs-6'>
+              <div className='fw-bold mt-5'>Product</div>
+              <div className='text-gray-600'>
+                <span className='fw-semibold text-gray-700'>{productVariantInfo.productName}</span>
+              </div>
               <div className='mt-5'>
                 <h5 className=''>Pricing</h5>
                 <table className='table fs-6 fw-semibold gs-0 gy-2 gx-2'>
                   <tbody>
                     <tr className=''>
                       <td className='text-gray-700'>Price:</td>
-                      <td className='text-gray-800'>{toCurrency(productVariantInfo.price)}</td>
+                      <td className='text-gray-800 text-end'>
+                        {toCurrency(productVariantInfo.price.basePrice)}
+                      </td>
                     </tr>
-
                     <tr className=''>
                       <td className='text-gray-700'>Discounted Price:</td>
-                      <td className='text-gray-800'>{toCurrency(productVariantInfo.discount)}</td>
+                      <td className='text-gray-800 text-end'>
+                        {toCurrency(productVariantInfo.price.discountedPrice)}
+                      </td>
                     </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className='mt-5'>
+                <h5 className=''>Point Values</h5>
+                <table className='table fs-6 fw-semibold gs-0 gy-2 gx-2'>
+                  <tbody>
+                    {productVariantInfo.pointValues &&
+                      productVariantInfo.pointValues.map((point) => {
+                        return (
+                          <tr className='' key={point.membershipLevelLabel}>
+                            <td className='text-gray-700'>{point.membershipLevelLabel}:</td>
+                            <td className='text-gray-800 text-end'>{toPoints(point.pointValue)}</td>
+                          </tr>
+                        )
+                      })}
                   </tbody>
                 </table>
               </div>

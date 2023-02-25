@@ -17,7 +17,7 @@ import {createSupply} from '../../api'
 import CustomCard from '@/components/elements/Card/CustomCard'
 import InputField from '@/components/elements/Input/InputField'
 import SelectField from '@/components/elements/Input/SelectField'
-import SelectInputFieldNonFormik from '@/components/elements/Input/SelectInputFieldNonFormik'
+import SelectInputFieldNonFormikWithGrouping from '@/components/elements/Input/SelectInputFieldNonFormikWithGrouping'
 import TextAreaField from '@/components/elements/Input/TextAreaField'
 import DateTimePickerField from '@/components/elements/Input/DateTimePickerField'
 import supplyCreateFormModel from '../../models/SupplyCreate/supplyCreateFormModel'
@@ -289,7 +289,7 @@ const SupplyCreateForm = () => {
                     <div className='col-6'>
                       <div className='d-flex align-self-center'>
                         <div className='flex-grow-1 me-3'>
-                          <SelectInputFieldNonFormik
+                          <SelectInputFieldNonFormikWithGrouping
                             setValue={setSelectedVariant}
                             data={productVariantOptions}
                           />

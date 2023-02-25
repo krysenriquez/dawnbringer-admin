@@ -39,10 +39,10 @@ const useSupplyInfoQueryContext = () => {
 const useSupplyInfoQueryData = () => {
   const {response} = useSupplyInfoQueryContext()
   if (!response) {
-    return {}
+    return []
   }
 
-  return response || {}
+  return response || []
 }
 
 const useSupplyInfoQueryLoading = () => {

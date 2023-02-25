@@ -26,7 +26,7 @@ const OrderStatusForm = () => {
   const swal = withReactContent(Swal)
   const {toggleModal} = useModalContext()
   const {refetch} = useOrderInfoQueryContext()
-  const order = useOrderInfoQueryData()
+  const orderInfo = useOrderInfoQueryData()
   const [initialOrderStatus, setInitialOrderStatus] = useState(processOrderStatusInitialValues)
   const [orderStatuses, setOrderStatuses] = useState([])
 
@@ -60,13 +60,13 @@ const OrderStatusForm = () => {
   }
 
   useEffect(() => {
-    if (order) {
+    if (orderInfo) {
       setInitialOrderStatus((prevState) => {
         return {...prevState, orderId: searchParams.orderId}
       })
-      handleGetOrderStatuses(order)
+      handleGetOrderStatuses(orderInfo)
     }
-  }, [order])
+  }, [orderInfo])
 
   const cancel = (withRefresh) => {
     if (withRefresh) {
@@ -76,16 +76,33 @@ const OrderStatusForm = () => {
   }
 
   const submit = async (values, actions) => {
-    actions.setSubmitting(true)
-    try {
-      const {data: response} = await processOrderStatus(values)
-      swal.fire('Order Updated!', response.detail, 'success')
-    } catch (ex) {
-      toast.error(ex.response.data.detail)
-    } finally {
-      actions.setSubmitting(true)
-      cancel(true)
-    }
+    swal
+      .fire({
+        title: 'Update Order Status?',
+        icon: 'question',
+        showCancelButton: true,
+        showConfirmButton: true,
+        confirmButtonColor: 'btn btn-primary',
+        cancelButtonColor: 'btn btn-info',
+        confirmButtonText: 'Update',
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          actions.setSubmitting(true)
+          try {
+            const {data: response} = await processOrderStatus(values)
+            swal.fire('Order Updated', response.detail, 'success')
+          } catch (ex) {
+            toast.error(ex.response.data.detail)
+          } finally {
+            actions.setSubmitting(true)
+          }
+        }
+      })
+      .finally(() => {
+        actions.setSubmitting(false)
+        cancel(true)
+      })
   }
 
   return (

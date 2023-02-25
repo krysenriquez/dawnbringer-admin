@@ -9,7 +9,7 @@ import {
 import CustomCard from '@/components/elements/Card/CustomCard'
 
 const OrderMedia = () => {
-  const order = useOrderInfoQueryData()
+  const orderInfo = useOrderInfoQueryData()
   const isLoading = useOrderInfoQueryLoading()
   const [index, setIndex] = useState(0)
   const [imageIndex, setImageIndex] = useState(0)
@@ -17,16 +17,16 @@ const OrderMedia = () => {
   const [orderAttachments, setOrderAttachments] = useState([])
 
   useEffect(() => {
-    if (order.attachments) {
+    if (orderInfo.attachments) {
       let attachment_arr = []
-      order.attachments.map((attachment) => {
+      orderInfo.attachments.map((attachment) => {
         if (attachment.attachment) {
           attachment_arr.push({src: attachment.attachment})
         }
       })
       setOrderAttachments(attachment_arr)
     }
-  }, [order])
+  }, [orderInfo])
 
   const viewAttachments = (index) => {
     setImageIndex(index)
@@ -39,7 +39,7 @@ const OrderMedia = () => {
 
   return (
     <>
-      {order && order.address && !isLoading ? (
+      {orderInfo && orderInfo.address && !isLoading ? (
         <CustomCard
           cardClassName='card-flush py-4 flex-row-fluid overflow-hidden'
           hasHeader={true}
@@ -47,8 +47,8 @@ const OrderMedia = () => {
           bodyClassName='pt-0'
         >
           <Carousel activeIndex={index} onSelect={handleSelect} className='px-5'>
-            {order.attachments &&
-              order.attachments.map((attachment, index) => {
+            {orderInfo.attachments &&
+              orderInfo.attachments.map((attachment, index) => {
                 return (
                   <Carousel.Item key={index}>
                     <div

@@ -8,7 +8,7 @@ import CustomCard from '@/components/elements/Card/CustomCard'
 
 const SupplyTable = () => {
   const navigate = useNavigate()
-  const supply = useSupplyInfoQueryData()
+  const supplyInfo = useSupplyInfoQueryData()
   const isLoading = useSupplyInfoQueryLoading()
 
   const theme = useThemeMode()
@@ -23,7 +23,7 @@ const SupplyTable = () => {
 
   return (
     <>
-      {supply && !isLoading ? (
+      {supplyInfo && !isLoading ? (
         <CustomCard
           cardClassName='card-flush py-4 flex-row-fluid overflow-hidden'
           hasHeader={true}
@@ -40,7 +40,7 @@ const SupplyTable = () => {
                 </tr>
               </thead>
               <tbody className='fw-semibold text-gray-600'>
-                {supply.details.map((detail) => {
+                {supplyInfo.details.map((detail) => {
                   return (
                     <tr key={detail.variantSku}>
                       <td>

@@ -8,6 +8,7 @@ export const GET_PRODUCT_VARIANTS_URL = `${PRODUCTS_URL}/getproductvariants/`
 export const GET_PRODUCT_VARIANT_INFO_URL = `${PRODUCTS_URL}/getproductvariant/`
 const GET_PRODUCT_VARIANT_OPTIONS_URL = `${PRODUCTS_URL}/getproductvariantsoptions/`
 const CREATE_PRODUCT_VARIANT_URL = `${PRODUCTS_URL}/createproductvariant/`
+const UPDATE_PRODUCT_VARIANT_URL = `${PRODUCTS_URL}/updateproductvariant/`
 const VERIFY_SKU_URL = `${PRODUCTS_URL}/verifysku/`
 
 export const getProductVariantOptions = () => {
@@ -47,6 +48,12 @@ export function createProductVariant(productVariant) {
   })
 }
 
-export const verifySku = (sku) => {
-  return axios.post(`${VERIFY_SKU_URL}`, humps.decamelizeKeys({sku: sku}))
+export function updateProductVariant(productVariant) {
+  return axios.post(`${UPDATE_PRODUCT_VARIANT_URL}`, productVariant, {
+    headers: {'Content-Type': 'multipart/form-data'},
+  })
+}
+
+export const verifySku = (sku, variantId) => {
+  return axios.post(`${VERIFY_SKU_URL}`, humps.decamelizeKeys({sku: sku, variantId: variantId}))
 }

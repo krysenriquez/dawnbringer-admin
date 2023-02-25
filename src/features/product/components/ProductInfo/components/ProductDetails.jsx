@@ -14,9 +14,7 @@ const ProductDetails = () => {
   const isLoading = useProductInfoQueryLoading()
 
   const edit = () => {
-    navigate(`edit`, {
-      state: {productId: productInfo.productId},
-    })
+    navigate(`edit`)
   }
 
   const defaultThumbnail =
@@ -57,6 +55,10 @@ const ProductDetails = () => {
               </div>
             </div>
             <div className='pb-5 fs-6'>
+              <div className='fw-bold mt-5'>Product Type</div>
+              <div className='text-gray-600'>
+                <span className='fw-semibold text-gray-700'>{productInfo.productTypeName}</span>
+              </div>
               <div className='fw-bold mt-5'>Description</div>
               <div className='text-gray-600'>
                 <span

@@ -29,7 +29,7 @@ const ViewAttachments = (prop) => {
 
 const OrderDocuments = () => {
   const navigate = useNavigate()
-  const order = useOrderInfoQueryData()
+  const orderInfo = useOrderInfoQueryData()
   const isLoading = useOrderInfoQueryLoading()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -45,7 +45,7 @@ const OrderDocuments = () => {
 
   return (
     <>
-      {order && !isLoading && (
+      {orderInfo && !isLoading && (
         <>
           <CustomCard
             cardClassName='card-flush py-4 flex-row-fluid'
@@ -69,9 +69,9 @@ const OrderDocuments = () => {
                     <td className='fw-bold text-end'>
                       <button
                         className='btn btn-flush btn-link btn-color-gray-700 btn-active-color-primary fw-bold text-end'
-                        onClick={() => handleClick(order.codeAccount)}
+                        onClick={() => handleClick(orderInfo.codeAccount)}
                       >
-                        {order.code}
+                        {orderInfo.code}
                       </button>
                     </td>
                   </tr>

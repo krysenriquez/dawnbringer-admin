@@ -6,12 +6,12 @@ import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import CustomCard from '@/components/elements/Card/CustomCard'
 
 const SupplyDelivery = () => {
-  const supply = useSupplyInfoQueryData()
+  const supplyInfo = useSupplyInfoQueryData()
   const isLoading = useSupplyInfoQueryLoading()
 
   return (
     <>
-      {supply && !isLoading ? (
+      {supplyInfo && !isLoading ? (
         <CustomCard
           cardClassName='card-flush py-4 flex-row-fluid'
           hasHeader={true}
@@ -31,7 +31,7 @@ const SupplyDelivery = () => {
                       Tracking Number
                     </div>
                   </td>
-                  <td className='fw-bold text-end'>{supply.trackingNumber}</td>
+                  <td className='fw-bold text-end'>{supplyInfo.trackingNumber}</td>
                 </tr>
                 <tr>
                   <td className='text-muted'>
@@ -43,7 +43,7 @@ const SupplyDelivery = () => {
                       Carrier
                     </div>
                   </td>
-                  <td className='fw-bold text-end'>{supply.carrier}</td>
+                  <td className='fw-bold text-end'>{supplyInfo.carrier}</td>
                 </tr>
                 <tr>
                   <td className='text-muted'>
@@ -55,7 +55,7 @@ const SupplyDelivery = () => {
                       Carrier Contact Number
                     </div>
                   </td>
-                  <td className='fw-bold text-end'>{supply.carrierContactNumber}</td>
+                  <td className='fw-bold text-end'>{supplyInfo.carrierContactNumber}</td>
                 </tr>
               </tbody>
             </table>

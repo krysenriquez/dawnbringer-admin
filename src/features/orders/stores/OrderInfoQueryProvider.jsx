@@ -39,10 +39,10 @@ const useOrderInfoQueryContext = () => {
 const useOrderInfoQueryData = () => {
   const {response} = useOrderInfoQueryContext()
   if (!response) {
-    return {}
+    return []
   }
 
-  return response || {}
+  return response || []
 }
 
 const useOrderInfoQueryLoading = () => {

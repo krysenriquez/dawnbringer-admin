@@ -8,7 +8,7 @@ import CustomCard from '@/components/elements/Card/CustomCard'
 
 const OrderCustomer = () => {
   const navigate = useNavigate()
-  const order = useOrderInfoQueryData()
+  const orderInfo = useOrderInfoQueryData()
   const isLoading = useOrderInfoQueryLoading()
 
   const handleClick = (e) => {
@@ -19,7 +19,7 @@ const OrderCustomer = () => {
 
   return (
     <>
-      {order && order.customer && !isLoading ? (
+      {orderInfo && orderInfo.customer && !isLoading ? (
         <CustomCard
           cardClassName='card-flush py-4 flex-row-fluid'
           hasHeader={true}
@@ -42,9 +42,9 @@ const OrderCustomer = () => {
                   <td className='fw-bold text-end'>
                     <button
                       className='btn btn-flush btn-link btn-color-gray-700 btn-active-color-primary fw-bold text-end'
-                      onClick={() => handleClick(order.customer)}
+                      onClick={() => handleClick(orderInfo.customer)}
                     >
-                      {order.customer.name}
+                      {orderInfo.customer.name}
                     </button>
                   </td>
                 </tr>
@@ -58,7 +58,7 @@ const OrderCustomer = () => {
                       Email
                     </div>
                   </td>
-                  <td className='fw-bold text-end'>{order.customer.emailAddress}</td>
+                  <td className='fw-bold text-end'>{orderInfo.customer.emailAddress}</td>
                 </tr>
                 <tr>
                   <td className='text-muted'>
@@ -70,7 +70,7 @@ const OrderCustomer = () => {
                       Phone
                     </div>
                   </td>
-                  <td className='fw-bold text-end'>{order.customer.contactNumber}</td>
+                  <td className='fw-bold text-end'>{orderInfo.customer.contactNumber}</td>
                 </tr>
               </tbody>
             </table>

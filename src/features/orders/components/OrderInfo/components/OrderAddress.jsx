@@ -7,12 +7,12 @@ import {
 
 const OrderAddress = () => {
   const intl = useIntl()
-  const order = useOrderInfoQueryData()
+  const orderInfo = useOrderInfoQueryData()
   const isLoading = useOrderInfoQueryLoading()
 
   return (
     <>
-      {order && order.address && !isLoading ? (
+      {orderInfo && orderInfo.address && !isLoading ? (
         <div className='card card-flush py-4 flex-row-fluid overflow-hidden'>
           <div className='position-absolute top-0 end-0 opacity-10 pe-none text-end'>
             <img src='/media/icons/ecommerce/delivery.svg' className='w-175px' />
@@ -26,12 +26,12 @@ const OrderAddress = () => {
             <div className='d-flex align-items-center min-h-100'>
               <div>
                 <h4>
-                  {order.address.address1} {order.address.address2}
+                  {orderInfo.address.address1} {orderInfo.address.address2}
                 </h4>
                 <h4>
-                  {order.address.city} {order.address.province} {order.address.zip}
+                  {orderInfo.address.city} {orderInfo.address.province} {orderInfo.address.zip}
                 </h4>
-                <h4>{order.address.country}</h4>
+                <h4>{orderInfo.address.country}</h4>
               </div>
             </div>
           </div>

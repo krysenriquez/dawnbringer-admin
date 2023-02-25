@@ -82,12 +82,6 @@ const ProductEditForm = () => {
     }
   }, [productInfo])
 
-  useEffect(() => {
-    if (initialProduct) {
-      console.log(initialProduct)
-    }
-  }, [initialProduct])
-
   const cancel = () => {
     navigate(`/products/${productInfo.productId}`, {
       state: {productId: productInfo.productId},
