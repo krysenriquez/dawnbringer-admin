@@ -22,10 +22,10 @@ const App = () => {
           <CompanyProvider>
             <AuthInit>
               <Outlet />
-              <ToastContainer />
               <MasterInit />
             </AuthInit>
           </CompanyProvider>
+          <ToastContainer />
         </LayoutProvider>
       </I18nProvider>
     </Suspense>
@@ -38,7 +38,6 @@ export const AppRoutes = () => {
     <BrowserRouter basename={PUBLIC_URL}>
       <Routes>
         <Route element={<App />}>
-          {/* <Route path='error/*' element={<ErrorsPage />} /> */}
           <Route path='logout' element={<Logout />} />
           {auth ? (
             <>

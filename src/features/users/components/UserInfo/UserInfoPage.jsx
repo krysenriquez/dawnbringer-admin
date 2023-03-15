@@ -7,8 +7,6 @@ import {
 } from '@/features/users/stores/UserInfoQueryProvider'
 import UserDetails from './components/UserDetails'
 import UserBranchesListTable from './components/UserBranches/UserBranchesListTable'
-// import BranchDetails from './components/BranchDetails'
-// import BranchUsersTable from './components/BranchUsers/BranchUsersTable'
 
 const BranchInfoPage = () => {
   const userInfo = useUserInfoQueryData()

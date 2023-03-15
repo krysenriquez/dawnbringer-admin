@@ -98,12 +98,12 @@ const ProductVariantEditForm = () => {
   }, [products])
 
   useEffect(() => {
-    if (productVariantInfo) {
+    if (productVariantInfo && !isLoading) {
       setInitialProductVariant((prevState) => {
         return {...prevState, ...productVariantInfo}
       })
     }
-  }, [productVariantInfo])
+  }, [productVariantInfo, isLoading])
 
   const cancel = () => {
     navigate(`/product-variants/${productVariantInfo.sku}`, {

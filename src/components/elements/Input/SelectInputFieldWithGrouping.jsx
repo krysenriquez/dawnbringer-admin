@@ -12,6 +12,7 @@ export default function SelectInputFieldWithGrouping(props) {
   const isError = touched && error && true
   const isValid = touched && !!!error && value
   const [defaultSelected, setDefaultSelected] = useState('')
+  const [selectedValue, setSelectedValue] = useState('')
 
   function renderErrorMessage() {
     if (isError) {
@@ -20,15 +21,26 @@ export default function SelectInputFieldWithGrouping(props) {
   }
 
   const handleChange = (e) => {
-    setTouched(true)
+    let selected = data
+      .filter((element) => element.options.find((option) => option.value === e.value))
+      .reduce((acc, item) => item.options.find((option) => option.value === e.value), {})
+    setSelectedValue(selected)
     setFieldValue(field.name, e.value)
+    setTouched(true)
   }
 
   useEffect(() => {
-    if (meta.initialValue) {
-      setDefaultSelected(meta.initialValue)
+    if (meta.initialValue && data.length > 0) {
+      let selected = data
+        .filter((element) => element.options.find((option) => option.value === meta.initialValue))
+        .reduce(
+          (acc, item) => item.options.find((option) => option.value === meta.initialValue),
+          {}
+        )
+      setSelectedValue(selected)
+      setDefaultSelected(selected)
     }
-  }, [meta.initialValue])
+  }, [meta.initialValue, data])
 
   const formatGroupLabel = (data) => (
     <div className='react-select-group-label'>
@@ -43,18 +55,8 @@ export default function SelectInputFieldWithGrouping(props) {
       <Select
         {...field}
         onChange={(e) => handleChange(e)}
-        value={
-          data.length > 0
-            ? data
-                .filter((element) => element.options.find((option) => option.value === field.value))
-                .reduce(
-                  (acc, item) => item.options.find((option) => option.value === field.value),
-                  {}
-                )
-            : ''
-        }
+        value={selectedValue}
         options={data}
-        defaultInputValue={defaultSelected}
         classNames={{
           singleValue: (state) => 'react-select-value',
           input: (state) => 'react-select-value',

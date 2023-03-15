@@ -49,7 +49,7 @@ const UserBranchesUpdateForm = () => {
         return {
           ...prevState,
           userId: searchParams.userId,
-          branch: userInfo.branchAssignment.branch,
+          branch: userInfo.branchAssignment && userInfo.branchAssignment.branch,
         }
       })
     }
@@ -58,7 +58,6 @@ const UserBranchesUpdateForm = () => {
   const [branchesOptions, setBranchesOptions] = useState([])
   useEffect(() => {
     if (branches) {
-      console.log(branches)
       setBranchesOptions(
         arrayObjectToSelectOptions(branches, 'branchId', 'branchName', 'Select Branch')
       )
@@ -74,9 +73,10 @@ const UserBranchesUpdateForm = () => {
           branchName: branch.branchName,
         }
       })
-    const found = formikActions.current.values.branch.some(
-      (branch) => branch.branchId == branchToAdd.branchId
-    )
+
+    const found =
+      formikActions.current.values.branch &&
+      formikActions.current.values.branch.some((branch) => branch.branchId == branchToAdd.branchId)
     if (!found) {
       arrayHelpersRef.current.push(branchToAdd)
     } else {
@@ -178,7 +178,7 @@ const UserBranchesUpdateForm = () => {
                               </tr>
                             </thead>
                             <tbody className='fw-semibold text-gray-800'>
-                              {actions.values.branch.length > 0 ? (
+                              {actions.values.branch && actions.values.branch.length > 0 ? (
                                 actions.values.branch.map((detail, index) => {
                                   return (
                                     <tr key={detail.branchId}>

@@ -1,13 +1,11 @@
 import {lazy} from 'react'
-import {Route, Routes, Outlet} from 'react-router-dom'
-import {useIntl} from 'react-intl'
-import {PageTitle} from '@/providers/PageDataProvider'
+import {Route, Routes} from 'react-router-dom'
 import {SuspensedView} from '@/utils/suspensedView'
-import BranchesList from '@/features/branches/routes/BranchesList'
 
 const SettingsRoutes = () => {
   const Branches = lazy(() => import('@/features/branches/routes'))
   const Users = lazy(() => import('@/features/users/routes'))
+  const Roles = lazy(() => import('@/features/roles/routes'))
 
   return (
     <Routes>
@@ -27,6 +25,16 @@ const SettingsRoutes = () => {
           <>
             <SuspensedView>
               <Users />
+            </SuspensedView>
+          </>
+        }
+      />
+      <Route
+        path='/roles/*'
+        element={
+          <>
+            <SuspensedView>
+              <Roles />
             </SuspensedView>
           </>
         }

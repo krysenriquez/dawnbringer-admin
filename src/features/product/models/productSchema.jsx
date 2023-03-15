@@ -1,5 +1,5 @@
 import {string, object, array} from 'yup'
-import {verifyProductName} from '../api'
+import {verifyProductName, verifyProductSlug} from '../api'
 import productFormModel from './productFormModel'
 const {
   formField: {
@@ -18,7 +18,17 @@ const validateProductName = async (ctx) => {
       return true
     })
     .catch((err) => {
+      return ctx.createError({path: productName.name, message: err.response.data.message})
+    })
+}
+
+const validateProductSlug = async (ctx) => {
+  return await verifyProductSlug(ctx.parent.pageSlug, ctx.parent.productId)
+    .then((response) => {
       return true
+    })
+    .catch((err) => {
+      return ctx.createError({path: pageSlug.name, message: err.response.data.message})
     })
 }
 
@@ -37,6 +47,12 @@ export default object().shape({
   meta: object({
     [metaTagTitle.key]: string().required(`${metaTagTitle.requiredErrorMsg}`),
     [metaTagDescription.key]: string().required(`${metaTagDescription.requiredErrorMsg}`),
-    [pageSlug.key]: string().required(`${pageSlug.requiredErrorMsg}`),
+    [pageSlug.key]: string()
+      .required(`${pageSlug.requiredErrorMsg}`)
+      .test({
+        name: 'is-valid-product-slug',
+        test: (value, ctx) => validateProductSlug(ctx),
+        exclusive: true,
+      }),
   }),
 })

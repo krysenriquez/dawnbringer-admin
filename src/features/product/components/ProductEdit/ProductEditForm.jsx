@@ -75,12 +75,12 @@ const ProductEditForm = () => {
   }, [productTypes])
 
   useEffect(() => {
-    if (productInfo) {
+    if (productInfo && !isLoading) {
       setInitialProduct((prevState) => {
         return {...prevState, ...productInfo}
       })
     }
-  }, [productInfo])
+  }, [productInfo, isLoading])
 
   const cancel = () => {
     navigate(`/products/${productInfo.productId}`, {

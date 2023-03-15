@@ -83,6 +83,11 @@ const SidebarMenuItems = () => {
           title={intl.formatMessage({id: 'SETTINGS.USERS'})}
           hasBullet={true}
         />
+        <SidebarMenuItem
+          to='/settings/roles'
+          title={intl.formatMessage({id: 'SETTINGS.ROLES'})}
+          hasBullet={true}
+        />
       </SidebarMenuItemWithSub>
     </>
   )

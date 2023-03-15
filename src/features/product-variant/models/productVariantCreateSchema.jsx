@@ -1,5 +1,5 @@
 import {string, object, array, number} from 'yup'
-import {verifySku} from '../api'
+import {verifyProductVariantSku, verifyProductVariantSlug} from '../api'
 import productVariantCreateFormModel from './productVariantCreateFormModel'
 const {
   formField: {
@@ -16,13 +16,23 @@ const {
   },
 } = productVariantCreateFormModel
 
-const validateSku = async (ctx) => {
-  return await verifySku(ctx.parent.sku, ctx.parent.variantId)
+const validateProductVariantSku = async (ctx) => {
+  return await verifyProductVariantSku(ctx.parent.sku, ctx.parent.variantId)
     .then((response) => {
       return true
     })
     .catch((err) => {
-      return ctx.createError({path: 'sku', message: err.response.data.message})
+      return ctx.createError({path: sku.name, message: err.response.data.message})
+    })
+}
+
+const validateProductVariantSlug = async (ctx) => {
+  return await verifyProductVariantSlug(ctx.parent.pageSlug, ctx.parent.variantId)
+    .then((response) => {
+      return true
+    })
+    .catch((err) => {
+      return ctx.createError({path: pageSlug.name, message: err.response.data.message})
     })
 }
 
@@ -31,8 +41,8 @@ export default object().shape({
   [sku.key]: string()
     .required(`${sku.requiredErrorMsg}`)
     .test({
-      name: 'is-valid-sku',
-      test: (value, ctx) => validateSku(ctx),
+      name: 'is-valid-product-variant-sku',
+      test: (value, ctx) => validateProductVariantSku(ctx),
       exclusive: true,
     }),
   [variantName.key]: string().required(`${variantName.requiredErrorMsg}`),
@@ -56,7 +66,13 @@ export default object().shape({
   meta: object({
     [metaTagTitle.key]: string().required(`${metaTagTitle.requiredErrorMsg}`),
     [metaTagDescription.key]: string().required(`${metaTagDescription.requiredErrorMsg}`),
-    [pageSlug.key]: string().required(`${pageSlug.requiredErrorMsg}`),
+    [pageSlug.key]: string()
+      .required(`${pageSlug.requiredErrorMsg}`)
+      .test({
+        name: 'is-valid-product-variant-sku',
+        test: (value, ctx) => validateProductVariantSlug(ctx),
+        exclusive: true,
+      }),
   }),
   pointValue: array().of(
     object({

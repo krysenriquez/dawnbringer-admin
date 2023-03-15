@@ -1,7 +1,6 @@
 import {useState, useEffect, createContext, useContext, useRef} from 'react'
 import {toast} from 'react-toastify'
 import {getBranches} from '@/features/branches/api'
-import {getProductVariantOptions} from '@/features/product-variant/api'
 
 const UserUpdateBranchesContext = createContext({
   branches: undefined,

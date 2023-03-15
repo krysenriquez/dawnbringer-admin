@@ -39,7 +39,7 @@ const UserBranchesListTable = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo && userInfo.branchAssignment && !isLoading) {
       setUserInfoBranches(userInfo.branchAssignment.branch)
     }
   }, [userInfo])

@@ -59,6 +59,9 @@
   "SETTINGS.USERS.LIST": "Users List",
   "SETTINGS.USERS.INFO": "User Info",
   "SETTINGS.USERS.EDIT": "User Edit",
+  "SETTINGS.ROLES": "Roles",
+  "SETTINGS.ROLES.LIST": "Roles List",
+  "SETTINGS.ROLES.INFO": "Role Info",
 
   "DRAFT": "Draft",
   "ACTIVE": "Active",

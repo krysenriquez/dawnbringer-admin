@@ -30,22 +30,28 @@ const usersColumn = [
   },
   {
     header: 'Type',
-    accessorFn: (row) => row.userType,
-    id: 'userType',
+    accessorFn: (row) => row.userTypeName,
+    id: 'userTypeName',
     cell: (info) => {
       return (
         <div
           className={clsx('badge fw-bolder d-inline', {
-            'badge-light-warning': info.getValue() == 'STAFF',
-            'badge-light-info': info.getValue() == 'DEVELOPER',
-            'badge-light-success': info.getValue() == 'ADMIN',
-            'badge-light-dark': info.getValue() == 'MEMBER',
+            'badge-light-warning': info.getValue() == 'Staff' || info.getValue() == 'Auditor',
+            'badge-light-info': info.getValue() == 'Developer',
+            'badge-light-success': info.getValue() == 'Administrator',
+            'badge-light-dark': info.getValue() == 'Member',
           })}
         >
           {info.getValue()}
         </div>
       )
     },
+  },
+  {
+    header: 'Created by',
+    accessorFn: (row) => row.createdByName,
+    id: 'createdByName',
+    cell: (info) => info.getValue(),
   },
   {
     header: 'Status',

@@ -10,6 +10,7 @@ const GET_PRODUCT_OPTIONS_URL = `${PRODUCTS_URL}/getproductsoptions/`
 const CREATE_PRODUCT_URL = `${PRODUCTS_URL}/createproduct/`
 const UPDATE_PRODUCT_URL = `${PRODUCTS_URL}/updateproduct/`
 const VERIFY_PRODUCT_NAME_URL = `${PRODUCTS_URL}/verifyproductname/`
+const VERIFY_PRODUCT_SLUG_URL = `${PRODUCTS_URL}/verifyproductslug/`
 
 export const getProductOptions = () => {
   return axios.get(`${GET_PRODUCT_OPTIONS_URL}`).then((d) => humps.camelizeKeys(d.data))
@@ -48,5 +49,12 @@ export const verifyProductName = (productName, productId) => {
   return axios.post(
     `${VERIFY_PRODUCT_NAME_URL}`,
     humps.decamelizeKeys({productName: productName, productId: productId})
+  )
+}
+
+export const verifyProductSlug = (pageSlug, productId) => {
+  return axios.post(
+    `${VERIFY_PRODUCT_SLUG_URL}`,
+    humps.decamelizeKeys({pageSlug: pageSlug, productId: productId})
   )
 }

@@ -110,7 +110,7 @@ const CustomTable2 = (props) => {
                       <tr
                         key={row.id}
                         className='bg-hover-light text-hover-inverse-light'
-                        onClick={() => handleClick(row.original)}
+                        onClick={() => handleClick && handleClick(row.original)}
                       >
                         {row.getVisibleCells().map((cell) => {
                           return (

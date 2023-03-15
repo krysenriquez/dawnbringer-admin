@@ -9,7 +9,8 @@ export const GET_PRODUCT_VARIANT_INFO_URL = `${PRODUCTS_URL}/getproductvariant/`
 const GET_PRODUCT_VARIANT_OPTIONS_URL = `${PRODUCTS_URL}/getproductvariantsoptions/`
 const CREATE_PRODUCT_VARIANT_URL = `${PRODUCTS_URL}/createproductvariant/`
 const UPDATE_PRODUCT_VARIANT_URL = `${PRODUCTS_URL}/updateproductvariant/`
-const VERIFY_SKU_URL = `${PRODUCTS_URL}/verifysku/`
+const VERIFY_PRODUCT_VARIANT_SKU_URL = `${PRODUCTS_URL}/verifyproductvariantsku/`
+const VERIFY_PRODUCT_VARIANT_SLUG_URL = `${PRODUCTS_URL}/verifyproductvariantslug/`
 
 export const getProductVariantOptions = () => {
   return axios.get(`${GET_PRODUCT_VARIANT_OPTIONS_URL}`).then((d) => humps.camelizeKeys(d.data))
@@ -54,6 +55,16 @@ export function updateProductVariant(productVariant) {
   })
 }
 
-export const verifySku = (sku, variantId) => {
-  return axios.post(`${VERIFY_SKU_URL}`, humps.decamelizeKeys({sku: sku, variantId: variantId}))
+export const verifyProductVariantSku = (sku, variantId) => {
+  return axios.post(
+    `${VERIFY_PRODUCT_VARIANT_SKU_URL}`,
+    humps.decamelizeKeys({sku: sku, variantId: variantId})
+  )
+}
+
+export const verifyProductVariantSlug = (pageSlug, variantId) => {
+  return axios.post(
+    `${VERIFY_PRODUCT_VARIANT_SLUG_URL}`,
+    humps.decamelizeKeys({pageSlug: pageSlug, variantId: variantId})
+  )
 }

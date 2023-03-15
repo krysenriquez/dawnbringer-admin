@@ -35,5 +35,5 @@ export default {
     [metaTagDescription.key]: '',
     [pageSlug.key]: '',
   },
-  point_values: [],
+  pointValues: [],
 }

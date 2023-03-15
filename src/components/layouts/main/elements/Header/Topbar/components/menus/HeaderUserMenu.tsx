@@ -6,7 +6,7 @@ import {useEffect} from 'react'
 const HeaderUserMenu = () => {
   const {currentUser, logout} = useAuth()
   const blankAvatar = toAbsoluteUrl('/media/avatars/blank.png')
-  console.log(currentUser)
+
   return (
     <>
       {currentUser && (
