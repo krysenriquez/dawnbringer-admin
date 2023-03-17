@@ -1,10 +1,13 @@
 import {SectionComponentInfoQueryProvider} from '../../stores/SectionComponents/SectionComponentInfoQueryProvider'
-import SectionComponentInfoPage from '../../components/SectionComponents/SectionComponentInfo/SectionComponentInfoPage'
+import {SectionComponentCreateProvider} from '../../stores/SectionComponents/SectionComponentCreateProvider'
+import SectionComponentInfoForm from '../../components/SectionComponents/SectionComponentInfo/SectionComponentInfoForm'
 
 const SectionComponentInfo = () => {
   return (
     <SectionComponentInfoQueryProvider>
-      <SectionComponentInfoPage />
+      <SectionComponentCreateProvider>
+        <SectionComponentInfoForm />
+      </SectionComponentCreateProvider>
     </SectionComponentInfoQueryProvider>
   )
 }

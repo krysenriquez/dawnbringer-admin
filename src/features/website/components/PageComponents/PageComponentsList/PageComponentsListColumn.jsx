@@ -5,7 +5,7 @@ import {useIntl} from 'react-intl'
 import ActionCell from '@/components/elements/Table/Cell/ActionCell'
 import CustomSVG from '@/components/elements/SVG/CustomSVG'
 
-const sectionComponentsColumn = [
+const pageComponentsColumn = [
   {
     header: 'Name',
     accessorFn: (row) => row.name,
@@ -19,9 +19,9 @@ const sectionComponentsColumn = [
     },
   },
   {
-    header: 'Page Component',
-    accessorFn: (row) => row.pageComponentName,
-    id: 'pageComponentName',
+    header: 'Page Content',
+    accessorFn: (row) => row.pageContentName,
+    id: 'pageContentName',
     cell: (info) => info.getValue(),
   },
   {
@@ -51,21 +51,21 @@ const sectionComponentsColumn = [
   },
   {
     header: 'Actions',
-    accessorFn: (row) => row.sectionComponentId,
-    id: 'pageContentAction',
+    accessorFn: (row) => row.pageComponentId,
+    id: 'pageComponentAction',
     cell: (info) => {
       const navigate = useNavigate()
 
       const handleView = () => {
-        navigate(`${info.row.original.sectionComponentId}`, {
-          state: {sectionComponentId: info.row.original.sectionComponentId},
+        navigate(`${info.row.original.pageComponentId}`, {
+          state: {pageComponentId: info.row.original.pageComponentId},
         })
       }
 
       return (
         <>
           <ActionCell
-            handleClick={handleView}
+            handleClick={() => handleView()}
             className='btn btn-icon btn-icon-primary btn-light btn-sm border-0 me-2'
           >
             <CustomSVG path='/media/icons/general/magnifying-glass.svg' className='svg-icon-2' />
@@ -76,4 +76,4 @@ const sectionComponentsColumn = [
   },
 ]
 
-export default sectionComponentsColumn
+export default pageComponentsColumn

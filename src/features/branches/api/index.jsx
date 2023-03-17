@@ -30,10 +30,10 @@ export const getBranchInfo = (branchId) => {
     .then((d) => humps.camelizeKeys(d.data[0]))
 }
 
-export function createBranch(values) {
+export const createBranch = (values) => {
   return axios.post(`${CREATE_BRANCH_URL}`, humps.decamelizeKeys(values))
 }
 
-export function updateBranch(values) {
+export const updateBranch = (values) => {
   return axios.post(`${UPDATE_BRANCH_URL}`, humps.decamelizeKeys(values))
 }

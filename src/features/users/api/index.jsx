@@ -32,11 +32,11 @@ export const getUserInfo = (userId) => {
     .then((d) => humps.camelizeKeys(d.data[0]))
 }
 
-export function updateBranchAssignments(values) {
+export const updateBranchAssignments = (values) => {
   return axios.post(`${UPDATE_BRANCH_ASSIGNMENTS_URL}`, humps.decamelizeKeys(values))
 }
 
-export function createUser(values) {
+export const createUser = (values) => {
   return axios.post(`${CREATE_USER_URL}`, humps.decamelizeKeys(values))
 }
 

@@ -5,6 +5,7 @@ import humps from 'humps'
 import {toast} from 'react-toastify'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import {slugify} from '@/utils/stringUtils'
 import {useProductCreate} from '@/features/product/stores/ProductCreateProvider'
 import {arrayObjectToSelectOptions, arrayToSelectOptions} from '@/utils/arrayToSelectOptions'
 import {createProduct} from '../../api'
@@ -82,6 +83,7 @@ const ProductCreateForm = () => {
       })
       .then(async (result) => {
         if (result.isConfirmed) {
+          values.meta.pageSlug = slugify(values.meta.pageSlug)
           const formData = transformToFormData(values)
           actions.setSubmitting(true)
           try {

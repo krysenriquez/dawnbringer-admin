@@ -38,18 +38,18 @@ export const getSupplyInfo = (supplyId, branchId) => {
     .then((d) => humps.camelizeKeys(d.data[0]))
 }
 
-export function createSupply(values) {
+export const createSupply = (values) => {
   return axios.post(`${CREATE_SUPPLY_URL}`, humps.decamelizeKeys(values))
 }
 
-export function updateSupply(values) {
+export const updateSupply = (values) => {
   return axios.post(`${UPDATE_SUPPLY_URL}`, humps.decamelizeKeys(values))
 }
 
-export function getSupplyStatuses(values) {
+export const getSupplyStatuses = (values) => {
   return axios.post(`${GET_SUPPLY_STATUSES_URL}`, humps.decamelizeKeys(values))
 }
 
-export function processSupplyStatus(values) {
+export const processSupplyStatus = (values) => {
   return axios.post(`${CREATE_SUPPLY_HISTORY_URL}`, humps.decamelizeKeys(values))
 }

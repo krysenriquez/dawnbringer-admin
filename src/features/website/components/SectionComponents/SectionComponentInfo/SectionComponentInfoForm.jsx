@@ -5,9 +5,14 @@ import humps from 'humps'
 import {toast} from 'react-toastify'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import {
+  useSectionComponentInfoQueryData,
+  useSectionComponentInfoQueryLoading,
+  useSectionComponentInfoQueryContext,
+} from '@/features/website/stores/SectionComponents/SectionComponentInfoQueryProvider'
 import {useSectionComponentCreate} from '@/features/website/stores/SectionComponents/SectionComponentCreateProvider'
 import {arrayObjectToSelectOptions} from '@/utils/arrayToSelectOptions'
-import {createSectionComponent} from '@/features/website/api'
+import {updateSectionComponent} from '@/features/website/api'
 import CustomCard from '@/components/elements/Card/CustomCard'
 import ImageInputField from '@/components/elements/Input/ImageInputField'
 import InputField from '@/components/elements/Input/InputField'
@@ -19,8 +24,12 @@ import sectionComponentFormModel from '@/features/website/models/SectionComponen
 import sectionComponentFormSchema from '@/features/website/models/SectionComponents/sectionComponentFormSchema'
 import sectionComponentInitialValues from '@/features/website/models/SectionComponents/sectionComponentInitialValues'
 
-const SectionComponentCreateForm = () => {
+const SectionComponentInfoForm = () => {
   const navigate = useNavigate()
+  const sectionComponentInfo = useSectionComponentInfoQueryData()
+  const isLoading = useSectionComponentInfoQueryLoading()
+  const {refetch} = useSectionComponentInfoQueryContext()
+
   const {pageComponents} = useSectionComponentCreate()
   const swal = withReactContent(Swal)
 
@@ -46,6 +55,14 @@ const SectionComponentCreateForm = () => {
     },
   } = sectionComponentFormModel
 
+  useEffect(() => {
+    if (sectionComponentInfo && !isLoading) {
+      setInitialSectionComponent((prevState) => {
+        return {...prevState, ...sectionComponentInfo}
+      })
+    }
+  }, [sectionComponentInfo, isLoading])
+
   const [pageComponentOptions, setPageComponentOptions] = useState([])
   useEffect(() => {
     if (pageComponents) {
@@ -62,21 +79,21 @@ const SectionComponentCreateForm = () => {
   const submit = async (values, actions) => {
     swal
       .fire({
-        title: 'Create Section Component?',
+        title: 'Update Section Component?',
         icon: 'question',
         showCancelButton: true,
         showConfirmButton: true,
         confirmButtonColor: 'btn btn-primary',
         cancelButtonColor: 'btn btn-info',
-        confirmButtonText: 'Create',
+        confirmButtonText: 'Update',
       })
       .then(async (result) => {
         if (result.isConfirmed) {
           const formData = transformToFormData(values)
           actions.setSubmitting(true)
           try {
-            const {data: response} = await createSectionComponent(formData)
-            swal.fire('Section Component Created', response.detail, 'success')
+            const {data: response} = await updateSectionComponent(formData)
+            swal.fire('Section Component Updated', response.detail, 'success')
             toast.success(response.message)
           } catch (ex) {
             toast.error(ex.response.data.detail)
@@ -248,4 +265,4 @@ const SectionComponentCreateForm = () => {
   )
 }
 
-export default SectionComponentCreateForm
+export default SectionComponentInfoForm

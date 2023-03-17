@@ -50,15 +50,21 @@ const pageContentsColumn = [
     },
   },
   {
+    header: 'Created by',
+    accessorFn: (row) => row.createdByName,
+    id: 'createdByName',
+    cell: (info) => info.getValue(),
+  },
+  {
     header: 'Actions',
-    accessorFn: (row) => row.id,
+    accessorFn: (row) => row.pageContentId,
     id: 'pageContentAction',
     cell: (info) => {
       const navigate = useNavigate()
 
       const handleView = () => {
-        navigate(`${info.row.original.id}`, {
-          state: {id: info.row.original.id},
+        navigate(`${info.row.original.pageContentId}`, {
+          state: {pageContentId: info.row.original.pageContentId},
         })
       }
 

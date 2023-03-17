@@ -36,10 +36,10 @@ export const getOrderInfo = (orderId, branchId) => {
     .then((d) => humps.camelizeKeys(d.data[0]))
 }
 
-export function getOrderStatuses(values) {
+export const getOrderStatuses = (values) => {
   return axios.post(`${GET_ORDER_STATUSES_URL}`, humps.decamelizeKeys(values))
 }
 
-export function processOrderStatus(values) {
+export const processOrderStatus = (values) => {
   return axios.post(`${CREATE_ORDER_HISTORY_URL}`, humps.decamelizeKeys(values))
 }

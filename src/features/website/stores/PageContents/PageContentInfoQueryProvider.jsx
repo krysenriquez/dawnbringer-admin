@@ -15,9 +15,9 @@ const PageContentInfoQueryProvider = ({children}) => {
     refetch,
     data: response,
   } = useQuery(
-    `${GET_PAGE_CONTENT_INFO_URL}-${searchParams.id}`,
+    `${GET_PAGE_CONTENT_INFO_URL}-${searchParams.pageContentId}`,
     () => {
-      return getPageContentInfo(searchParams.id)
+      return getPageContentInfo(searchParams.pageContentId)
     },
     {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
   )

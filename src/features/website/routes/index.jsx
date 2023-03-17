@@ -4,6 +4,7 @@ import {SuspensedView} from '@/utils/suspensedView'
 
 const WebsiteRoutes = () => {
   const PageContents = lazy(() => import('@/features/website/routes/PageContents'))
+  const PageComponents = lazy(() => import('@/features/website/routes/PageComponents'))
   const SectionComponents = lazy(() => import('@/features/website/routes/SectionComponents'))
 
   return (
@@ -14,6 +15,16 @@ const WebsiteRoutes = () => {
           <>
             <SuspensedView>
               <PageContents />
+            </SuspensedView>
+          </>
+        }
+      />
+      <Route
+        path='/page-components/*'
+        element={
+          <>
+            <SuspensedView>
+              <PageComponents />
             </SuspensedView>
           </>
         }

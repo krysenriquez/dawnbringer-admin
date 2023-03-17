@@ -1,10 +1,10 @@
 import {PageContentInfoQueryProvider} from '../../stores/PageContents/PageContentInfoQueryProvider'
-import PageContentInfoPage from '../../components/PageContents/PageContentInfo/PageContentInfoPage'
+import PageContentInfoForm from '../../components/PageContents/PageContentInfo/PageContentInfoForm'
 
 const PageContentInfo = () => {
   return (
     <PageContentInfoQueryProvider>
-      <PageContentInfoPage />
+      <PageContentInfoForm />
     </PageContentInfoQueryProvider>
   )
 }

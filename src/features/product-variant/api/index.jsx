@@ -43,13 +43,13 @@ export const getProductVariantInfo = (sku, branchId) => {
     .then((d) => humps.camelizeKeys(d.data[0]))
 }
 
-export function createProductVariant(productVariant) {
+export const createProductVariant = (productVariant) => {
   return axios.post(`${CREATE_PRODUCT_VARIANT_URL}`, productVariant, {
     headers: {'Content-Type': 'multipart/form-data'},
   })
 }
 
-export function updateProductVariant(productVariant) {
+export const updateProductVariant = (productVariant) => {
   return axios.post(`${UPDATE_PRODUCT_VARIANT_URL}`, productVariant, {
     headers: {'Content-Type': 'multipart/form-data'},
   })

@@ -63,24 +63,48 @@ const RoleDetails = () => {
                         <label className='text-gray-800 fw-bold fs-6 mb-1'>
                           {permission.moduleName}
                         </label>
-                        {permission.canCreate && (
-                          <div className='d-flex align-items-center'>
-                            <span className='bullet bg-success me-3'></span>
-                            <span className='text-gray-700'>Create</span>
-                          </div>
-                        )}
-                        {permission.canRetrieve && (
-                          <div className='d-flex align-items-center'>
-                            <span className='bullet bg-success me-3'></span>
-                            <span className='text-gray-700'>Read</span>
-                          </div>
-                        )}
-                        {permission.canUpdate && (
-                          <div className='d-flex align-items-center'>
-                            <span className='bullet bg-success me-3'></span>
-                            <span className='text-gray-700'>Write</span>
-                          </div>
-                        )}
+                        <div className='d-flex flex-stack ps-5'>
+                          <div className='fw-bold'>Create</div>
+                          <CustomSVG
+                            path={
+                              permission.canCreate
+                                ? '/media/icons/general/check.svg'
+                                : '/media/icons/general/cross.svg'
+                            }
+                            className={clsx('svg-icon-2', {
+                              'svg-icon-success': permission.canCreate,
+                              'svg-icon-danger': !permission.canCreate,
+                            })}
+                          />
+                        </div>
+                        <div className='d-flex flex-stack ps-5'>
+                          <div className='fw-bold'>Read</div>
+                          <CustomSVG
+                            path={
+                              permission.canRetrieve
+                                ? '/media/icons/general/check.svg'
+                                : '/media/icons/general/cross.svg'
+                            }
+                            className={clsx('svg-icon-2', {
+                              'svg-icon-success': permission.canRetrieve,
+                              'svg-icon-danger': !permission.canRetrieve,
+                            })}
+                          />
+                        </div>
+                        <div className='d-flex flex-stack ps-5'>
+                          <div className='fw-bold'>Write</div>
+                          <CustomSVG
+                            path={
+                              permission.canUpdate
+                                ? '/media/icons/general/check.svg'
+                                : '/media/icons/general/cross.svg'
+                            }
+                            className={clsx('svg-icon-2', {
+                              'svg-icon-success': permission.canUpdate,
+                              'svg-icon-danger': !permission.canUpdate,
+                            })}
+                          />
+                        </div>
                       </div>
                     ) : (
                       <></>

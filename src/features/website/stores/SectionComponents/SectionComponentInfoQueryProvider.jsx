@@ -15,9 +15,9 @@ const SectionComponentInfoQueryProvider = ({children}) => {
     refetch,
     data: response,
   } = useQuery(
-    `${GET_SECTION_COMPONENT_INFO_URL}-${searchParams.id}`,
+    `${GET_SECTION_COMPONENT_INFO_URL}-${searchParams.sectionComponentId}`,
     () => {
-      return getSectionComponentInfo(searchParams.id)
+      return getSectionComponentInfo(searchParams.sectionComponentId)
     },
     {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
   )

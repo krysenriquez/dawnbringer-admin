@@ -63,6 +63,11 @@ const SidebarMenuItems = () => {
           hasBullet={true}
         />
         <SidebarMenuItem
+          to='/website/page-components'
+          title={intl.formatMessage({id: 'WEBSITE.PAGECOMPONENTS'})}
+          hasBullet={true}
+        />
+        <SidebarMenuItem
           to='/website/section-components'
           title={intl.formatMessage({id: 'WEBSITE.SECTIONCOMPONENTS'})}
           hasBullet={true}

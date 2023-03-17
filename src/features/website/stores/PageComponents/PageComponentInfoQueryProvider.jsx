@@ -15,9 +15,9 @@ const PageComponentInfoQueryProvider = ({children}) => {
     refetch,
     data: response,
   } = useQuery(
-    `${GET_PAGE_COMPONENT_INFO_URL}-${searchParams.id}`,
+    `${GET_PAGE_COMPONENT_INFO_URL}-${searchParams.pageComponentId}`,
     () => {
-      return getPageComponentInfo(searchParams.id)
+      return getPageComponentInfo(searchParams.pageComponentId)
     },
     {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
   )

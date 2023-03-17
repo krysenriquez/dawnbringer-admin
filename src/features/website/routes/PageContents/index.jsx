@@ -2,9 +2,10 @@ import {Route, Routes, Outlet} from 'react-router-dom'
 import {useIntl} from 'react-intl'
 import {PageTitle} from '@/providers/PageDataProvider'
 import PageContentsList from './PageContentsList'
+import PageContentCreate from './PageContentCreate'
 import PageContentInfo from './PageContentInfo'
 
-const BranchesRoutes = () => {
+const PageContentsRoutes = () => {
   const intl = useIntl()
 
   const pageContentsBreadCrumbs = [
@@ -36,7 +37,18 @@ const BranchesRoutes = () => {
         }
       />
       <Route
-        path=':branchId'
+        path='/create'
+        element={
+          <>
+            <PageTitle breadcrumbs={pageContentsBreadCrumbs} description=''>
+              {intl.formatMessage({id: 'WEBSITE.PAGECONTENTS.CREATE'})}
+            </PageTitle>
+            <PageContentCreate />
+          </>
+        }
+      />
+      <Route
+        path=':pageContentId'
         element={
           <>
             <PageTitle breadcrumbs={pageContentsBreadCrumbs} description=''>
@@ -50,4 +62,4 @@ const BranchesRoutes = () => {
   )
 }
 
-export default BranchesRoutes
+export default PageContentsRoutes
