@@ -19,10 +19,10 @@ export default object().shape({
   [internalName.key]: string().required(`${internalName.requiredErrorMsg}`),
   [pageTitle.key]: string().required(`${pageTitle.requiredErrorMsg}`),
   [pageSlug.key]: string().required(`${pageSlug.requiredErrorMsg}`),
-  [metaDescription.key]: string(),
+  [metaDescription.key]: string().nullable(),
   [metaRobots.key]: array().of(string()),
   [metaKeywords.key]: array().of(string()),
-  [otherMetaData.key]: string(),
+  [otherMetaData.key]: string().nullable(),
   [isPublished.key]: boolean(),
   [isHome.key]: boolean(),
 })

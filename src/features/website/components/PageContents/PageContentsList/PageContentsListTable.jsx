@@ -28,7 +28,7 @@ const PageContentsListTable = () => {
             {...{
               data: tableData,
               columns: tableColumns,
-              hasToolbar: true,
+              hasToolbar: false,
               toolbarButtonName: 'Add Page Content',
               handleToolbarButtonClick: createPageContent,
             }}

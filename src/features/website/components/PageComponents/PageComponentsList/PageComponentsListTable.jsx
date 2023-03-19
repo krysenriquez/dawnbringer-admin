@@ -51,7 +51,7 @@ const PageComponentsListTable = () => {
             {...{
               data: tableData,
               columns: tableColumns,
-              hasToolbar: true,
+              hasToolbar: false,
               toolbarButtonName: 'Add Page Component',
               handleToolbarButtonClick: toggleModal,
             }}
