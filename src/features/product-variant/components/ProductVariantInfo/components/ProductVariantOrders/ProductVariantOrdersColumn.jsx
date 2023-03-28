@@ -55,7 +55,8 @@ const ordersColumn = [
             'badge-light-info':
               info.getValue() == 'AWAITING_DELIVERY' ||
               info.getValue() == 'AWAITING_PICKUP' ||
-              info.getValue() == 'ON_DELIVERY',
+              info.getValue() == 'ON_DELIVERY' ||
+              info.getValue() == 'ON_PICKUP',
             'badge-light-danger': info.getValue() == 'CANCELLED' || info.getValue() == 'REFUNDED',
             'badge-light-success': info.getValue() == 'COMPLETED',
           })}

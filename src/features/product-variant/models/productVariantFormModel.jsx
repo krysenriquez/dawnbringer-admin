@@ -1,6 +1,10 @@
 export default {
   formId: 'productCreateForm',
   formField: {
+    variantId: {
+      key: 'variantId',
+      name: 'variantId',
+    },
     product: {
       key: 'product',
       name: 'product',

@@ -43,15 +43,15 @@ const SidebarMenuItems = () => {
         fontIcon='fa-solid fa-user-group fs-2'
       />
       <SidebarMenuItem
+        to='/cashouts'
+        title={intl.formatMessage({id: 'CASHOUTS'})}
+        fontIcon='fa-solid fa-money-bills fs-2'
+      />
+      <SidebarMenuItem
         to='/customers'
         title={intl.formatMessage({id: 'CUSTOMERS'})}
         fontIcon='fa-solid fa-users fs-2'
       />
-      {/* <SidebarMenuItem
-        to='/cashouts'
-        title={intl.formatMessage({id: 'CASHOUTS'})}
-        fontIcon='fa-solid fa-money-check-dollar fs-2'
-      /> */}
       <SidebarMenuItemWithSub
         to='/website'
         title={intl.formatMessage({id: 'WEBSITE'})}

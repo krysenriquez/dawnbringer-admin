@@ -5,10 +5,17 @@ import {
   useMemberInfoQueryData,
   useMemberInfoQueryLoading,
 } from '@/features/members/stores/MemberInfoQueryProvider'
+import {MemberPointsQueryProvider} from '../../stores/MemberPointsQueryProvider'
+import {MemberUserInfoQueryProvider} from '../../stores/MemberUserInfoQueryProviders'
+import CustomCard from '@/components/elements/Card/CustomCard'
 import MemberDetails from './components/MemberDetails'
-import MemberCode from './components/MemberCode'
+import MemberCode from './components/MemberReferrals/MemberCode'
+import MemberPoints from './components/MemberReferrals/MemberPoints'
 import MemberOrdersTable from './components/MemberOrders/MemberOrdersTable'
 import MemberActivitiesTable from './components/MemberActivities/MemberActivitiesTable'
+import ChangeUsername from './components/MemberAuth/Username/ChangeUsername'
+import ChangeEmailAddress from './components/MemberAuth/EmailAddress/ChangeEmaillAddress'
+import ChangePassword from './components/MemberAuth/Password/ChangePassword'
 
 const MemberInfoPage = () => {
   const memberInfo = useMemberInfoQueryData()
@@ -45,7 +52,16 @@ const MemberInfoPage = () => {
                   {tab == 'referrals' ? (
                     <>
                       <div className='d-flex flex-column flex-lg-row-fluid ms-lg-7 ms-xl-1 gap-7 gap-lg-10'>
-                        <MemberCode />
+                        <div className='row g-5 g-xl-8 mb-5 mb-xl-2'>
+                          <div className='col-6'>
+                            <MemberCode />
+                          </div>
+                          <div className='col-6'>
+                            <MemberPointsQueryProvider>
+                              <MemberPoints />
+                            </MemberPointsQueryProvider>
+                          </div>
+                        </div>
                       </div>
                     </>
                   ) : (
@@ -56,6 +72,30 @@ const MemberInfoPage = () => {
                   {tab == 'activities' ? (
                     <>
                       <MemberActivitiesTable />
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </Tab>
+                <Tab eventKey='advanced' title='Advanced'>
+                  {tab == 'advanced' ? (
+                    <>
+                      <CustomCard
+                        cardClassName='card-flush mb-5 mb-xl-8'
+                        hasHeader={true}
+                        header={<h2>Summary</h2>}
+                        bodyClassName='pt-0'
+                      >
+                        <>
+                          <MemberUserInfoQueryProvider>
+                            <ChangeUsername />
+                            <div className='separator separator-dashed my-6' />
+                            <ChangeEmailAddress />
+                            <div className='separator separator-dashed my-6' />
+                            <ChangePassword />
+                          </MemberUserInfoQueryProvider>
+                        </>
+                      </CustomCard>
                     </>
                   ) : (
                     <></>

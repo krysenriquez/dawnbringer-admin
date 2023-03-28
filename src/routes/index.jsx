@@ -7,6 +7,7 @@ import {LayoutProvider} from '@/providers/layout/LayoutProvider'
 import {LayoutSplashScreen} from '@/providers/SplashScreen'
 import {MasterInit} from '@/components/layouts/MasterInit'
 import {CompanyProvider} from '@/providers/CompanyProvider'
+import {StateProvider} from '@/providers/StateProvider'
 import {BranchProvider} from '@/providers/BranchProvider'
 // import {ErrorsPage} from 'features/errors/ErrorsPage'
 import PublicRoutes from './PublicRoutes'
@@ -21,8 +22,10 @@ const App = () => {
         <LayoutProvider>
           <CompanyProvider>
             <AuthInit>
-              <Outlet />
-              <MasterInit />
+              <StateProvider>
+                <Outlet />
+                <MasterInit />
+              </StateProvider>
             </AuthInit>
           </CompanyProvider>
           <ToastContainer />

@@ -48,8 +48,8 @@ const HeaderUserMenu = () => {
             </div>
             <div className='separator my-2'></div>
             <div className='menu-item px-5'>
-              <Link to={'/profile'} className='menu-link px-5'>
-                My Profile
+              <Link to={'/account'} className='menu-link px-5'>
+                My Account
               </Link>
             </div>
 

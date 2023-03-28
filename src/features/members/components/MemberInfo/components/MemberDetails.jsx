@@ -30,9 +30,7 @@ const MemberDetails = () => {
               <div className='symbol symbol-150px symbol-lg-160px symbol-circle mb-7'>
                 <img
                   src={`${
-                    memberInfo.avatarInfo.fileAttachment
-                      ? memberInfo.avatarInfo.fileAttachment
-                      : defaultThumbnail
+                    memberInfo.avatarInfo.avatar ? memberInfo.avatarInfo.avatar : defaultThumbnail
                   }`}
                   alt='image'
                 />
@@ -71,7 +69,9 @@ const MemberDetails = () => {
                 <>
                   <div className='fw-bold mt-5'>Contact Number</div>
                   <div className='text-gray-600'>
-                    {memberInfo.contactInfo.contactNumber ? memberInfo.contactInfo.contactNumber : '--'}
+                    {memberInfo.contactInfo.contactNumber
+                      ? memberInfo.contactInfo.contactNumber
+                      : '--'}
                   </div>
                 </>
               )}

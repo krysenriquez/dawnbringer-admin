@@ -24,9 +24,10 @@ import SelectInputFieldWithGrouping from '@/components/elements/Input/SelectInpu
 import QuillField from '@/components/elements/Input/QuillField'
 import TagField from '@/components/elements/Input/TagField'
 import InputGroupField from '@/components/elements/Input/InputGroupField'
-import productVariantCreateFormModel from '../../models/productVariantCreateFormModel'
-import productVariantCreateInitialValues from '../../models/productVariantCreateInitialValues'
-import productVariantCreateSchema from '../../models/productVariantCreateSchema'
+
+import productVariantFormModel from '../../models/productVariantFormModel'
+import productVariantInitialValues from '../../models/productVariantInitialValues'
+import productVariantSchema from '../../models/productVariantSchema'
 
 const variantStatuses = [
   {
@@ -52,9 +53,7 @@ const ProductVariantCreateForm = () => {
   const {defaultBranch} = useBranch()
   const navigate = useNavigate()
   const swal = withReactContent(Swal)
-  const [initialProductVariant, setInitialProductVariant] = useState(
-    productVariantCreateInitialValues
-  )
+  const [initialProductVariant, setInitialProductVariant] = useState(productVariantInitialValues)
   const [tab, setTab] = useState('general')
 
   const {
@@ -73,7 +72,7 @@ const ProductVariantCreateForm = () => {
       meta: {metaTagTitle, metaTagDescription, pageSlug},
       pointValues: [{pointValue, membershipLevel}],
     },
-  } = productVariantCreateFormModel
+  } = productVariantFormModel
 
   const [productOptions, setProductOptions] = useState([])
   useEffect(() => {
@@ -173,7 +172,7 @@ const ProductVariantCreateForm = () => {
     <Formik
       enableReinitialize
       validateOnChange={false}
-      validationSchema={productVariantCreateSchema}
+      validationSchema={productVariantSchema}
       initialValues={initialProductVariant}
       onSubmit={submit}
     >

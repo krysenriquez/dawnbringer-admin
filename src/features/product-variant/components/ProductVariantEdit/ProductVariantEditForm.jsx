@@ -28,9 +28,9 @@ import QuillField from '@/components/elements/Input/QuillField'
 import TagField from '@/components/elements/Input/TagField'
 import InputGroupField from '@/components/elements/Input/InputGroupField'
 
-import productVariantCreateFormModel from '../../models/productVariantCreateFormModel'
-import productVariantCreateInitialValues from '../../models/productVariantCreateInitialValues'
-import productVariantCreateSchema from '../../models/productVariantCreateSchema'
+import productVariantFormModel from '../../models/productVariantFormModel'
+import productVariantInitialValues from '../../models/productVariantInitialValues'
+import productVariantSchema from '../../models/productVariantSchema'
 
 const variantStatuses = [
   {
@@ -59,9 +59,7 @@ const ProductVariantEditForm = () => {
 
   const {products, membershipLevels} = useProductVariantCreate()
   const swal = withReactContent(Swal)
-  const [initialProductVariant, setInitialProductVariant] = useState(
-    productVariantCreateInitialValues
-  )
+  const [initialProductVariant, setInitialProductVariant] = useState(productVariantInitialValues)
   const [tab, setTab] = useState('general')
 
   const {
@@ -80,7 +78,7 @@ const ProductVariantEditForm = () => {
       meta: {metaTagTitle, metaTagDescription, pageSlug},
       pointValues: [{pointValue, membershipLevel}],
     },
-  } = productVariantCreateFormModel
+  } = productVariantFormModel
 
   const [productOptions, setProductOptions] = useState([])
   useEffect(() => {
@@ -176,7 +174,7 @@ const ProductVariantEditForm = () => {
         <Formik
           enableReinitialize
           validateOnChange={false}
-          validationSchema={productVariantCreateSchema}
+          validationSchema={productVariantSchema}
           initialValues={initialProductVariant}
           onSubmit={submit}
         >

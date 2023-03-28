@@ -60,7 +60,7 @@ const BranchCreateForm = () => {
           try {
             const {data: response} = await createBranch(values)
             swal.fire('Branch Created', response.detail, 'success')
-            toast.success(response.message)
+            toast.success(response.detail)
           } catch (ex) {
             toast.error(ex.response.data.detail)
           } finally {

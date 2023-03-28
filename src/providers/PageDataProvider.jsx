@@ -2,19 +2,24 @@ import {createContext, useContext, useEffect, useState} from 'react'
 const siteName = import.meta.env.VITE_APP_SITE_NAME
 
 const PageDataContext = createContext({
+  pageAction: undefined,
   pageTitle: undefined,
   pageDescription: undefined,
   pageBreadcrumbs: undefined,
+  setPageAction: (any) => {},
   setPageTitle: (_title) => {},
   setPageBreadcrumbs: (_breadcrumbs) => {},
   setPageDescription: (_description) => {},
 })
 
 const PageDataProvider = ({children}) => {
+  const [pageAction, setPageAction] = useState(undefined)
   const [pageTitle, setPageTitle] = useState('')
   const [pageDescription, setPageDescription] = useState('')
   const [pageBreadcrumbs, setPageBreadcrumbs] = useState([])
   const value = {
+    pageAction,
+    setPageAction,
     pageTitle,
     setPageTitle,
     pageDescription,
@@ -63,16 +68,26 @@ const PageTitle = ({children, description, breadcrumbs}) => {
 }
 
 const PageDescription = ({children}) => {
-  const {setPageDescription} = usePageData()
+  const {setPageAction} = usePageData()
   useEffect(() => {
     if (children) {
-      setPageDescription(children.toString())
-    }
-    return () => {
-      setPageDescription('')
+      setPageAction(children.toString())
     }
   }, [children])
   return <></>
 }
 
-export {PageDescription, PageTitle, PageDataProvider, usePageData}
+const PageAction = ({children}) => {
+  const {setPageAction} = usePageData()
+  useEffect(() => {
+    if (children) {
+      setPageAction(children)
+    }
+    return () => {
+      setPageAction(<></>)
+    }
+  }, [children])
+  return <></>
+}
+
+export {PageAction, PageDescription, PageTitle, PageDataProvider, usePageData}

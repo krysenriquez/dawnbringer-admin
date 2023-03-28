@@ -61,7 +61,7 @@ const PageComponentCreateForm = () => {
           try {
             const {data: response} = await createPageComponent(values)
             swal.fire('Page Component Created', response.detail, 'success')
-            toast.success(response.message)
+            toast.success(response.detail)
           } catch (ex) {
             toast.error(ex.response.data.detail)
           } finally {

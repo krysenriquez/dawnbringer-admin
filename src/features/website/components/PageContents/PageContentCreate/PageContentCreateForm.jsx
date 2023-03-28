@@ -59,7 +59,7 @@ const PageContentCreateForm = () => {
             values.metaKeywords = values.metaKeywords.join()
             const {data: response} = await createPageContent(values)
             swal.fire('Page Content Created', response.detail, 'success')
-            toast.success(response.message)
+            toast.success(response.detail)
           } catch (ex) {
             toast.error(ex.response.data.detail)
           } finally {

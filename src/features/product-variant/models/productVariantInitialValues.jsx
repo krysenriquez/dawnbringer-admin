@@ -1,4 +1,4 @@
-import productVariantCreateFormModel from './productVariantCreateFormModel'
+import productVariantCreateFormModel from './productVariantFormModel'
 const {
   formField: {
     product,

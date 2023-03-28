@@ -3,6 +3,7 @@ import {verifyProductName, verifyProductSlug} from '../api'
 import productFormModel from './productFormModel'
 const {
   formField: {
+    productId,
     productType,
     productName,
     productStatus,
@@ -18,21 +19,23 @@ const validateProductName = async (ctx) => {
       return true
     })
     .catch((err) => {
-      return ctx.createError({path: productName.name, message: err.response.data.message})
+      return ctx.createError({path: productName.name, message: err.response.data.detail})
     })
 }
 
 const validateProductSlug = async (ctx) => {
-  return await verifyProductSlug(ctx.parent.pageSlug, ctx.parent.productId)
+  console.log(ctx)
+  return await verifyProductSlug(ctx.parent.pageSlug, ctx.from[1].value.productId)
     .then((response) => {
       return true
     })
     .catch((err) => {
-      return ctx.createError({path: pageSlug.name, message: err.response.data.message})
+      return ctx.createError({path: pageSlug.name, message: err.response.data.detail})
     })
 }
 
 export default object().shape({
+  [productId.key]: string().nullable(),
   [productType.key]: string().required(`${productType.requiredErrorMsg}`),
   [productName.key]: string()
     .required(`${productName.requiredErrorMsg}`)

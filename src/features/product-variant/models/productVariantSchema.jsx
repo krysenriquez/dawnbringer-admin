@@ -1,8 +1,9 @@
 import {string, object, array, number} from 'yup'
 import {verifyProductVariantSku, verifyProductVariantSlug} from '../api'
-import productVariantCreateFormModel from './productVariantCreateFormModel'
+import productVariantCreateFormModel from './productVariantFormModel'
 const {
   formField: {
+    variantId,
     product,
     sku,
     variantName,
@@ -22,21 +23,22 @@ const validateProductVariantSku = async (ctx) => {
       return true
     })
     .catch((err) => {
-      return ctx.createError({path: sku.name, message: err.response.data.message})
+      return ctx.createError({path: sku.name, message: err.response.data.detail})
     })
 }
 
 const validateProductVariantSlug = async (ctx) => {
-  return await verifyProductVariantSlug(ctx.parent.pageSlug, ctx.parent.variantId)
+  return await verifyProductVariantSlug(ctx.parent.pageSlug, ctx.from[1].value.variantId)
     .then((response) => {
       return true
     })
     .catch((err) => {
-      return ctx.createError({path: pageSlug.name, message: err.response.data.message})
+      return ctx.createError({path: pageSlug.name, message: err.response.data.detail})
     })
 }
 
 export default object().shape({
+  [variantId.key]: string().nullable(),
   [product.key]: string().required(`${product.requiredErrorMsg}`),
   [sku.key]: string()
     .required(`${sku.requiredErrorMsg}`)

@@ -62,7 +62,7 @@ const UserCreateForm = () => {
           try {
             const {data: response} = await createUser(values)
             swal.fire('User Created', response.detail, 'success')
-            toast.success(response.message)
+            toast.success(response.detail)
           } catch (ex) {
             toast.error(ex.response.data.detail)
           } finally {

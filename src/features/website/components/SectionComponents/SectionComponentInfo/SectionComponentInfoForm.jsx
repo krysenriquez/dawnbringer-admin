@@ -94,7 +94,7 @@ const SectionComponentInfoForm = () => {
           try {
             const {data: response} = await updateSectionComponent(formData)
             swal.fire('Section Component Updated', response.detail, 'success')
-            toast.success(response.message)
+            toast.success(response.detail)
           } catch (ex) {
             toast.error(ex.response.data.detail)
           } finally {

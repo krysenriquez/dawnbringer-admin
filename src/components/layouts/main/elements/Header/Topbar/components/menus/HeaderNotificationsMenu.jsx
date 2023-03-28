@@ -61,7 +61,7 @@ const HeaderNotificationsMenu = () => (
 
             <div className='timeline-content mb-10 mt-n2'>
               <div className='overflow-auto pe-3'>
-                <div className='fs-5 fw-bold mb-2'>{log.message}</div>
+                <div className='fs-5 fw-bold mb-2'>{log.detail}</div>
                 <div className='d-flex align-items-center mt-1 fs-6'>
                   <div className='text-muted me-2 fs-7'>{log.time}</div>
                 </div>

@@ -1,6 +1,11 @@
 export default {
   formId: 'productForm',
   formField: {
+    productId: {
+      key: 'productId',
+      name: 'productId',
+      label: 'Product Type',
+    },
     productType: {
       key: 'productType',
       name: 'productType',

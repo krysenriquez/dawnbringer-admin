@@ -1,6 +1,7 @@
 import {Route, Routes, Outlet} from 'react-router-dom'
 import {useIntl} from 'react-intl'
-import {PageTitle} from '@/providers/PageDataProvider'
+import {PageTitle, PageAction} from '@/providers/PageDataProvider'
+import DashboardActions from '../components/widgets/DashboardActions'
 import Dashboard from './Dashboard'
 
 const MembersRoutes = () => {
@@ -30,6 +31,9 @@ const MembersRoutes = () => {
             <PageTitle breadcrumbs={dashboardBreadCrumbs} description=''>
               {intl.formatMessage({id: 'DASHBOARD'})}
             </PageTitle>
+            <PageAction>
+              <DashboardActions />
+            </PageAction>
             <Dashboard />
           </>
         }

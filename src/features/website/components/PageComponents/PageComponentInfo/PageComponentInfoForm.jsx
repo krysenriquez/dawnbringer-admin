@@ -73,7 +73,7 @@ const PageComponentInfoForm = () => {
           try {
             const {data: response} = await updatePageComponent(values)
             swal.fire('Page Component Updated', response.detail, 'success')
-            toast.success(response.message)
+            toast.success(response.detail)
           } catch (ex) {
             toast.error(ex.response.data.detail)
           } finally {

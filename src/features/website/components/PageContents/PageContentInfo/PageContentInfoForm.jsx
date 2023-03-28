@@ -77,7 +77,7 @@ const PageContentInfoForm = () => {
             values.metaKeywords = values.metaKeywords.join()
             const {data: response} = await updatePageContent(values)
             swal.fire('Page Content Updated', response.detail, 'success')
-            toast.success(response.message)
+            toast.success(response.detail)
           } catch (ex) {
             toast.error(ex.response.data.detail)
           } finally {

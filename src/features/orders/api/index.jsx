@@ -2,8 +2,8 @@ import axios from 'axios'
 import humps from 'humps'
 
 const API_URL = import.meta.env.VITE_API_URL
-const ORDERS_URL = `${API_URL}/orders
-`
+const ORDERS_URL = `${API_URL}/orders`
+
 export const GET_ORDERS_URL = `${ORDERS_URL}/getadminorders/`
 export const GET_ORDER_INFO_URL = `${ORDERS_URL}/getadminorder/`
 const GET_ORDER_STATUSES_URL = `${ORDERS_URL}/getorderstatus/`
