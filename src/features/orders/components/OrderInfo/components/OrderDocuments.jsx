@@ -50,7 +50,7 @@ const OrderDocuments = () => {
           <CustomCard
             cardClassName='card-flush py-4 flex-row-fluid'
             hasHeader={true}
-            header={<h2>Attachments</h2>}
+            header={<h2>Other/s</h2>}
             bodyClassName='pt-0'
           >
             <div className='table-responsive'>

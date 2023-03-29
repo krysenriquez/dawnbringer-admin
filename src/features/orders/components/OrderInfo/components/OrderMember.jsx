@@ -6,14 +6,14 @@ import {
 import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import CustomCard from '@/components/elements/Card/CustomCard'
 
-const OrderCustomer = () => {
+const OrderMember = () => {
   const navigate = useNavigate()
   const orderInfo = useOrderInfoQueryData()
   const isLoading = useOrderInfoQueryLoading()
 
-  const handleClickCustomer = (e) => {
-    navigate(`/customers/` + e.customerNumber, {
-      state: {customerNumber: e.customerNumber},
+  const handleClickMember = (e) => {
+    navigate(`/members/` + e.accountId, {
+      state: {accountId: e.accountId},
     })
   }
 
@@ -25,11 +25,11 @@ const OrderCustomer = () => {
 
   return (
     <>
-      {orderInfo && orderInfo.customer && !isLoading ? (
+      {orderInfo && orderInfo.account && !isLoading ? (
         <CustomCard
           cardClassName='card-flush py-4 flex-row-fluid'
           hasHeader={true}
-          header={<h2>Customer</h2>}
+          header={<h2>Member</h2>}
           bodyClassName='pt-0'
         >
           <div className='table-responsive'>
@@ -42,15 +42,15 @@ const OrderCustomer = () => {
                         className='svg-icon svg-icon-2 me-2'
                         path='/media/icons/communication/user.svg'
                       />
-                      Customer
+                      Member
                     </div>
                   </td>
                   <td className='fw-bold text-end'>
                     <button
                       className='btn btn-flush btn-link btn-color-gray-700 btn-active-color-primary fw-bold text-end'
-                      onClick={() => handleClickCustomer(orderInfo.customer)}
+                      onClick={() => handleClickMember(orderInfo.account)}
                     >
-                      {orderInfo.customer.name}
+                      {orderInfo.account.name}
                     </button>
                   </td>
                 </tr>
@@ -64,7 +64,7 @@ const OrderCustomer = () => {
                       Email
                     </div>
                   </td>
-                  <td className='fw-bold text-end'>{orderInfo.customer.emailAddress}</td>
+                  <td className='fw-bold text-end'>{orderInfo.account.emailAddress}</td>
                 </tr>
                 <tr>
                   <td className='text-muted'>
@@ -76,7 +76,7 @@ const OrderCustomer = () => {
                       Phone
                     </div>
                   </td>
-                  <td className='fw-bold text-end'>{orderInfo.customer.contactNumber}</td>
+                  <td className='fw-bold text-end'>{orderInfo.account.contactNumber}</td>
                 </tr>
                 <tr>
                   <td className='text-muted'>
@@ -107,4 +107,4 @@ const OrderCustomer = () => {
     </>
   )
 }
-export default OrderCustomer
+export default OrderMember

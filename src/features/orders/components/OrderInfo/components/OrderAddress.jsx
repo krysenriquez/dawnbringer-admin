@@ -4,6 +4,7 @@ import {
   useOrderInfoQueryData,
   useOrderInfoQueryLoading,
 } from '@/features/orders/stores/OrderInfoQueryProvider'
+import CustomCard from '@/components/elements/Card/CustomCard'
 
 const OrderAddress = () => {
   const intl = useIntl()
@@ -23,17 +24,13 @@ const OrderAddress = () => {
             </div>
           </div>
           <div className='card-body pt-0'>
-            <div className='d-flex align-items-center min-h-100'>
-              <div>
-                <h4>
-                  {orderInfo.address.address1} {orderInfo.address.address2}
-                </h4>
-                <h4>
-                  {orderInfo.address.city} {orderInfo.address.province} {orderInfo.address.zip}
-                </h4>
-                <h4>{orderInfo.address.country}</h4>
-              </div>
-            </div>
+            <h4>
+              {orderInfo.address.address1} {orderInfo.address.address2}
+            </h4>
+            <h4>
+              {orderInfo.address.city} {orderInfo.address.province} {orderInfo.address.zip}
+            </h4>
+            <h4>{orderInfo.address.country}</h4>
           </div>
         </div>
       ) : (

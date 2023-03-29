@@ -62,7 +62,25 @@ export const productVariantsColumn = [
     header: 'Total Stocks',
     accessorFn: (row) => row.stocks,
     id: 'stocks',
-    cell: (info) => info.getValue(),
+    cell: (info) => {
+      return (
+        <>
+          {info.getValue()}
+          {info.row.original.stocksStatus !== 'Available' ? (
+            <div
+              className={clsx('badge fw-bolder d-inline ms-2', {
+                'badge-light-warning': info.row.original.stocksStatus == 'Low Stock',
+                'badge-light-danger': info.row.original.stocksStatus == 'No Stock',
+              })}
+            >
+              {info.row.original.stocksStatus}
+            </div>
+          ) : (
+            <></>
+          )}
+        </>
+      )
+    },
   },
   {
     header: 'Status',

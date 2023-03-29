@@ -3,7 +3,7 @@ import {useField} from 'formik'
 import clsx from 'clsx'
 
 export default function PasswordField(props) {
-  const {label, required, helperText, errorText, ...rest} = props
+  const {label, required, helperText, errorText, className, ...rest} = props
   const [field, meta] = useField(props)
   const {touched, error, value} = meta
   const isError = touched && error && true
@@ -26,10 +26,13 @@ export default function PasswordField(props) {
       <div className='position-relative mb-3'>
         <input
           type={showPassword ? 'text' : 'password'}
-          className={clsx('form-control form-control-solid', {
-            'is-invalid': isError,
-            'is-valid': isValid,
-          })}
+          className={clsx(
+            {
+              'is-invalid': isError,
+              'is-valid': isValid,
+            },
+            className && className
+          )}
           {...field}
           {...rest}
         />

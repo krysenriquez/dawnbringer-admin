@@ -8,7 +8,6 @@ import {toast} from 'react-toastify'
 import {useIntl} from 'react-intl'
 import {toCurrency} from '@/utils/toCurrency'
 import {useNavigate} from 'react-router-dom'
-import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
@@ -49,7 +48,6 @@ const CashoutInfoPage = () => {
               activityNumber: cashout.activityNumber,
               status: status,
             })
-            console.log(response)
             swal.fire('Cashout Updated!', response.message, 'success')
             toast.success(response.message)
           } catch (ex) {
@@ -164,18 +162,6 @@ const CashoutInfoPage = () => {
                                 )}
                               </div>
                             </div>
-                            <div className='d-flex flex-stack mb-3'>
-                              <div className='fw-semibold pe-10 text-gray-600 fs-7'>
-                                Subtotal - Admin Fee
-                              </div>
-                              <div className='text-end fw-bold fs-6 text-gray-800'>
-                                {cashout.activityAmountTotal ? (
-                                  toCurrency(cashout.activityAmountTotal)
-                                ) : (
-                                  <></>
-                                )}
-                              </div>
-                            </div>
                             <div className='d-flex flex-stack'>
                               <div className='fw-semibold pe-10 text-gray-600 fs-7'>Total</div>
                               <div className='text-end fw-bold fs-6 text-gray-800'>
@@ -235,7 +221,7 @@ const CashoutInfoPage = () => {
                   {cashout.status == 'RELEASED' ? (
                     <></>
                   ) : (
-                    <Dropdown as={ButtonGroup}>
+                    <Dropdown as={ButtonGroup} drop='down-centered'>
                       <Button
                         onClick={() =>
                           updateStatus(cashout.status == 'APPROVED' ? 'RELEASED' : 'APPROVED')
@@ -274,7 +260,7 @@ const CashoutInfoPage = () => {
                     {cashout.details ? (
                       cashout.details.map((detail) => {
                         return (
-                          <tr>
+                          <tr key={detail.created}>
                             <td className='min-w-70px'>{detail.createdByUsername}</td>
                             <td className='text-success'>{detail.action}</td>
                             <td className='pe-0 text-end min-w-200px'>

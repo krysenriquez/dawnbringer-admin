@@ -13,7 +13,7 @@ import loginFormModel from '../models/Login/loginFormModel'
 import loginSchema from '../models/Login/loginSchema'
 import loginInitialValues from '../models/Login/loginInitialValues'
 
-export const LoginForm = () => {
+const LoginForm = () => {
   const intl = useIntl()
   const [loading, setLoading] = useState(false)
   const {saveAuth, setCurrentUser} = useAuth()
@@ -50,20 +50,20 @@ export const LoginForm = () => {
       onSubmit={submit}
     >
       {(actions) => (
-        <Form>
-          <div className='text-center mb-10' id={formId}>
+        <Form className='form w-100' id={formId}>
+          <div className='text-center mb-10'>
             <h1 className='text-dark mb-3'>{intl.formatMessage({id: 'LOGIN.HEADER'})}</h1>
           </div>
-          <div className='fv-row mb-10'>
+          <div className='fv-row mb-7'>
             <InputField
-              className='form-control form-control-solid form-control-lg '
+              className='form-control form-control-lg'
               name={username.name}
               placeholder={username.label}
             />
           </div>
           <div className='mb-7'>
             <PasswordField
-              className='form-control form-control-solid form-control-lg '
+              className='form-control form-control-lg'
               name={password.name}
               placeholder={password.label}
             />
@@ -85,7 +85,6 @@ export const LoginForm = () => {
           <div className='text-center'>
             <button
               type='submit'
-              id='kt_sign_in_submit'
               className='btn btn-lg btn-primary w-100 mb-5'
               disabled={actions.isSubmitting || !actions.isValid || !actions.touched}
             >
@@ -103,3 +102,5 @@ export const LoginForm = () => {
     </Formik>
   )
 }
+
+export default LoginForm

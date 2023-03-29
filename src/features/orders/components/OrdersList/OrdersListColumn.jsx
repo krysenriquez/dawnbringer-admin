@@ -1,7 +1,9 @@
 import clsx from 'clsx'
+import {format} from 'date-fns'
 import {useNavigate} from 'react-router-dom'
 import {toCurrency} from '@/utils/toCurrency'
 import {useIntl} from 'react-intl'
+import Countdown from 'react-countdown'
 import ActionCell from '@/components/elements/Table/Cell/ActionCell'
 import CustomSVG from '@/components/elements/SVG/CustomSVG'
 
@@ -31,6 +33,37 @@ const ordersColumn = [
     cell: (info) => {
       const intl = useIntl()
       return intl.formatMessage({id: info.getValue()})
+    },
+  },
+  {
+    header: 'Order Date',
+    accessorFn: (row) => row.orderDate,
+    id: 'orderDate',
+    cell: (info) => {
+      const intl = useIntl()
+      return format(Date.parse(info.getValue()), 'dd/MM/yyyy hh:mm:ss')
+    },
+  },
+  {
+    header: 'Remaining Prep Time',
+    accessorFn: (row) => row.remainingPrepTimeStatus,
+    id: 'remainingPrepTimeStatus',
+    cell: (info) => {
+      const intl = useIntl()
+      return (
+        <>
+          {info.getValue() ? (
+            <Countdown
+              date={Date.parse(info.row.original.orderDate)}
+              overtime={true}
+              className={'text-' + info.getValue()}
+            />
+          ) : (
+            <></>
+          )}
+        </>
+        // <div className={'text-' + info.row.original.remainingPrepTimeStatus}>{info.getValue()}</div>
+      )
     },
   },
   {

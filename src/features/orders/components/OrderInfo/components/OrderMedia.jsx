@@ -60,7 +60,6 @@ const OrderMedia = () => {
                 )
               })}
           </Carousel>
-
           <Lightbox
             open={open}
             index={imageIndex}

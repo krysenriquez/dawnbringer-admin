@@ -7,6 +7,7 @@ const ORDERS_URL = `${API_URL}/orders`
 export const GET_ORDERS_URL = `${ORDERS_URL}/getadminorders/`
 export const GET_ORDER_INFO_URL = `${ORDERS_URL}/getadminorder/`
 const GET_ORDER_STATUSES_URL = `${ORDERS_URL}/getorderstatus/`
+const GET_ORDER_STOCKS_URL = `${ORDERS_URL}/verifyorderstocks/`
 const CREATE_ORDER_HISTORY_URL = `${ORDERS_URL}/updateorder/`
 
 export const getOrders = (branchId) => {
@@ -37,7 +38,13 @@ export const getOrderInfo = (orderId, branchId) => {
 }
 
 export const getOrderStatuses = (values) => {
-  return axios.post(`${GET_ORDER_STATUSES_URL}`, humps.decamelizeKeys(values))
+  return axios.post(`${GET_ORDER_STATUSES_URL}`, humps.decamelizeKeys(values)).then((d) => d.data)
+}
+
+export const getOrderStocks = (values) => {
+  return axios
+    .post(`${GET_ORDER_STOCKS_URL}`, humps.decamelizeKeys(values))
+    .then((d) => humps.camelizeKeys(d.data))
 }
 
 export const processOrderStatus = (values) => {

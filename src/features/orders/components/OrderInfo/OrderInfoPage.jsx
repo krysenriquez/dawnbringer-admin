@@ -4,6 +4,7 @@ import {
 } from '@/features/orders/stores/OrderInfoQueryProvider'
 import OrderDetails from './components/OrderDetails'
 import OrderCustomer from './components/OrderCustomer'
+import OrderMember from './components/OrderMember'
 import OrderDocuments from './components/OrderDocuments'
 import OrderAddress from './components/OrderAddress'
 import OrderMedia from './components/OrderMedia'
@@ -24,8 +25,8 @@ const OrderInfoPage = () => {
           <div className='flex-lg-row-fluid ms-lg-7 ms-xl-1 d-flex flex-column gap-7 gap-lg-10'>
             <div className='d-flex flex-column flex-xl-row gap-7 gap-lg-10'>
               <OrderDetails />
+              <OrderMember />
               <OrderCustomer />
-              <OrderDocuments />
             </div>
             <div className='d-flex flex-column gap-7 gap-lg-10'>
               <div className='d-flex flex-column flex-xl-row gap-7 gap-lg-10'>

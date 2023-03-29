@@ -7,6 +7,7 @@ import {
 } from '@/features/orders/stores/OrderInfoQueryProvider'
 import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import CustomCard from '@/components/elements/Card/CustomCard'
+import Countdown from 'react-countdown'
 
 const OrderDetails = () => {
   const intl = useIntl()
@@ -23,7 +24,7 @@ const OrderDetails = () => {
           bodyClassName='pt-0'
         >
           <div className='table-responsive'>
-            <table className='table align-middle table-row-bordered mb-0 fs-6 gy-5 min-w-250px'>
+            <table className='table align-middle table-row-bordered mb-0 fs-6 gy-5 min-w-200px'>
               <tbody className='fw-semibold text-gray-600'>
                 <tr>
                   <td className='text-muted'>
@@ -36,7 +37,30 @@ const OrderDetails = () => {
                     </div>
                   </td>
                   <td className='fw-bold text-end'>
-                    {orderInfo.orderDate && format(Date.parse(orderInfo.orderDate), 'dd/MM/yyyy hh:mm:ss')}
+                    {orderInfo.orderDate &&
+                      format(Date.parse(orderInfo.orderDate), 'dd/MM/yyyy hh:mm:ss')}
+                  </td>
+                </tr>
+                <tr>
+                  <td className='text-muted'>
+                    <div className='d-flex align-items-center'>
+                      <CustomSVG
+                        className='svg-icon svg-icon-2 me-2'
+                        path='/media/icons/general/hourglass.svg'
+                      />
+                      Remaining Prep Time
+                    </div>
+                  </td>
+                  <td className='fw-bold text-end'>
+                    {orderInfo.orderDate && orderInfo.currentOrderStage != 4 ? (
+                      <Countdown
+                        date={Date.parse(orderInfo.orderDate)}
+                        overtime={true}
+                        className={'text-' + orderInfo.remainingPrepTimeStatus}
+                      />
+                    ) : (
+                      <></>
+                    )}
                   </td>
                 </tr>
                 <tr>
@@ -63,7 +87,9 @@ const OrderDetails = () => {
                       Delivery Method
                     </div>
                   </td>
-                  <td className='fw-bold text-end'>{intl.formatMessage({id: orderInfo.orderType})}</td>
+                  <td className='fw-bold text-end'>
+                    {intl.formatMessage({id: orderInfo.orderType})}
+                  </td>
                 </tr>
               </tbody>
             </table>
