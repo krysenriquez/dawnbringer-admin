@@ -9,7 +9,7 @@ import {
   useMemberUserInfoQueryContext,
 } from '@/features/members/stores/MemberUserInfoQueryProviders'
 import {useAuth} from '@/providers/AuthProvider'
-import {changeEmailAddress} from '@/features/members/api'
+import {changeMemberEmailAddress} from '@/features/members/api'
 import {useModalContext} from '@/components/elements/Modal/CustomModal'
 import InputField from '@/components/elements/Input/InputField'
 import PasswordField from '@/components/elements/Input/PasswordField'
@@ -70,7 +70,7 @@ const ChangeEmailAddressForm = () => {
         if (result.isConfirmed) {
           actions.setSubmitting(true)
           try {
-            const {data: response} = await changeEmailAddress(values.user)
+            const {data: response} = await changeMemberEmailAddress(values.user)
             swal.fire('Email Address updated!', response.detail, 'success')
           } catch (ex) {
             toast.error(ex.response.data.detail)

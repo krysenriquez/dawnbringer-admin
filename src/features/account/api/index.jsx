@@ -2,8 +2,9 @@ import axios from 'axios'
 import humps from 'humps'
 
 const API_URL = import.meta.env.VITE_API_URL
+const API_SUFFIX = import.meta.env.VITE_API_SUFFIX
 
-const USER_URL = `${API_URL}/users`
+const USER_URL = `${API_URL}/users/${API_SUFFIX}`
 export const GET_PROFILE_URL = `${USER_URL}/getuserprofile`
 const UPDATE_PROFILE_URL = `${USER_URL}/updateuserprofile/`
 const CHANGE_USERNAME_URL = `${USER_URL}/changeusername/`

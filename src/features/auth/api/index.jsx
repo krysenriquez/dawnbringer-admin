@@ -2,20 +2,15 @@ import axios from 'axios'
 import humps from 'humps'
 
 const API_URL = import.meta.env.VITE_API_URL
-const API_PATH = import.meta.env.VITE_API_PATH
-
-
-
-const AUTH_URL = `${API_URL}/vanguard`
+const API_SUFFIX = import.meta.env.VITE_API_SUFFIX
+const AUTH_URL = `${API_URL}/vanguard/${API_SUFFIX}`
+const USERS_URL = `${API_URL}/users/${API_SUFFIX}`
 
 const GET_USER_BY_ACCESSTOKEN_URL = `${AUTH_URL}/whoami/`
-const LOGIN_URL = `${AUTH_URL}/dblogin/`
+const LOGIN_URL = `${AUTH_URL}/login/`
 const REFRESH_URL = `${AUTH_URL}/refresh/`
-
 const FORGOT_PASSWORD_URL = `${AUTH_URL}/forgotpassword/`
 const VERIFY_FORGOT_PASSWORD_URL = `${AUTH_URL}/verifyforgotpassword/`
-
-const USERS_URL = `${API_URL}/users`
 const RESET_PASSWORD_URL = `${USERS_URL}/resetpassword/`
 
 export function login(username, password) {

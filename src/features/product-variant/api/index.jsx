@@ -2,7 +2,8 @@ import axios from 'axios'
 import humps from 'humps'
 
 const API_URL = import.meta.env.VITE_API_URL
-const PRODUCTS_URL = `${API_URL}/products`
+const API_SUFFIX = import.meta.env.VITE_API_SUFFIX
+const PRODUCTS_URL = `${API_URL}/products/${API_SUFFIX}`
 
 export const GET_PRODUCT_VARIANTS_URL = `${PRODUCTS_URL}/getproductvariants/`
 export const GET_PRODUCT_VARIANT_INFO_URL = `${PRODUCTS_URL}/getproductvariant/`

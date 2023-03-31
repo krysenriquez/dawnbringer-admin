@@ -2,17 +2,17 @@ import axios from 'axios'
 import humps from 'humps'
 
 const API_URL = import.meta.env.VITE_API_URL
-const SHOPS_URL = `${API_URL}/shop`
+const API_SUFFIX = import.meta.env.VITE_API_SUFFIX
+const SHOPS_URL = `${API_URL}/shop/${API_SUFFIX}`
+
 export const GET_PAGE_CONTENTS_URL = `${SHOPS_URL}/getpagecontents/`
 export const GET_PAGE_CONTENT_INFO_URL = `${SHOPS_URL}/getpagecontent/`
 const CREATE_PAGE_CONTENT_URL = `${SHOPS_URL}/createpagecontent/`
 const UPDATE_PAGE_CONTENT_URL = `${SHOPS_URL}/updatepagecontent/`
-
 export const GET_PAGE_COMPONENTS_URL = `${SHOPS_URL}/getpagecomponents/`
 export const GET_PAGE_COMPONENT_INFO_URL = `${SHOPS_URL}/getpagecomponent/`
 const CREATE_PAGE_COMPONENT_URL = `${SHOPS_URL}/createpagecomponent/`
 const UPDATE_PAGE_COMPONENT_URL = `${SHOPS_URL}/updatepagecomponent/`
-
 export const GET_SECTION_COMPONENTS_URL = `${SHOPS_URL}/getsectioncomponents/`
 export const GET_SECTION_COMPONENT_INFO_URL = `${SHOPS_URL}/getsectioncomponent/`
 const CREATE_SECTION_COMPONENT_URL = `${SHOPS_URL}/createsectioncomponent/`

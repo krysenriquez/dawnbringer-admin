@@ -2,7 +2,7 @@ import {string, object, ref, boolean} from 'yup'
 import * as yup from 'yup'
 import YupPassword from 'yup-password'
 YupPassword(yup)
-import {verifyEmailAddress, verifyUsername} from '../../api'
+import {checkEmailAddress, checkUsername} from '../../api'
 import userCreateFormModel from './userCreateFormModel'
 const {
   formField: {username, displayName, userType, emailAddress, password, repeatPassword, isActive},
@@ -10,7 +10,7 @@ const {
 
 const validateUsername = async (ctx) => {
   console.log(ctx.parent)
-  return await verifyUsername(ctx.parent.username)
+  return await checkUsername(ctx.parent.username)
     .then((response) => {
       return true
     })
@@ -20,7 +20,7 @@ const validateUsername = async (ctx) => {
 }
 
 const validateEmailAddress = async (ctx) => {
-  return await verifyEmailAddress(ctx.parent.emailAddress)
+  return await checkEmailAddress(ctx.parent.emailAddress)
     .then((response) => {
       return true
     })

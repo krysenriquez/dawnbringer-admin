@@ -1,5 +1,3 @@
-import React from 'react'
-import clsx from 'clsx'
 import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import {useBranch} from '@/providers/BranchProvider'
 

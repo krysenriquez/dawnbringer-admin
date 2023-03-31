@@ -2,7 +2,9 @@ import axios from 'axios'
 import humps from 'humps'
 
 const API_URL = import.meta.env.VITE_API_URL
-const SETTINGS_URL = `${API_URL}/settings`
+const API_SUFFIX = import.meta.env.VITE_API_SUFFIX
+const SETTINGS_URL = `${API_URL}/settings/${API_SUFFIX}`
+
 export const GET_BRANCH_ASSIGNMENTS_URL = `${SETTINGS_URL}/getbranchassignments/`
 export const GET_BRANCHES_URL = `${SETTINGS_URL}/getbranches/`
 export const GET_BRANCH_INFO_URL = `${SETTINGS_URL}/getbranch/`

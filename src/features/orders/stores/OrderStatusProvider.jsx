@@ -30,7 +30,10 @@ const OrderStatusProvider = ({children}) => {
       const requestOrderStatuses = async () => {
         try {
           if (!didRequestOrderStatus.current) {
-            const data = await getOrderStatuses()
+            const data = await getOrderStatuses({
+              orderStatus: orderInfo.currentOrderStatus,
+              orderType: orderInfo.orderType,
+            })
             if (data) {
               setOrderStatuses(data)
             }

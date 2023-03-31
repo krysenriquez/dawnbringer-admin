@@ -8,7 +8,7 @@ import {
   useMemberUserInfoQueryLoading,
   useMemberUserInfoQueryContext,
 } from '@/features/members/stores/MemberUserInfoQueryProviders'
-import {changePassword} from '@/features/members/api'
+import {changeMemberPassword} from '@/features/members/api'
 import {useModalContext} from '@/components/elements/Modal/CustomModal'
 import PasswordField from '@/components/elements/Input/PasswordField'
 
@@ -70,7 +70,7 @@ const ChangePasswordForm = () => {
         if (result.isConfirmed) {
           actions.setSubmitting(true)
           try {
-            const {data: response} = await changePassword(values.user)
+            const {data: response} = await changeMemberPassword(values.user)
             swal.fire('Password Updated!', response.detail, 'success')
           } catch (ex) {
             toast.error(ex.response.data.detail)

@@ -68,10 +68,10 @@ const PageTitle = ({children, description, breadcrumbs}) => {
 }
 
 const PageDescription = ({children}) => {
-  const {setPageAction} = usePageData()
+  const {setPageDescription} = usePageData()
   useEffect(() => {
     if (children) {
-      setPageAction(children.toString())
+      setPageDescription(children.toString())
     }
   }, [children])
   return <></>

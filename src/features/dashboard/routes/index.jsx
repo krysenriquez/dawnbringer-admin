@@ -1,6 +1,7 @@
 import {Route, Routes, Outlet} from 'react-router-dom'
 import {useIntl} from 'react-intl'
 import {PageTitle, PageAction} from '@/providers/PageDataProvider'
+import {DashboardProvider} from '../stores/DashboardProvider'
 import DashboardActions from '../components/widgets/DashboardActions'
 import Dashboard from './Dashboard'
 
@@ -28,13 +29,15 @@ const MembersRoutes = () => {
         path=''
         element={
           <>
-            <PageTitle breadcrumbs={dashboardBreadCrumbs} description=''>
-              {intl.formatMessage({id: 'DASHBOARD'})}
-            </PageTitle>
-            <PageAction>
-              <DashboardActions />
-            </PageAction>
-            <Dashboard />
+            <DashboardProvider>
+              <PageTitle breadcrumbs={dashboardBreadCrumbs} description=''>
+                {intl.formatMessage({id: 'DASHBOARD'})}
+              </PageTitle>
+              <PageAction>
+                <DashboardActions />
+              </PageAction>
+              <Dashboard />
+            </DashboardProvider>
           </>
         }
       />

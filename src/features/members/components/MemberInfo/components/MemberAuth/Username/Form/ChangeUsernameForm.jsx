@@ -8,7 +8,7 @@ import {
   useMemberUserInfoQueryLoading,
   useMemberUserInfoQueryContext,
 } from '@/features/members/stores/MemberUserInfoQueryProviders'
-import {changeUsername} from '@/features/members/api'
+import {changeMemberUsername} from '@/features/members/api'
 import {useModalContext} from '@/components/elements/Modal/CustomModal'
 import InputField from '@/components/elements/Input/InputField'
 import PasswordField from '@/components/elements/Input/PasswordField'
@@ -70,7 +70,7 @@ const ChangeUsernameForm = () => {
         if (result.isConfirmed) {
           actions.setSubmitting(true)
           try {
-            const {data: response} = await changeUsername(values.user)
+            const {data: response} = await changeMemberUsername(values.user)
             swal.fire('Username Updated!', response.detail, 'success')
           } catch (ex) {
             toast.error(ex.response.data.detail)

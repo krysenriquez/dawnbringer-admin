@@ -1,3 +1,5 @@
+import {toCurrency} from './toCurrency'
+
 export const arrayObjectToSelectOptions = (array, value, label, defaultLabel) => {
   let return_arr = [
     {
@@ -65,6 +67,16 @@ export const arrayToSelectOptions = (array, defaultLabel) => {
 
   array.map((arr) => {
     return_arr.push({value: arr, label: arr})
+  })
+
+  return return_arr
+}
+
+export const arrayObjectsToArray = (array, key) => {
+  let return_arr = []
+
+  array.map((arr) => {
+    return_arr.push(arr[`${key}`])
   })
 
   return return_arr
