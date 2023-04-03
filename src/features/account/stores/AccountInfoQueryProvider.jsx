@@ -15,6 +15,8 @@ const AccountInfoQueryProvider = ({children}) => {
     queryKey: [GET_PROFILE_URL],
     queryFn: () => getUserProfile(),
     enabled: true,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

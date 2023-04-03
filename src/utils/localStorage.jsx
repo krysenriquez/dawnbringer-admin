@@ -7,12 +7,16 @@ export const setLocalStorage = (key, value) => {
 }
 
 export const getLocalStorage = (key) => {
-  const encrypted = localStorage.getItem(key)
-  if (encrypted) {
-    const decrypted = CryptoJS.AES.decrypt(encrypted, SECRET_KEY).toString(CryptoJS.enc.Utf8)
-    return JSON.parse(decrypted)
+  try {
+    const encrypted = localStorage.getItem(key)
+    if (encrypted) {
+      const decrypted = CryptoJS.AES.decrypt(encrypted, SECRET_KEY).toString(CryptoJS.enc.Utf8)
+      return JSON.parse(decrypted)
+    }
+    return
+  } catch (error) {
+    removeLocalStorage(key)
   }
-  return
 }
 
 export const removeLocalStorage = (key) => {

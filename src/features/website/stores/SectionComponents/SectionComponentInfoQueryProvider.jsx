@@ -18,6 +18,8 @@ const SectionComponentInfoQueryProvider = ({children}) => {
     queryKey: [GET_SECTION_COMPONENT_INFO_URL, searchParams?.sectionComponentId],
     queryFn: () => getSectionComponentInfo(searchParams?.sectionComponentId),
     enabled: !!searchParams?.sectionComponentId,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

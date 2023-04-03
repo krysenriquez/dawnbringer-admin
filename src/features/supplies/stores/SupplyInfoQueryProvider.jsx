@@ -20,6 +20,8 @@ const SupplyInfoQueryProvider = ({children}) => {
     queryKey: [GET_SUPPLY_INFO_URL, searchParams?.supplyId, defaultBranch?.branchId],
     queryFn: () => getSupplyInfo(searchParams?.supplyId, defaultBranch?.branchId),
     enabled: !!searchParams?.supplyId && !!defaultBranch?.branchId,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

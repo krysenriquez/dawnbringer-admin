@@ -1,4 +1,4 @@
-import {ResetPasswordForm} from '../components/ResetPasswordForm'
+import ResetPasswordForm from '../components/ResetPasswordForm'
 import {ResetPasswordProvider} from '../stores/ResetPasswordProvider'
 
 const ResetPassword = () => {

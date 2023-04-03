@@ -15,6 +15,8 @@ const RolesListQueryProvider = ({children}) => {
     queryKey: [GET_USER_TYPES_URL],
     queryFn: () => getUserTypes(),
     enabled: true,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

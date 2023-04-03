@@ -20,6 +20,8 @@ const OrderInfoQueryProvider = ({children}) => {
     queryKey: [GET_ORDER_INFO_URL, searchParams?.orderId, defaultBranch?.branchId],
     queryFn: () => getOrderInfo(searchParams?.orderId, defaultBranch?.branchId),
     enabled: !!searchParams.orderId && !!defaultBranch?.branchId,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

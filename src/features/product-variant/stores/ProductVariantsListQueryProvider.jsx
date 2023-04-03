@@ -18,6 +18,8 @@ const ProductVariantsListQueryProvider = ({children}) => {
     queryKey: [GET_PRODUCT_VARIANTS_URL, defaultBranch?.branchId],
     queryFn: () => getProductVariants(defaultBranch?.branchId),
     enabled: !!defaultBranch?.branchId,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

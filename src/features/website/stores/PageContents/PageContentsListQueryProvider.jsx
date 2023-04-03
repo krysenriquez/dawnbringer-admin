@@ -15,6 +15,8 @@ const PageContentsListQueryProvider = ({children}) => {
     queryKey: [GET_PAGE_CONTENTS_URL],
     queryFn: () => getPageContents(),
     enabled: true,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

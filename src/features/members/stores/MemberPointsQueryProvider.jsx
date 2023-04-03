@@ -17,6 +17,8 @@ const MemberPointsQueryProvider = ({children}) => {
     queryKey: [GET_MEMBER_MEMBERSHIP_LEVEL_POINTS, searchParams?.accountId],
     queryFn: () => getMemberMembershipLevelPoints(searchParams?.accountId),
     enabled: !!searchParams?.accountId,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

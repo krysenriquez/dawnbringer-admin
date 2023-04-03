@@ -18,6 +18,8 @@ const RoleInfoQueryProvider = ({children}) => {
     queryKey: [GET_USER_TYPE_INFO_URL, searchParams?.userTypeId],
     queryFn: () => getUserTypeInfo(searchParams?.userTypeId),
     enabled: !!searchParams?.userTypeId,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

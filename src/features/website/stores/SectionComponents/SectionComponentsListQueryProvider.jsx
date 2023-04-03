@@ -15,6 +15,8 @@ const SectionComponentsListQueryProvider = ({children}) => {
     queryKey: [GET_SECTION_COMPONENTS_URL],
     queryFn: () => getSectionComponents(),
     enabled: true,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

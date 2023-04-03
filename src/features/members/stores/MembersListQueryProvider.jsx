@@ -15,6 +15,8 @@ const MembersListQueryProvider = ({children}) => {
     queryKey: [GET_MEMBERS_URL],
     queryFn: () => getMembers(),
     enabled: true,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

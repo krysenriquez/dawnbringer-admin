@@ -15,6 +15,8 @@ const CustomersListQueryProvider = ({children}) => {
     queryKey: [GET_CUSTOMERS_URL],
     queryFn: () => getCustomers(),
     enabled: true,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

@@ -18,6 +18,8 @@ const PageComponentInfoQueryProvider = ({children}) => {
     queryKey: [GET_PAGE_COMPONENT_INFO_URL, searchParams?.pageComponentId],
     queryFn: () => getPageComponentInfo(searchParams?.pageComponentId),
     enabled: !!searchParams?.pageComponentId,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

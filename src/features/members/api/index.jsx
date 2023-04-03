@@ -10,6 +10,7 @@ const USER_URL = `${API_URL}/users/${API_SUFFIX}`
 export const GET_MEMBERS_URL = `${ACCOUNTS_URL}/getmembers/`
 export const GET_MEMBER_INFO_URL = `${ACCOUNTS_URL}/getmember/`
 export const GET_MEMBER_USER_INFO_URL = `${ACCOUNTS_URL}/getmemberuser/`
+export const UPDATE_CODE_STATUS_URL = `${ACCOUNTS_URL}/updatecodestatus/`
 export const GET_MEMBER_MEMBERSHIP_LEVEL_POINTS = `${CORE_URL}/getmembershiplevelpoints/`
 
 const CHANGE_MEMBER_USERNAME_URL = `${USER_URL}/changememberusername/`
@@ -31,6 +32,12 @@ export const getMember = (accountId) => {
       })
     )
     .then((d) => humps.camelizeKeys(d.data[0]))
+}
+
+export const updateCodeStatus = (values) => {
+  return axios
+    .post(`${UPDATE_CODE_STATUS_URL}`, humps.decamelizeKeys(values))
+    .then((d) => humps.camelizeKeys(d.data))
 }
 
 export const getMemberMembershipLevelPoints = (accountId) => {

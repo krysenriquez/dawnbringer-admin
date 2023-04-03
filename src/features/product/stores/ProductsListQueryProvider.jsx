@@ -15,6 +15,8 @@ const ProductsListQueryProvider = ({children}) => {
     queryKey: [GET_PRODUCTS_URL],
     queryFn: () => getProducts(),
     enabled: true,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

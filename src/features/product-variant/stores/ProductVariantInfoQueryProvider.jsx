@@ -20,6 +20,8 @@ const ProductVariantInfoQueryProvider = ({children}) => {
     queryKey: [GET_PRODUCT_VARIANT_INFO_URL, searchParams?.sku, defaultBranch?.branchId],
     queryFn: () => getProductVariantInfo(searchParams?.sku, defaultBranch?.branchId),
     enabled: !!searchParams?.sku && !!defaultBranch?.branchId,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

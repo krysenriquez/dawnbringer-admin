@@ -15,6 +15,8 @@ const PageComponentsListQueryProvider = ({children}) => {
     queryKey: [GET_PAGE_COMPONENTS_URL],
     queryFn: () => getPageComponents(),
     enabled: true,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

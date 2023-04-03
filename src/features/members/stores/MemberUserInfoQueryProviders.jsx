@@ -18,6 +18,8 @@ const MemberUserInfoQueryProvider = ({children}) => {
     queryKey: [GET_MEMBER_USER_INFO_URL, searchParams?.accountId],
     queryFn: () => getMemberUserInfo(searchParams?.accountId),
     enabled: !!searchParams?.accountId,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

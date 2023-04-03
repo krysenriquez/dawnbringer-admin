@@ -14,6 +14,8 @@ const CashoutsListQueryProvider = ({children}) => {
     queryKey: [GET_CASHOUTS_URL],
     queryFn: () => getCashouts(),
     enabled: true,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

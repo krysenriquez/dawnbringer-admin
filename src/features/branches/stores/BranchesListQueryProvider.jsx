@@ -15,6 +15,8 @@ const BranchesListQueryProvider = ({children}) => {
     queryKey: [GET_BRANCHES_URL],
     queryFn: () => getBranches(),
     enabled: true,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

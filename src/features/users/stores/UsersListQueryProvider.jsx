@@ -15,6 +15,8 @@ const UsersListQueryProvider = ({children}) => {
     queryKey: [GET_USERS_URL],
     queryFn: () => getUsers(),
     enabled: true,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

@@ -18,6 +18,8 @@ const CashoutInfoQueryProvider = ({children}) => {
     queryKey: [GET_CASHOUT_INFO_URL, searchParams?.activityNumber],
     queryFn: () => getCashout(searchParams?.activityNumber),
     enabled: !!searchParams?.activityNumber,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

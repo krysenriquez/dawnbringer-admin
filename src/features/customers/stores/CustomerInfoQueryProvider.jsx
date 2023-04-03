@@ -18,6 +18,8 @@ const CustomerInfoQueryProvider = ({children}) => {
     queryKey: [GET_CUSTOMER_INFO_URL, searchParams?.customerNumber],
     queryFn: () => getCustomer(searchParams?.customerNumber),
     enabled: !!searchParams?.customerNumber,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

@@ -18,6 +18,8 @@ const ProductTypeInfoQueryProvider = ({children}) => {
     queryKey: [GET_PRODUCT_TYPE_INFO_URL, searchParams?.productTypeId],
     queryFn: () => getProductTypeInfo(searchParams?.productTypeId),
     enabled: !!searchParams?.productTypeId,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

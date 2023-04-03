@@ -18,6 +18,8 @@ const OrdersListQueryProvider = ({children}) => {
     queryKey: [GET_ORDERS_URL, defaultBranch?.branchId],
     queryFn: () => getOrders(defaultBranch?.branchId),
     enabled: !!defaultBranch?.branchId,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

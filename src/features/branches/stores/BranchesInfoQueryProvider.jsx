@@ -18,6 +18,8 @@ const BranchInfoQueryProvider = ({children}) => {
     queryKey: [GET_BRANCH_INFO_URL, searchParams?.branchId],
     queryFn: () => getBranchInfo(searchParams?.branchId),
     enabled: !!searchParams?.branchId,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {

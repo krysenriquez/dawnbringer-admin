@@ -15,6 +15,8 @@ const ProductTypesListQueryProvider = ({children}) => {
     queryKey: [GET_PRODUCT_TYPES_URL],
     queryFn: () => getProductTypes(),
     enabled: true,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const value = {
