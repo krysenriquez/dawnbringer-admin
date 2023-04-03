@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom'
 import {useIntl} from 'react-intl'
 import ActionCell from '@/components/elements/Table/Cell/ActionCell'
 import CustomSVG from '@/components/elements/SVG/CustomSVG'
+import RolePermissionComponent from '@/providers/Permissions/RolePermissionComponent'
 
 const pageContentsColumn = [
   {
@@ -70,12 +71,14 @@ const pageContentsColumn = [
 
       return (
         <>
-          <ActionCell
-            handleClick={handleView}
-            className='btn btn-icon btn-icon-primary btn-light btn-sm border-0 me-2'
-          >
-            <CustomSVG path='/media/icons/general/magnifying-glass.svg' className='svg-icon-2' />
-          </ActionCell>
+          <RolePermissionComponent moduleName='Content Management' permission='canRetrieve'>
+            <ActionCell
+              handleClick={handleView}
+              className='btn btn-icon btn-icon-primary btn-light btn-sm border-0 me-2'
+            >
+              <CustomSVG path='/media/icons/general/magnifying-glass.svg' className='svg-icon-2' />
+            </ActionCell>
+          </RolePermissionComponent>
         </>
       )
     },

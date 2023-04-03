@@ -16,10 +16,10 @@ import {
   usePageContentInfoQueryLoading,
   usePageContentInfoQueryContext,
 } from '@/features/website/stores/PageContents/PageContentInfoQueryProvider'
-
 import pageContentsFormModel from '@/features/website/models/PageContents/pageContentsFormModel'
 import pageContentsFormSchema from '@/features/website/models/PageContents/pageContentsFormSchema'
 import pageContentsInitialValues from '@/features/website/models/PageContents/pageContentsInitialValues'
+import RolePermissionComponent from '@/providers/Permissions/RolePermissionComponent'
 
 const PageContentInfoForm = () => {
   const navigate = useNavigate()
@@ -180,27 +180,31 @@ const PageContentInfoForm = () => {
                   </div>
                 </CustomCard>
                 <div className='d-flex justify-content-end'>
-                  <button
-                    type='reset'
-                    onClick={() => cancel()}
-                    className='btn btn-light me-3'
-                    disabled={actions.isSubmitting}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type='submit'
-                    className='btn btn-primary'
-                    disabled={actions.isSubmitting || !actions.isValid || !actions.touched}
-                  >
-                    <span className='indicator-label'>Submit</span>
-                    {actions.isSubmitting && (
-                      <span className='indicator-progress'>
-                        Please wait...{' '}
-                        <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
-                      </span>
-                    )}
-                  </button>
+                  <RolePermissionComponent moduleName='Content Management' permission='canUpdate'>
+                    <>
+                      <button
+                        type='reset'
+                        onClick={() => cancel()}
+                        className='btn btn-light me-3'
+                        disabled={actions.isSubmitting}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type='submit'
+                        className='btn btn-primary'
+                        disabled={actions.isSubmitting || !actions.isValid || !actions.touched}
+                      >
+                        <span className='indicator-label'>Submit</span>
+                        {actions.isSubmitting && (
+                          <span className='indicator-progress'>
+                            Please wait...{' '}
+                            <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+                          </span>
+                        )}
+                      </button>
+                    </>
+                  </RolePermissionComponent>
                 </div>
               </div>
             </Form>

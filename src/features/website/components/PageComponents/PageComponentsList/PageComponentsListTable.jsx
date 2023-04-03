@@ -9,9 +9,10 @@ import {
   usePageComponentsListQueryLoading,
 } from '@/features/website/stores/PageComponents/PageComponentsListQueryProvider'
 import {PageComponentCreateProvider} from '@/features/website/stores/PageComponents/PageComponentCreateProvider'
-
 import pageComponentsColumn from './PageComponentsListColumn'
 import PageComponentCreateForm from '../PageComponentCreate/PageContentCreateForm'
+import {usePermissions} from '@/providers/Permissions/PermissionsProviders'
+import getRolePermission from '@/utils/getRolePermission'
 
 const ProcessPageComponentCreate = (prop) => {
   const {isModalOpen, toggleModal} = prop
@@ -38,6 +39,9 @@ const PageComponentsListTable = () => {
   const tableData = useMemo(() => pageComponents, [pageComponents])
   const tableColumns = useMemo(() => pageComponentsColumn, [])
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [canCreatePageComponent, setCanCreatePageComponent] = useState(false)
+  const navigate = useNavigate()
+  const {permissions} = usePermissions()
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
@@ -51,7 +55,12 @@ const PageComponentsListTable = () => {
             {...{
               data: tableData,
               columns: tableColumns,
-              hasToolbar: false,
+              hasToolbar:
+                getRolePermission({
+                  moduleName: 'Content Management',
+                  permissions: permissions,
+                  permission: 'canCreate',
+                }) && canCreatePageComponent,
               toolbarButtonName: 'Add Page Component',
               handleToolbarButtonClick: toggleModal,
             }}

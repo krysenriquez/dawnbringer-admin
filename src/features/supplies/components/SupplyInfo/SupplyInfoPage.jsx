@@ -15,6 +15,7 @@ import SupplyBranchTo from './components/SupplyBranchTo'
 import SupplyTable from './components/SupplyTable'
 import SupplyUpdateForm from './components/Forms/SupplyUpdateForm'
 import HistoriesTable from './components/Histories/HistoriesTable'
+import RolePermissionComponent from '@/providers/Permissions/RolePermissionComponent'
 
 const ProcessSupplyUpdate = (prop) => {
   const {isModalOpen, toggleModal} = prop
@@ -80,24 +81,29 @@ const SupplyInfoPage = () => {
                         <SupplyBranchTo />
                       </div>
                       <SupplyTable />
-                      {supplyInfo.currentSupplyStage < 5 && supplyInfo.canUpdateSupplyStatus && (
-                        <div className='d-flex justify-content-end'>
-                          <button
-                            type='reset'
-                            onClick={() => cancel()}
-                            className='btn btn-light me-3'
-                          >
-                            Cancel
-                          </button>
-                          <button
-                            type='reset'
-                            onClick={() => toggleModal()}
-                            className='btn btn-primary'
-                          >
-                            Update
-                          </button>
-                        </div>
-                      )}
+                      <RolePermissionComponent
+                        moduleName='Supplies Management'
+                        permission='canUpdate'
+                      >
+                        {supplyInfo.currentSupplyStage < 5 && supplyInfo.canUpdateSupplyStatus && (
+                          <div className='d-flex justify-content-end'>
+                            <button
+                              type='reset'
+                              onClick={() => cancel()}
+                              className='btn btn-light me-3'
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              type='reset'
+                              onClick={() => toggleModal()}
+                              className='btn btn-primary'
+                            >
+                              Update
+                            </button>
+                          </div>
+                        )}
+                      </RolePermissionComponent>
                     </div>
                   </>
                 ) : (

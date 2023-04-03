@@ -1,4 +1,4 @@
-import {useEffect, useMemo} from 'react'
+import {useMemo} from 'react'
 import {useNavigate} from 'react-router-dom'
 import CustomCardWithoutHeader from '@/components/elements/Card/CustomCardWithoutHeader'
 import CustomTable from '@/components/elements/Table/CustomTable'
@@ -7,8 +7,9 @@ import {
   useProductVariantsListQueryData,
   useProductVariantsListQueryLoading,
 } from '../../stores/ProductVariantsListQueryProvider'
-
 import {productVariantsColumn} from './ProductVariantsListColumn'
+import {usePermissions} from '@/providers/Permissions/PermissionsProviders'
+import getRolePermission from '@/utils/getRolePermission'
 
 export const ProductVariantsListTable = () => {
   const productVariants = useProductVariantsListQueryData()
@@ -16,6 +17,7 @@ export const ProductVariantsListTable = () => {
   const tableData = useMemo(() => productVariants, [productVariants])
   const tableColumns = useMemo(() => productVariantsColumn, [])
   const navigate = useNavigate()
+  const {permissions} = usePermissions()
 
   const createProductVariant = () => {
     navigate(`/product-variants/create`)
@@ -30,7 +32,11 @@ export const ProductVariantsListTable = () => {
               data: tableData,
               columns: tableColumns,
               title: 'Product Variants',
-              hasToolbar: true,
+              hasToolbar: getRolePermission({
+                moduleName: 'Products Management',
+                permissions: permissions,
+                permission: 'canCreate',
+              }),
               toolbarButtonName: 'Add Product Variant',
               handleToolbarButtonClick: createProductVariant,
             }}

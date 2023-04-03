@@ -8,6 +8,8 @@ import {
   useSuppliesListQueryLoading,
 } from '../../stores/SuppliesListQueryProvider'
 import suppliesColumn from './SuppliesListColumn'
+import {usePermissions} from '@/providers/Permissions/PermissionsProviders'
+import getRolePermission from '@/utils/getRolePermission'
 
 const SuppliesListTable = () => {
   const supplies = useSuppliesListQueryData()
@@ -15,6 +17,7 @@ const SuppliesListTable = () => {
   const tableData = useMemo(() => supplies, [supplies])
   const tableColumns = useMemo(() => suppliesColumn, [])
   const navigate = useNavigate()
+  const {permissions} = usePermissions()
 
   const createSupply = () => {
     navigate(`/supplies/create`)
@@ -28,7 +31,11 @@ const SuppliesListTable = () => {
             {...{
               data: tableData,
               columns: tableColumns,
-              hasToolbar: true,
+              hasToolbar: getRolePermission({
+                moduleName: 'Supplies Management',
+                permissions: permissions,
+                permission: 'canCreate',
+              }),
               toolbarButtonName: 'Create Supply',
               handleToolbarButtonClick: createSupply,
             }}

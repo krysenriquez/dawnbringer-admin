@@ -6,12 +6,15 @@ import {
   useProductInfoQueryLoading,
 } from '@/features/product/stores/ProductInfoQueryProvider'
 import CustomCard from '@/components/elements/Card/CustomCard'
+import {usePermissions} from '@/providers/Permissions/PermissionsProviders'
+import getRolePermission from '@/utils/getRolePermission'
 
 const ProductDetails = () => {
   const navigate = useNavigate()
   const theme = useThemeMode()
   const productInfo = useProductInfoQueryData()
   const isLoading = useProductInfoQueryLoading()
+  const {permissions} = usePermissions()
 
   const edit = () => {
     navigate(`edit`)
@@ -27,7 +30,11 @@ const ProductDetails = () => {
           cardClassName='card-flush mb-5 mb-xl-8'
           hasHeader={true}
           header={<h2>Summary</h2>}
-          hasToolbar={true}
+          hasToolbar={getRolePermission({
+            moduleName: 'Products Management',
+            permissions: permissions,
+            permission: 'canUpdate',
+          })}
           toolbarButtonName='Edit'
           handleToolbarButtonClick={edit}
           bodyClassName='pt-0'

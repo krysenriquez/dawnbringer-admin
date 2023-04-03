@@ -1,4 +1,4 @@
-import {useEffect, useMemo} from 'react'
+import {useMemo} from 'react'
 import {useNavigate} from 'react-router-dom'
 import CustomCardWithoutHeader from '@/components/elements/Card/CustomCardWithoutHeader'
 import CustomTable from '@/components/elements/Table/CustomTable'
@@ -8,6 +8,8 @@ import {
   useProductTypesListQueryLoading,
 } from '@/features/product-type/stores/ProductTypesListQueryProvider'
 import productTypesColumn from './ProductTypesListColumn'
+import {usePermissions} from '@/providers/Permissions/PermissionsProviders'
+import getRolePermission from '@/utils/getRolePermission'
 
 const ProductTypesListTable = () => {
   const productTypes = useProductTypesListQueryData()
@@ -15,6 +17,7 @@ const ProductTypesListTable = () => {
   const tableData = useMemo(() => productTypes, [productTypes])
   const tableColumns = useMemo(() => productTypesColumn, [])
   const navigate = useNavigate()
+  const {permissions} = usePermissions()
 
   const createProductType = () => {
     navigate(`/product-types/create`)
@@ -28,7 +31,11 @@ const ProductTypesListTable = () => {
             {...{
               data: tableData,
               columns: tableColumns,
-              hasToolbar: true,
+              hasToolbar: getRolePermission({
+                moduleName: 'Products Management',
+                permissions: permissions,
+                permission: 'canCreate',
+              }),
               toolbarButtonName: 'Add Product Type',
               handleToolbarButtonClick: createProductType,
             }}

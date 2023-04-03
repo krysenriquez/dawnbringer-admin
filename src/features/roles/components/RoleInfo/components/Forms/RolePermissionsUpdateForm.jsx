@@ -99,6 +99,7 @@ const RolePermissionsUpdateForm = () => {
   }
 
   const submit = async (values, actions) => {
+    console.log(values)
     swal
       .fire({
         title: 'Update Role Permissions?',

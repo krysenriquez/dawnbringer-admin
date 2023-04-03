@@ -1,11 +1,13 @@
 import {createContext, useContext, useState, useEffect, useRef} from 'react'
-import {useAuth} from './AuthProvider'
+import {useAuth} from '../AuthProvider'
 import axios from 'axios'
 import humps from 'humps'
 
 const API_URL = import.meta.env.VITE_API_URL
-const USERS_URL = `${API_URL}/users`
-const GET_PERMISSIONS_URL = `${USERS_URL}/getpermissions/`
+const API_SUFFIX = import.meta.env.VITE_API_SUFFIX
+
+const USER_URL = `${API_URL}/users/${API_SUFFIX}`
+const GET_PERMISSIONS_URL = `${USER_URL}/getuserpermissions/`
 
 const getPermissions = () => {
   return axios.post(`${GET_PERMISSIONS_URL}`).then((d) => humps.camelizeKeys(d.data))

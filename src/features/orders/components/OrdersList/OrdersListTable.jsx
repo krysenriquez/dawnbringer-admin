@@ -11,7 +11,6 @@ import ordersColumn from './OrdersListColumn'
 const OrdersListTable = () => {
   const orders = useOrdersListQueryData()
   const isLoading = useOrdersListQueryLoading()
-
   const tableData = useMemo(() => orders, [orders])
   const tableColumns = useMemo(() => ordersColumn, [])
 

@@ -8,6 +8,8 @@ import {
   useSectionComponentsListQueryLoading,
 } from '@/features/website/stores/SectionComponents/SectionComponentsListQueryProvider'
 import sectionComponentsColumn from './SectionComponentsListColumn'
+import {usePermissions} from '@/providers/Permissions/PermissionsProviders'
+import getRolePermission from '@/utils/getRolePermission'
 
 const SectionComponentsListTable = () => {
   const navigate = useNavigate()
@@ -15,6 +17,8 @@ const SectionComponentsListTable = () => {
   const isLoading = useSectionComponentsListQueryLoading()
   const tableData = useMemo(() => sectionComponents, [sectionComponents])
   const tableColumns = useMemo(() => sectionComponentsColumn, [])
+  const [canCreateSectionComponent, setCanCreateSectionComponent] = useState(false)
+  const {permissions} = usePermissions()
 
   const createSectionComponents = () => {
     navigate(`/website/section-components/create`)
@@ -28,7 +32,12 @@ const SectionComponentsListTable = () => {
             {...{
               data: tableData,
               columns: tableColumns,
-              hasToolbar: true,
+              hasToolbar:
+                getRolePermission({
+                  moduleName: 'Content Management',
+                  permissions: permissions,
+                  permission: 'canCreate',
+                }) && canCreateSectionComponent,
               toolbarButtonName: 'Add Section Component',
               handleToolbarButtonClick: createSectionComponents,
             }}

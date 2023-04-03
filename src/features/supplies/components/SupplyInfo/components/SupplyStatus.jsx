@@ -10,6 +10,9 @@ import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import {CustomModal} from '@/components/elements/Modal/CustomModal'
 import SupplyStatusForm from './Forms/SupplyStatusForm'
 import classnames from 'classnames'
+import CustomCard from '@/components/elements/Card/CustomCard'
+import {usePermissions} from '@/providers/Permissions/PermissionsProviders'
+import getRolePermission from '@/utils/getRolePermission'
 
 const ProcessSupplyStatus = (prop) => {
   const {isModalOpen, toggleModal} = prop
@@ -32,8 +35,8 @@ const SupplyStatus = () => {
   const intl = useIntl()
   const supplyInfo = useSupplyInfoQueryData()
   const isLoading = useSupplyInfoQueryLoading()
-
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const {permissions} = usePermissions()
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
@@ -42,25 +45,24 @@ const SupplyStatus = () => {
   return (
     <>
       {supplyInfo && supplyInfo.histories && !isLoading ? (
-        <div className='card card-flush py-4'>
-          <div className='card-header'>
-            <div className='card-title'>
-              <h2>History</h2>
-            </div>
-            <div className='card-toolbar'>
-              {supplyInfo.currentSupplyStage < 5 && supplyInfo.canUpdateSupplyStatus ? (
-                <button
-                  className='btn btn-sm btn-light btn-active-primary'
-                  onClick={() => toggleModal()}
-                >
-                  Process
-                </button>
-              ) : (
-                <></>
-              )}
-            </div>
-          </div>
-          <div className='card-body pt-0'>
+        <CustomCard
+          cardClassName='card-flush py-4'
+          hasHeader={true}
+          header={<h2>History</h2>}
+          hasToolbar={
+            getRolePermission({
+              moduleName: 'Supplies Management',
+              permissions: permissions,
+              permission: 'canUpdate',
+            }) &&
+            supplyInfo.currentSupplyStage < 5 &&
+            supplyInfo.canUpdateSupplyStatus
+          }
+          toolbarButtonName='Process'
+          handleToolbarButtonClick={toggleModal}
+          bodyClassName='pt-0'
+        >
+          <>
             <div className='timeline ms-n1'>
               {supplyInfo.histories.map((history, index) => {
                 return (
@@ -119,8 +121,8 @@ const SupplyStatus = () => {
                 )
               })}
             </div>
-          </div>
-        </div>
+          </>
+        </CustomCard>
       ) : (
         <></>
       )}

@@ -8,6 +8,8 @@ import {useUsersListQueryData, useUsersListQueryLoading} from '../../stores/User
 import {UserCreateProvider} from '../../stores/UserCreateProvider'
 import usersColumn from './UsersListColumn'
 import UserCreateForm from '../UserCreate/UserCreateForm'
+import {usePermissions} from '@/providers/Permissions/PermissionsProviders'
+import getRolePermission from '@/utils/getRolePermission'
 
 const ProcessUserCreate = (prop) => {
   const {isModalOpen, toggleModal} = prop
@@ -30,10 +32,11 @@ const ProcessUserCreate = (prop) => {
 
 const UsersListTable = () => {
   const users = useUsersListQueryData()
-  const isLoading = useUsersListQueryLoading() 
+  const isLoading = useUsersListQueryLoading()
   const tableData = useMemo(() => users, [users])
   const tableColumns = useMemo(() => usersColumn, [])
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const {permissions} = usePermissions()
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
@@ -47,7 +50,11 @@ const UsersListTable = () => {
             {...{
               data: tableData,
               columns: tableColumns,
-              hasToolbar: true,
+              hasToolbar: getRolePermission({
+                moduleName: 'User Management',
+                permissions: permissions,
+                permission: 'canCreate',
+              }),
               toolbarButtonName: 'Add User',
               handleToolbarButtonClick: toggleModal,
             }}

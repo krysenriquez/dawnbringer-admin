@@ -8,6 +8,8 @@ import {
   useProductsListQueryLoading,
 } from '../../stores/ProductsListQueryProvider'
 import productsColumn from './ProductsListColumn'
+import {usePermissions} from '@/providers/Permissions/PermissionsProviders'
+import getRolePermission from '@/utils/getRolePermission'
 
 const ProductsListTable = () => {
   const products = useProductsListQueryData()
@@ -15,6 +17,7 @@ const ProductsListTable = () => {
   const tableData = useMemo(() => products, [products])
   const tableColumns = useMemo(() => productsColumn, [])
   const navigate = useNavigate()
+  const {permissions} = usePermissions()
 
   const createProduct = () => {
     navigate(`/products/create`)
@@ -28,7 +31,11 @@ const ProductsListTable = () => {
             {...{
               data: tableData,
               columns: tableColumns,
-              hasToolbar: true,
+              hasToolbar: getRolePermission({
+                moduleName: 'Products Management',
+                permissions: permissions,
+                permission: 'canCreate',
+              }),
               toolbarButtonName: 'Add Product',
               handleToolbarButtonClick: createProduct,
             }}

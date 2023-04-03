@@ -1,10 +1,10 @@
-import {usePermissions} from '@/providers/PermissionsProviders'
+import {usePermissions} from './PermissionsProviders'
 import {useState, useMemo} from 'react'
 import {useEffect} from 'react'
 import {Navigate} from 'react-router-dom'
 
-export default function RolePermissionComponent(props) {
-  const {children, permissionName, permission} = props
+const RolePermissionComponent = (props) => {
+  const {children, moduleName, permission} = props
   const {permissions} = usePermissions()
   const permissionsArray = useMemo(() => permissions, [permissions])
   const [canView, setCanView] = useState(false)
@@ -12,13 +12,15 @@ export default function RolePermissionComponent(props) {
   useEffect(() => {
     if (permissionsArray) {
       const permissionManagement = permissionsArray.find(
-        (permission) => permission.permissionName == permissionName
+        (permission) => permission.moduleName == moduleName
       )
-      setCanView(permissionManagement[`${permission}`])
+      setCanView(permissionManagement && permissionManagement[`${permission}`])
     }
-  }, [permissionsArray, permissionName])
+  }, [permissionsArray, moduleName])
 
   if (canView) return <>{children}</>
 
   return <></>
 }
+
+export default RolePermissionComponent

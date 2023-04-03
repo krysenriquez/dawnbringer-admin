@@ -10,6 +10,8 @@ import {
 } from '@/features/roles/stores/RoleInfoQueryProvider'
 import {RolePermissionsUpdateProvider} from '@/features/roles/stores/RolePermissionsUpdateProvider'
 import RolePermissionsUpdateForm from './Forms/RolePermissionsUpdateForm'
+import {usePermissions} from '@/providers/Permissions/PermissionsProviders'
+import getRolePermission from '@/utils/getRolePermission'
 
 const ProcessRoleEdit = (prop) => {
   const {isModalOpen, toggleModal} = prop
@@ -35,6 +37,7 @@ const RoleDetails = () => {
   const userTypeInfo = useRoleInfoQueryData()
   const isLoading = useRoleInfoQueryLoading()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const {permissions} = usePermissions()
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
@@ -47,7 +50,11 @@ const RoleDetails = () => {
           cardClassName='card-flush mb-5 mb-xl-8'
           hasHeader={true}
           header={<h2>{userTypeInfo.userTypeName}</h2>}
-          hasToolbar={true}
+          hasToolbar={getRolePermission({
+            moduleName: 'User Management',
+            permissions: permissions,
+            permission: 'canUpdate',
+          })}
           toolbarButtonName='Edit'
           handleToolbarButtonClick={toggleModal}
           bodyClassName='pt-0'

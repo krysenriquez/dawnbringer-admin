@@ -6,6 +6,7 @@ import {I18nProvider} from '@/providers/i18n/i18nProvider'
 import {LayoutProvider} from '@/providers/layout/LayoutProvider'
 import {LayoutSplashScreen} from '@/providers/SplashScreen'
 import {MasterInit} from '@/components/layouts/MasterInit'
+import {PermissionsProvider} from '@/providers/Permissions/PermissionsProviders'
 import {CompanyProvider} from '@/providers/CompanyProvider'
 import {StateProvider} from '@/providers/StateProvider'
 import {BranchProvider} from '@/providers/BranchProvider'
@@ -47,9 +48,11 @@ export const AppRoutes = () => {
               <Route
                 path='/*'
                 element={
-                  <BranchProvider>
-                    <PrivateRoutes />
-                  </BranchProvider>
+                  <PermissionsProvider>
+                    <BranchProvider>
+                      <PrivateRoutes />
+                    </BranchProvider>
+                  </PermissionsProvider>
                 }
               />
             </>

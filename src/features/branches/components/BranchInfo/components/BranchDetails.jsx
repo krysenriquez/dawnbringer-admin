@@ -9,6 +9,8 @@ import {
   useBranchInfoQueryLoading,
 } from '@/features/branches/stores/BranchesInfoQueryProvider'
 import BranchEditForm from '../../BranchEdit/BranchEditForm'
+import {usePermissions} from '@/providers/Permissions/PermissionsProviders'
+import getRolePermission from '@/utils/getRolePermission'
 
 const ProcessBranchEdit = (prop) => {
   const {isModalOpen, toggleModal} = prop
@@ -32,6 +34,7 @@ const BranchDetails = () => {
   const branchInfo = useBranchInfoQueryData()
   const isLoading = useBranchInfoQueryLoading()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const {permissions} = usePermissions()
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
@@ -44,7 +47,11 @@ const BranchDetails = () => {
           cardClassName='card-flush mb-5 mb-xl-8'
           hasHeader={true}
           header={<h2>Summary</h2>}
-          hasToolbar={true}
+          hasToolbar={getRolePermission({
+            moduleName: 'User Management',
+            permissions: permissions,
+            permission: 'canUpdate',
+          })}
           toolbarButtonName='Edit'
           handleToolbarButtonClick={toggleModal}
           bodyClassName='pt-0'

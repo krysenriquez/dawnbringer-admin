@@ -10,6 +10,8 @@ import {
 } from '@/features/branches/stores/BranchesListQueryProvider'
 import branchesColumn from './BranchesListColumn'
 import BranchCreateForm from '../BranchCreate/BranchCreateForm'
+import {usePermissions} from '@/providers/Permissions/PermissionsProviders'
+import getRolePermission from '@/utils/getRolePermission'
 
 const ProcessBranchCreate = (prop) => {
   const {isModalOpen, toggleModal} = prop
@@ -35,6 +37,7 @@ const BranchesListTable = () => {
   const tableData = useMemo(() => branches, [branches])
   const tableColumns = useMemo(() => branchesColumn, [])
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const {permissions} = usePermissions()
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
@@ -48,7 +51,11 @@ const BranchesListTable = () => {
             {...{
               data: tableData,
               columns: tableColumns,
-              hasToolbar: true,
+              hasToolbar: getRolePermission({
+                moduleName: 'User Management',
+                permissions: permissions,
+                permission: 'canCreate',
+              }),
               toolbarButtonName: 'Add Branch',
               handleToolbarButtonClick: toggleModal,
             }}

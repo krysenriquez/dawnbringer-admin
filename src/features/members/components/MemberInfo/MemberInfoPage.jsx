@@ -16,11 +16,14 @@ import MemberActivitiesTable from './components/MemberActivities/MemberActivitie
 import ChangeUsername from './components/MemberAuth/Username/ChangeUsername'
 import ChangeEmailAddress from './components/MemberAuth/EmailAddress/ChangeEmaillAddress'
 import ChangePassword from './components/MemberAuth/Password/ChangePassword'
+import {usePermissions} from '@/providers/Permissions/PermissionsProviders'
+import getRolePermission from '@/utils/getRolePermission'
 
 const MemberInfoPage = () => {
   const memberInfo = useMemberInfoQueryData()
   const isLoading = useMemberInfoQueryLoading()
   const [tab, setTab] = useState('orders')
+  const {permissions} = usePermissions()
 
   return (
     <>
@@ -77,9 +80,23 @@ const MemberInfoPage = () => {
                     <></>
                   )}
                 </Tab>
-                <Tab eventKey='advanced' title='Advanced'>
+                <Tab
+                  eventKey='advanced'
+                  title='Advanced'
+                  disabled={
+                    !getRolePermission({
+                      moduleName: 'Members Management',
+                      permissions: permissions,
+                      permission: 'canUpdate',
+                    })
+                  }
+                >
                   {tab == 'advanced' ? (
                     <>
+                      {/* <RolePermissionComponent
+                        moduleName='Members Management'
+                        permission='canUpdate'
+                      > */}
                       <CustomCard
                         cardClassName='card-flush mb-5 mb-xl-8'
                         hasHeader={true}

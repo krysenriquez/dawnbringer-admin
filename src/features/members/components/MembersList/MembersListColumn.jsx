@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import ActionCell from '@/components/elements/Table/Cell/ActionCell'
 import {useNavigate} from 'react-router-dom'
+import RolePermissionComponent from '@/providers/Permissions/RolePermissionComponent'
 
 const membersColumns = [
   {
@@ -78,12 +79,14 @@ const membersColumns = [
 
       return (
         <>
-          <ActionCell
-            handleClick={handleView}
-            className='btn btn-icon btn-icon-primary btn-light btn-sm border-0 me-2'
-          >
-            <CustomSVG path='/media/icons/general/magnifying-glass.svg' className='svg-icon-2' />
-          </ActionCell>
+          <RolePermissionComponent moduleName='Members Management' permission='canRetrieve'>
+            <ActionCell
+              handleClick={handleView}
+              className='btn btn-icon btn-icon-primary btn-light btn-sm border-0 me-2'
+            >
+              <CustomSVG path='/media/icons/general/magnifying-glass.svg' className='svg-icon-2' />
+            </ActionCell>
+          </RolePermissionComponent>
         </>
       )
     },

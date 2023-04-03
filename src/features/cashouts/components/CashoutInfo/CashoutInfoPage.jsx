@@ -14,6 +14,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import {updateCashoutStatus} from '../../api'
+import RolePermissionComponent from '@/providers/Permissions/RolePermissionComponent'
 
 const CashoutInfoPage = () => {
   const navigate = useNavigate()
@@ -217,37 +218,39 @@ const CashoutInfoPage = () => {
                 <button type='button' className='btn btn-secondary' onClick={returnToList}>
                   Return
                 </button>
-                <div className='d-flex flex-wrap flex-center gap-3'>
-                  {cashout.status == 'RELEASED' ? (
-                    <></>
-                  ) : (
-                    <Dropdown as={ButtonGroup} drop='down-centered'>
-                      <Button
-                        onClick={() =>
-                          updateStatus(cashout.status == 'APPROVED' ? 'RELEASED' : 'APPROVED')
-                        }
-                        className='btn btn-light-primary'
-                      >
-                        {cashout.status == 'APPROVED' ? 'Release' : 'Approve'}
-                      </Button>
-                      <Dropdown.Toggle
-                        split
-                        id='dropdown-split-basic'
-                        className='btn btn-light-primary'
-                      />
-                      <Dropdown.Menu>
-                        {cashout.status == 'APPROVED' ? (
-                          <></>
-                        ) : (
-                          <Dropdown.Item onClick={() => updateStatus('RELEASED')}>
-                            Release
-                          </Dropdown.Item>
-                        )}
-                        <Dropdown.Item onClick={() => updateStatus('DENIED')}>Deny</Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  )}
-                </div>
+                <RolePermissionComponent moduleName='Members Management' permission='canUpdate'>
+                  <div className='d-flex flex-wrap flex-center gap-3'>
+                    {cashout.status == 'RELEASED' ? (
+                      <></>
+                    ) : (
+                      <Dropdown as={ButtonGroup} drop='down-centered'>
+                        <Button
+                          onClick={() =>
+                            updateStatus(cashout.status == 'APPROVED' ? 'RELEASED' : 'APPROVED')
+                          }
+                          className='btn btn-light-primary'
+                        >
+                          {cashout.status == 'APPROVED' ? 'Release' : 'Approve'}
+                        </Button>
+                        <Dropdown.Toggle
+                          split
+                          id='dropdown-split-basic'
+                          className='btn btn-light-primary'
+                        />
+                        <Dropdown.Menu>
+                          {cashout.status == 'APPROVED' ? (
+                            <></>
+                          ) : (
+                            <Dropdown.Item onClick={() => updateStatus('RELEASED')}>
+                              Release
+                            </Dropdown.Item>
+                          )}
+                          <Dropdown.Item onClick={() => updateStatus('DENIED')}>Deny</Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    )}
+                  </div>
+                </RolePermissionComponent>
               </div>
             </div>
           </div>

@@ -8,6 +8,7 @@ import {
   useMemberInfoQueryLoading,
 } from '@/features/members/stores/MemberInfoQueryProvider'
 import CustomCard from '@/components/elements/Card/CustomCard'
+import RolePermissionComponent from '@/providers/Permissions/RolePermissionComponent'
 
 const MemberCode = () => {
   const memberInfo = useMemberInfoQueryData()

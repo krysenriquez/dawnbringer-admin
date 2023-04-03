@@ -10,6 +10,7 @@ import {
 import {QRCodeSVG} from 'qrcode.react'
 import {toAbsoluteUrl} from '@/utils/toAbsoluteUrl'
 import {updateCodeStatus} from '@/features/members/api'
+import RolePermissionComponent from '@/providers/Permissions/RolePermissionComponent'
 
 const MemberCode = () => {
   const memberInfo = useMemberInfoQueryData()
@@ -104,27 +105,31 @@ const MemberCode = () => {
               <></>
             )}
             <div className='text-center pt-10'>
-              <button
-                className={clsx('btn py-3 px-6 me-3', {
-                  'btn-light': memberInfo.code.status == 'ACTIVE',
-                  'btn-light-success': memberInfo.code.status != 'ACTIVE',
-                })}
-                onClick={() => handleDisable(memberInfo.code)}
-              >
-                <span className='fw-bold'>
-                  {memberInfo.code.status == 'ACTIVE' ? 'Disable Code' : 'Enable Code'}
-                </span>
-              </button>
-              {memberInfo.code.status == 'ACTIVE' ? (
-                <button
-                  className='btn btn-light-warning py-3 px-6 me-3'
-                  onClick={() => copyToClipBoard(memberInfo.code.referralLink)}
-                >
-                  <span className='fw-bold'>Copy Link</span>
-                </button>
-              ) : (
-                <></>
-              )}
+              <RolePermissionComponent moduleName='Members Management' permission='canUpdate'>
+                <>
+                  <button
+                    className={clsx('btn py-3 px-6 me-3', {
+                      'btn-light': memberInfo.code.status == 'ACTIVE',
+                      'btn-light-success': memberInfo.code.status != 'ACTIVE',
+                    })}
+                    onClick={() => handleDisable(memberInfo.code)}
+                  >
+                    <span className='fw-bold'>
+                      {memberInfo.code.status == 'ACTIVE' ? 'Disable Code' : 'Enable Code'}
+                    </span>
+                  </button>
+                  {memberInfo.code.status == 'ACTIVE' ? (
+                    <button
+                      className='btn btn-light-warning py-3 px-6 me-3'
+                      onClick={() => copyToClipBoard(memberInfo.code.referralLink)}
+                    >
+                      <span className='fw-bold'>Copy Link</span>
+                    </button>
+                  ) : (
+                    <></>
+                  )}
+                </>
+              </RolePermissionComponent>
             </div>
           </div>
         </div>

@@ -11,6 +11,8 @@ import {
 import branchesColumn from './UserBranchesListColumn'
 import {UserBranchesUpdateProvider} from '@/features/users/stores/UserUpdateBranchesProvider'
 import UserBranchesUpdateForm from '../Forms/UserBranchesUpdateForm'
+import {usePermissions} from '@/providers/Permissions/PermissionsProviders'
+import getRolePermission from '@/utils/getRolePermission'
 
 const ProcessUserBranchesUpdate = (prop) => {
   const {isModalOpen, toggleModal} = prop
@@ -37,6 +39,7 @@ const UserBranchesListTable = () => {
   const isLoading = useUserInfoQueryLoading()
   const [userInfoBranches, setUserInfoBranches] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const {permissions} = usePermissions()
 
   useEffect(() => {
     if (userInfo && userInfo.branchAssignment && !isLoading) {
@@ -59,7 +62,11 @@ const UserBranchesListTable = () => {
             {...{
               data: tableData,
               columns: tableColumns,
-              hasToolbar: true,
+              hasToolbar: getRolePermission({
+                moduleName: 'User Management',
+                permissions: permissions,
+                permission: 'canUpdate',
+              }),
               toolbarButtonName: 'Update User Branches',
               handleToolbarButtonClick: toggleModal,
             }}

@@ -16,10 +16,10 @@ import CustomCard from '@/components/elements/Card/CustomCard'
 import InputField from '@/components/elements/Input/InputField'
 import SelectField from '@/components/elements/Input/SelectField'
 import CheckboxField from '@/components/elements/Input/CheckboxField'
-
 import pageComponentsFormModel from '@/features/website/models/PageComponents/pageComponentsFormModel'
 import pageComponentsFormSchema from '@/features/website/models/PageComponents/pageComponentsFormSchema'
 import pageComponentsInitialValues from '@/features/website/models/PageComponents/pageComponentsInitialValues'
+import RolePermissionComponent from '@/providers/Permissions/RolePermissionComponent'
 
 const PageComponentInfoForm = () => {
   const navigate = useNavigate()
@@ -140,27 +140,31 @@ const PageComponentInfoForm = () => {
                   </div>
                 </CustomCard>
                 <div className='d-flex justify-content-end'>
-                  <button
-                    type='reset'
-                    onClick={() => cancel()}
-                    className='btn btn-light me-3'
-                    disabled={actions.isSubmitting}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type='submit'
-                    className='btn btn-primary'
-                    disabled={actions.isSubmitting || !actions.isValid || !actions.touched}
-                  >
-                    <span className='indicator-label'>Submit</span>
-                    {actions.isSubmitting && (
-                      <span className='indicator-progress'>
-                        Please wait...{' '}
-                        <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
-                      </span>
-                    )}
-                  </button>
+                  <RolePermissionComponent moduleName='Content Management' permission='canUpdate'>
+                    <>
+                      <button
+                        type='reset'
+                        onClick={() => cancel()}
+                        className='btn btn-light me-3'
+                        disabled={actions.isSubmitting}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type='submit'
+                        className='btn btn-primary'
+                        disabled={actions.isSubmitting || !actions.isValid || !actions.touched}
+                      >
+                        <span className='indicator-label'>Submit</span>
+                        {actions.isSubmitting && (
+                          <span className='indicator-progress'>
+                            Please wait...{' '}
+                            <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+                          </span>
+                        )}
+                      </button>
+                    </>
+                  </RolePermissionComponent>
                 </div>
               </div>
             </Form>

@@ -3,6 +3,7 @@ import {Navigate, useRoutes} from 'react-router-dom'
 import {MainLayout} from '@/components/layouts/main/elements/MainLayout'
 import {DashboardLayout} from '@/components/layouts/main/elements/DashboardLayout'
 import {SuspensedView} from '@/utils/suspensedView'
+import RolePermissionRoute from '@/providers/Permissions/RolePermissionRoute'
 import DashboardRoutes from '@/features/dashboard/routes'
 
 const PrivateRoutes = () => {
@@ -29,7 +30,9 @@ const PrivateRoutes = () => {
           path: 'products/*',
           element: (
             <SuspensedView>
-              <Products />
+              <RolePermissionRoute moduleName='Products Management' permission='canRetrieve'>
+                <Products />
+              </RolePermissionRoute>
             </SuspensedView>
           ),
         },
@@ -37,7 +40,9 @@ const PrivateRoutes = () => {
           path: 'product-variants/*',
           element: (
             <SuspensedView>
-              <ProductVariants />
+              <RolePermissionRoute moduleName='Products Management' permission='canRetrieve'>
+                <ProductVariants />
+              </RolePermissionRoute>
             </SuspensedView>
           ),
         },
@@ -45,7 +50,9 @@ const PrivateRoutes = () => {
           path: 'product-types/*',
           element: (
             <SuspensedView>
-              <ProductTypes />
+              <RolePermissionRoute moduleName='Products Management' permission='canRetrieve'>
+                <ProductTypes />
+              </RolePermissionRoute>
             </SuspensedView>
           ),
         },
@@ -53,7 +60,9 @@ const PrivateRoutes = () => {
           path: 'orders/*',
           element: (
             <SuspensedView>
-              <Orders />
+              <RolePermissionRoute moduleName='Orders Management' permission='canRetrieve'>
+                <Orders />
+              </RolePermissionRoute>
             </SuspensedView>
           ),
         },
@@ -61,7 +70,9 @@ const PrivateRoutes = () => {
           path: 'supplies/*',
           element: (
             <SuspensedView>
-              <Supplies />
+              <RolePermissionRoute moduleName='Supplies Management' permission='canRetrieve'>
+                <Supplies />
+              </RolePermissionRoute>
             </SuspensedView>
           ),
         },
@@ -69,7 +80,9 @@ const PrivateRoutes = () => {
           path: 'members/*',
           element: (
             <SuspensedView>
-              <Members />
+              <RolePermissionRoute moduleName='Members Management' permission='canRetrieve'>
+                <Members />
+              </RolePermissionRoute>
             </SuspensedView>
           ),
         },
@@ -77,7 +90,9 @@ const PrivateRoutes = () => {
           path: 'cashouts/*',
           element: (
             <SuspensedView>
-              <Cashouts />
+              <RolePermissionRoute moduleName='Members Management' permission='canRetrieve'>
+                <Cashouts />
+              </RolePermissionRoute>
             </SuspensedView>
           ),
         },
@@ -85,7 +100,9 @@ const PrivateRoutes = () => {
           path: 'customers/*',
           element: (
             <SuspensedView>
-              <Customers />
+              <RolePermissionRoute moduleName='Guests Management' permission='canRetrieve'>
+                <Customers />
+              </RolePermissionRoute>
             </SuspensedView>
           ),
         },
@@ -93,7 +110,9 @@ const PrivateRoutes = () => {
           path: 'website/*',
           element: (
             <SuspensedView>
-              <Website />
+              <RolePermissionRoute moduleName='Content Management' permission='canRetrieve'>
+                <Website />
+              </RolePermissionRoute>
             </SuspensedView>
           ),
         },
@@ -101,7 +120,9 @@ const PrivateRoutes = () => {
           path: 'settings/*',
           element: (
             <SuspensedView>
-              <Settings />
+              <RolePermissionRoute moduleName='User Management' permission='canRetrieve'>
+                <Settings />
+              </RolePermissionRoute>
             </SuspensedView>
           ),
         },
