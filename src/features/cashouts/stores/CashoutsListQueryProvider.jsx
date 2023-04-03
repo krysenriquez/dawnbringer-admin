@@ -1,4 +1,4 @@
-import {createContext, useContext, useState, useEffect} from 'react'
+import {createContext, useContext} from 'react'
 import {useQuery} from 'react-query'
 import {initialQuery} from '@/config/const'
 import {getCashouts, GET_CASHOUTS_URL} from '../api'
@@ -10,13 +10,11 @@ const CashoutsListQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_CASHOUTS_URL}`,
-    () => {
-      return getCashouts()
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_CASHOUTS_URL],
+    queryFn: () => getCashouts(),
+    enabled: true,
+  })
 
   const value = {
     isLoading: isFetching,

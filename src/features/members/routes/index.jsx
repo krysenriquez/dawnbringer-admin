@@ -28,7 +28,7 @@ const MembersRoutes = () => {
         path=''
         element={
           <>
-            <PageTitle breadcrumbs={membersBreadCrumbs} description=''>
+            <PageTitle breadcrumbs={membersBreadCrumbs } description=''>
               {intl.formatMessage({id: 'MEMBERS.LIST'})}
             </PageTitle>
             <MembersList />

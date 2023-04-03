@@ -14,13 +14,11 @@ const OrdersListQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_ORDERS_URL}-${defaultBranch.branchId}`,
-    () => {
-      return getOrders(defaultBranch.branchId)
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_ORDERS_URL, defaultBranch?.branchId],
+    queryFn: () => getOrders(defaultBranch?.branchId),
+    enabled: !!defaultBranch?.branchId,
+  })
 
   const value = {
     isLoading: isFetching,

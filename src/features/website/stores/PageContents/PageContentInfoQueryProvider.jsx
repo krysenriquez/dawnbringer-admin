@@ -14,13 +14,11 @@ const PageContentInfoQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_PAGE_CONTENT_INFO_URL}-${searchParams.pageContentId}`,
-    () => {
-      return getPageContentInfo(searchParams.pageContentId)
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_PAGE_CONTENT_INFO_URL, searchParams?.pageContentId],
+    queryFn: () => getPageContentInfo(searchParams?.pageContentId),
+    enabled: !!searchParams?.pageContentId,
+  })
 
   const value = {
     isLoading: isFetching,

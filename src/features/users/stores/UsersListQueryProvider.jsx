@@ -11,13 +11,11 @@ const UsersListQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_USERS_URL}`,
-    () => {
-      return getUsers()
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_USERS_URL],
+    queryFn: () => getUsers(),
+    enabled: true,
+  })
 
   const value = {
     isLoading: isFetching,

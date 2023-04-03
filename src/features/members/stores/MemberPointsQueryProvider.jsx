@@ -13,13 +13,11 @@ const MemberPointsQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_MEMBER_MEMBERSHIP_LEVEL_POINTS}-${searchParams.accountId}`,
-    () => {
-      return getMemberMembershipLevelPoints(searchParams.accountId)
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_MEMBER_MEMBERSHIP_LEVEL_POINTS, searchParams?.accountId],
+    queryFn: () => getMemberMembershipLevelPoints(searchParams?.accountId),
+    enabled: !!searchParams?.accountId,
+  })
 
   const value = {
     isLoading: isFetching,

@@ -11,13 +11,11 @@ const RolesListQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_USER_TYPES_URL}`,
-    () => {
-      return getUserTypes()
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_USER_TYPES_URL],
+    queryFn: () => getUserTypes(),
+    enabled: true,
+  })
 
   const value = {
     isLoading: isFetching,

@@ -16,13 +16,11 @@ const OrderInfoQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_ORDER_INFO_URL}-${searchParams.orderId}-${defaultBranch.branchId}`,
-    () => {
-      return getOrderInfo(searchParams.orderId, defaultBranch.branchId)
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_ORDER_INFO_URL, searchParams?.orderId, defaultBranch?.branchId],
+    queryFn: () => getOrderInfo(searchParams?.orderId, defaultBranch?.branchId),
+    enabled: !!searchParams.orderId && !!defaultBranch?.branchId,
+  })
 
   const value = {
     isLoading: isFetching,

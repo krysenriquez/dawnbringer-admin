@@ -36,6 +36,7 @@ function usePageData() {
 
 const PageTitle = ({children, description, breadcrumbs}) => {
   const {setPageTitle, setPageDescription, setPageBreadcrumbs} = usePageData()
+
   useEffect(() => {
     if (children) {
       setPageTitle(children.toString())
@@ -77,7 +78,8 @@ const PageDescription = ({children}) => {
   return <></>
 }
 
-const PageAction = ({children}) => {
+const PageAction = (props) => {
+  const {children} = props
   const {setPageAction} = usePageData()
   useEffect(() => {
     if (children) {

@@ -1,47 +1,41 @@
 import {createContext, useContext, useState, useEffect, useRef} from 'react'
 import {toast} from 'react-toastify'
 import {getCompany} from '@/features/settings/api'
+import {getLocalStorage, setLocalStorage} from '@/utils/localStorage'
 
 const CompanyContext = createContext({
-  companyName: undefined,
-  companyLogo: undefined,
-  companyDescription: undefined,
+  company: undefined,
 })
 
 const CompanyProvider = ({children}) => {
   const didRequest = useRef(false)
-  const [companyName, setCompanyName] = useState(undefined)
-  const [companyLogo, setCompanyLogo] = useState(undefined)
-  const [companyDescription, setCompanyDescription] = useState(undefined)
+  const [company, setCompany] = useState(getLocalStorage('company'))
 
   useEffect(() => {
-    const requestCompany = async () => {
-      try {
-        if (!didRequest.current) {
-          const data = await getCompany()
-          if (data) {
-            setCompanyName(data.name)
-            setCompanyLogo(data.logo)
-            setCompanyDescription(data.description)
+    if (!company) {
+      const requestCompany = async () => {
+        try {
+          if (!didRequest.current) {
+            const data = await getCompany()
+            if (data) {
+              setCompany(data)
+              setLocalStorage('company', data)
+            }
+          }
+        } catch (error) {
+          if (!didRequest.current) {
+            toast.error('Could not fetch Company Info!')
           }
         }
-      } catch (error) {
-        if (!didRequest.current) {
-          toast.error('Could not fetch Company Info!')
-        }
+
+        return () => (didRequest.current = true)
       }
 
-      return () => (didRequest.current = true)
+      requestCompany()
     }
+  }, [company])
 
-    requestCompany()
-  }, [])
-
-  return (
-    <CompanyContext.Provider value={{companyName, companyLogo, companyDescription}}>
-      {children}
-    </CompanyContext.Provider>
-  )
+  return <CompanyContext.Provider value={{company}}>{children}</CompanyContext.Provider>
 }
 
 const useCompany = () => useContext(CompanyContext)

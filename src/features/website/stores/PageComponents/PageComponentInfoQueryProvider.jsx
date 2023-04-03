@@ -14,13 +14,11 @@ const PageComponentInfoQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_PAGE_COMPONENT_INFO_URL}-${searchParams.pageComponentId}`,
-    () => {
-      return getPageComponentInfo(searchParams.pageComponentId)
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_PAGE_COMPONENT_INFO_URL, searchParams?.pageComponentId],
+    queryFn: () => getPageComponentInfo(searchParams?.pageComponentId),
+    enabled: !!searchParams?.pageComponentId,
+  })
 
   const value = {
     isLoading: isFetching,

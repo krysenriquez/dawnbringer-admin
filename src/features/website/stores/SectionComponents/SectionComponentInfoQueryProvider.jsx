@@ -14,13 +14,11 @@ const SectionComponentInfoQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_SECTION_COMPONENT_INFO_URL}-${searchParams.sectionComponentId}`,
-    () => {
-      return getSectionComponentInfo(searchParams.sectionComponentId)
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_SECTION_COMPONENT_INFO_URL, searchParams?.sectionComponentId],
+    queryFn: () => getSectionComponentInfo(searchParams?.sectionComponentId),
+    enabled: !!searchParams?.sectionComponentId,
+  })
 
   const value = {
     isLoading: isFetching,

@@ -14,13 +14,11 @@ const MemberUserInfoQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_MEMBER_USER_INFO_URL}-${searchParams.accountId}`,
-    () => {
-      return getMemberUserInfo(searchParams.accountId)
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_MEMBER_USER_INFO_URL, searchParams?.accountId],
+    queryFn: () => getMemberUserInfo(searchParams?.accountId),
+    enabled: !!searchParams?.accountId,
+  })
 
   const value = {
     isLoading: isFetching,

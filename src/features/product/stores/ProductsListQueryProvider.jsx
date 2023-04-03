@@ -11,13 +11,11 @@ const ProductsListQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_PRODUCTS_URL}`,
-    () => {
-      return getProducts()
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_PRODUCTS_URL],
+    queryFn: () => getProducts(),
+    enabled: true,
+  })
 
   const value = {
     isLoading: isFetching,

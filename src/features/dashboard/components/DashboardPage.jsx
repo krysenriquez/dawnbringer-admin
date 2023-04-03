@@ -8,10 +8,15 @@ import MembersCount from './widgets/Cards/MembersCount'
 import CustomersCount from './widgets/Cards/CustomersCount'
 import OrdersCount from './widgets/Cards/OrdersCount'
 import TotalSales from './widgets/Cards/TotalSales'
+import {PageAction} from '@/providers/PageDataProvider'
+import DashboardActions from '../components/widgets/DashboardActions'
 
 const DashboardPage = () => {
   return (
     <>
+      <PageAction>
+        <DashboardActions />
+      </PageAction>
       <div className='row g-5 g-xl-10 mb-xl-10'>
         <div className='col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-0'>
           <TotalSales />

@@ -31,7 +31,7 @@ const ProductTypeRoutes = () => {
         element={
           <>
             <PageTitle breadcrumbs={productTypeBreadCrumbs} description=''>
-              {intl.formatMessage({id: 'PRODUCTS.TYPES'})}
+              {intl.formatMessage({id: 'PRODUCTS.TYPES.LIST'})}
             </PageTitle>
             <ProductTypesList />
           </>

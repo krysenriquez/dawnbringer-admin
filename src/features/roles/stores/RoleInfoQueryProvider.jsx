@@ -14,13 +14,11 @@ const RoleInfoQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_USER_TYPE_INFO_URL}-${searchParams.userTypeId}`,
-    () => {
-      return getUserTypeInfo(searchParams.userTypeId)
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_USER_TYPE_INFO_URL, searchParams?.userTypeId],
+    queryFn: () => getUserTypeInfo(searchParams?.userTypeId),
+    enabled: !!searchParams?.userTypeId,
+  })
 
   const value = {
     isLoading: isFetching,

@@ -2,10 +2,10 @@ import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import {useBranch} from '@/providers/BranchProvider'
 
 function SidebarMenuBranches() {
-  const {branches, defaultBranch, setDefaultBranch} = useBranch()
+  const {branches, defaultBranch, selectBranch} = useBranch()
 
   const setBranch = (branch) => {
-    setDefaultBranch(branch)
+    selectBranch(branch)
   }
 
   return (

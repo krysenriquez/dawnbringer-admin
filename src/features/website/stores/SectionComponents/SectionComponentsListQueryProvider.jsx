@@ -11,13 +11,11 @@ const SectionComponentsListQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_SECTION_COMPONENTS_URL}`,
-    () => {
-      return getSectionComponents()
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_SECTION_COMPONENTS_URL],
+    queryFn: () => getSectionComponents(),
+    enabled: true,
+  })
 
   const value = {
     isLoading: isFetching,

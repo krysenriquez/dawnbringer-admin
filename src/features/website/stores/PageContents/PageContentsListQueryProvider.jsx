@@ -11,13 +11,11 @@ const PageContentsListQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_PAGE_CONTENTS_URL}`,
-    () => {
-      return getPageContents()
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_PAGE_CONTENTS_URL],
+    queryFn: () => getPageContents(),
+    enabled: true,
+  })
 
   const value = {
     isLoading: isFetching,

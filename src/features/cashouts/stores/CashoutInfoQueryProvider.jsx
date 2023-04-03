@@ -14,13 +14,11 @@ const CashoutInfoQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_CASHOUT_INFO_URL}-${searchParams.activityNumber}`,
-    () => {
-      return getCashout({activityNumber: searchParams.activityNumber})
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_CASHOUT_INFO_URL, searchParams?.activityNumber],
+    queryFn: () => getCashout(searchParams?.activityNumber),
+    enabled: !!searchParams?.activityNumber,
+  })
 
   const value = {
     isLoading: isFetching,

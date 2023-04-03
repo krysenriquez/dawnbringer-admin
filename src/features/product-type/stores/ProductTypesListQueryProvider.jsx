@@ -11,13 +11,11 @@ const ProductTypesListQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_PRODUCT_TYPES_URL}`,
-    () => {
-      return getProductTypes()
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_PRODUCT_TYPES_URL],
+    queryFn: () => getProductTypes(),
+    enabled: true,
+  })
 
   const value = {
     isLoading: isFetching,

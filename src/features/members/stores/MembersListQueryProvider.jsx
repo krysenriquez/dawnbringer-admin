@@ -11,13 +11,11 @@ const MembersListQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_MEMBERS_URL}`,
-    () => {
-      return getMembers()
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_MEMBERS_URL],
+    queryFn: () => getMembers(),
+    enabled: true,
+  })
 
   const value = {
     isLoading: isFetching,

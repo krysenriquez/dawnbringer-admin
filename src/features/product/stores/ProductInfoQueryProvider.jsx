@@ -14,13 +14,11 @@ const ProductInfoQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_PRODUCT_INFO_URL}-${searchParams.productId}`,
-    () => {
-      return getProductInfo(searchParams.productId)
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_PRODUCT_INFO_URL, searchParams?.productId],
+    queryFn: () => getProductInfo(searchParams?.productId),
+    enabled: !!searchParams?.productId,
+  })
 
   const value = {
     isLoading: isFetching,

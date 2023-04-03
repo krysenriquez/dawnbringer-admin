@@ -14,13 +14,11 @@ const SuppliesListQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_SUPPLIES_URL}-${defaultBranch.branchId}`,
-    () => {
-      return getSupplies(defaultBranch.branchId)
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_SUPPLIES_URL, defaultBranch?.branchId],
+    queryFn: () => getSupplies(defaultBranch?.branchId),
+    enabled: !!defaultBranch?.branchId,
+  })
 
   const value = {
     isLoading: isFetching,

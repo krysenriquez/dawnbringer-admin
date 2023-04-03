@@ -14,13 +14,11 @@ const CustomerInfoQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_CUSTOMER_INFO_URL}-${searchParams.customerNumber}`,
-    () => {
-      return getCustomer(searchParams.customerNumber)
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_CUSTOMER_INFO_URL, searchParams?.customerNumber],
+    queryFn: () => getCustomer(searchParams?.customerNumber),
+    enabled: !!searchParams?.customerNumber,
+  })
 
   const value = {
     isLoading: isFetching,

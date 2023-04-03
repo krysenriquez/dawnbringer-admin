@@ -11,13 +11,11 @@ const BranchesListQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_BRANCHES_URL}`,
-    () => {
-      return getBranches()
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_BRANCHES_URL],
+    queryFn: () => getBranches(),
+    enabled: true,
+  })
 
   const value = {
     isLoading: isFetching,

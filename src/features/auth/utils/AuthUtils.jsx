@@ -1,3 +1,5 @@
+import {setLocalStorage, getLocalStorage, removeLocalStorage} from '@/utils/localStorage'
+
 const AUTH_LOCAL_STORAGE_KEY = import.meta.env.VITE_APP_PREFIX + 'a_token'
 const AUTH_LOCAL_STORAGE_KEY_DURATION = 1000 * 60 * 4
 
@@ -6,19 +8,11 @@ const getAuth = () => {
     return
   }
 
-  const lsValue = localStorage.getItem(AUTH_LOCAL_STORAGE_KEY)
-  if (!lsValue) {
+  const auth = getLocalStorage(AUTH_LOCAL_STORAGE_KEY)
+  if (!auth) {
     return
   }
-
-  try {
-    const auth = JSON.parse(lsValue)
-    if (auth) {
-      return auth
-    }
-  } catch (error) {
-    console.error('AUTH LOCAL STORAGE PARSE ERROR', error)
-  }
+  return auth
 }
 
 const setAuth = (auth) => {
@@ -27,8 +21,7 @@ const setAuth = (auth) => {
   }
 
   try {
-    const lsValue = JSON.stringify(auth)
-    localStorage.setItem(AUTH_LOCAL_STORAGE_KEY, lsValue)
+    setLocalStorage(AUTH_LOCAL_STORAGE_KEY, auth)
   } catch (error) {
     console.error('AUTH LOCAL STORAGE SAVE ERROR', error)
   }
@@ -40,7 +33,7 @@ const removeAuth = () => {
   }
 
   try {
-    localStorage.removeItem(AUTH_LOCAL_STORAGE_KEY)
+    removeLocalStorage(AUTH_LOCAL_STORAGE_KEY)
   } catch (error) {
     console.error('AUTH LOCAL STORAGE REMOVE ERROR', error)
   }

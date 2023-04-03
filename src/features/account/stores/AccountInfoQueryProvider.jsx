@@ -11,13 +11,11 @@ const AccountInfoQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_PROFILE_URL}`,
-    () => {
-      return getUserProfile()
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_PROFILE_URL],
+    queryFn: () => getUserProfile(),
+    enabled: true,
+  })
 
   const value = {
     isLoading: isFetching,

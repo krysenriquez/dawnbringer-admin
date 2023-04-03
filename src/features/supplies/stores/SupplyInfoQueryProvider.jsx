@@ -16,13 +16,11 @@ const SupplyInfoQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_SUPPLY_INFO_URL}-${searchParams.supplyId}-${defaultBranch.branchId}`,
-    () => {
-      return getSupplyInfo(searchParams.supplyId, defaultBranch.branchId)
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_SUPPLY_INFO_URL, searchParams?.supplyId, defaultBranch?.branchId],
+    queryFn: () => getSupplyInfo(searchParams?.supplyId, defaultBranch?.branchId),
+    enabled: !!searchParams?.supplyId && !!defaultBranch?.branchId,
+  })
 
   const value = {
     isLoading: isFetching,

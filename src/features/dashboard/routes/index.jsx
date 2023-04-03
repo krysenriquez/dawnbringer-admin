@@ -4,6 +4,8 @@ import {PageTitle, PageAction} from '@/providers/PageDataProvider'
 import {DashboardProvider} from '../stores/DashboardProvider'
 import DashboardActions from '../components/widgets/DashboardActions'
 import Dashboard from './Dashboard'
+import Toolbar from '@/components/layouts/main/elements/Toolbar/Toolbar'
+import {Content} from '@/components/layouts/main/elements/Content/Content'
 
 const MembersRoutes = () => {
   const intl = useIntl()
@@ -33,10 +35,10 @@ const MembersRoutes = () => {
               <PageTitle breadcrumbs={dashboardBreadCrumbs} description=''>
                 {intl.formatMessage({id: 'DASHBOARD'})}
               </PageTitle>
-              <PageAction>
-                <DashboardActions />
-              </PageAction>
-              <Dashboard />
+              <Toolbar />
+              <Content>
+                <Dashboard />
+              </Content>
             </DashboardProvider>
           </>
         }

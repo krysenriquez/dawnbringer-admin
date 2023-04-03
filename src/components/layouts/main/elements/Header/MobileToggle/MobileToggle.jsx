@@ -2,7 +2,7 @@ import CustomSVG from '@/components/elements/SVG/CustomSVG'
 import {useCompany} from '@/providers/CompanyProvider'
 
 const MobileToggle = () => {
-  const {companyLogo} = useCompany()
+  const {company} = useCompany()
   return (
     <div className='d-flex align-items-center d-block d-lg-none ms-n3' title='Show sidebar menu'>
       <div
@@ -12,7 +12,7 @@ const MobileToggle = () => {
         <CustomSVG path='/media/icons/hamburger.svg' className='svg-icon-2 svg-icon' />
       </div>
       <a href='/dashboard'>
-        <img alt='Logo' src='/media/logos/logo.png' className='h-30px' />
+        <img alt='Logo' src={company.logo} className='h-30px' />
       </a>
     </div>
   )

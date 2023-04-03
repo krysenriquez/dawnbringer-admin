@@ -76,32 +76,36 @@ const MemberDetails = () => {
                 </>
               )}
               {memberInfo.addressInfo &&
-                memberInfo.addressInfo.map((address) => {
-                  return (
-                    <div key={address.addressType}>
-                      <div className='fw-bold mt-5'>
-                        {intl.formatMessage({id: address.addressType})} Address
+                memberInfo.addressInfo
+                  .filter((address) => {
+                    return address.isDefault == true
+                  })
+                  .map((address, index) => {
+                    return (
+                      <div key={index}>
+                        <div className='fw-bold mt-5'>
+                          {intl.formatMessage({id: address.addressType})} Address
+                        </div>
+                        <div className='text-gray-600'>
+                          {address.address1 ||
+                          address.address2 ||
+                          address.city ||
+                          address.zip ||
+                          address.province ||
+                          address.country ? (
+                            <>
+                              {address.address1} {address.address2} <br />
+                              {address.city} {address.zip}
+                              <br />
+                              {address.province} {address.country}
+                            </>
+                          ) : (
+                            '--'
+                          )}
+                        </div>
                       </div>
-                      <div className='text-gray-600'>
-                        {address.address1 ||
-                        address.address2 ||
-                        address.city ||
-                        address.zip ||
-                        address.province ||
-                        address.country ? (
-                          <>
-                            {address.address1} {address.address2} <br />
-                            {address.city} {address.zip}
-                            <br />
-                            {address.province} {address.country}
-                          </>
-                        ) : (
-                          '--'
-                        )}
-                      </div>
-                    </div>
-                  )
-                })}
+                    )
+                  })}
             </div>
           </>
         </CustomCard>

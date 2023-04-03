@@ -11,13 +11,11 @@ const PageComponentsListQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_PAGE_COMPONENTS_URL}`,
-    () => {
-      return getPageComponents()
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_PAGE_COMPONENTS_URL],
+    queryFn: () => getPageComponents(),
+    enabled: true,
+  })
 
   const value = {
     isLoading: isFetching,

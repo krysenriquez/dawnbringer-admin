@@ -11,13 +11,11 @@ const CustomersListQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_CUSTOMERS_URL}`,
-    () => {
-      return getCustomers()
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_CUSTOMERS_URL],
+    queryFn: () => getCustomers(),
+    enabled: true,
+  })
 
   const value = {
     isLoading: isFetching,

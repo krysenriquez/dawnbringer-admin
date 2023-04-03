@@ -14,13 +14,11 @@ const BranchInfoQueryProvider = ({children}) => {
     isFetching,
     refetch,
     data: response,
-  } = useQuery(
-    `${GET_BRANCH_INFO_URL}-${searchParams.branchId}`,
-    () => {
-      return getBranchInfo(searchParams.branchId)
-    },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-  )
+  } = useQuery({
+    queryKey: [GET_BRANCH_INFO_URL, searchParams?.branchId],
+    queryFn: () => getBranchInfo(searchParams?.branchId),
+    enabled: !!searchParams?.branchId,
+  })
 
   const value = {
     isLoading: isFetching,

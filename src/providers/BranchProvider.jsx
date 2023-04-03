@@ -1,20 +1,25 @@
 import {createContext, useContext, useState, useEffect, useRef} from 'react'
+import {useQuery} from 'react-query'
 import {useAuth} from './AuthProvider'
-import axios from 'axios'
-import humps from 'humps'
+import {setLocalStorage, getLocalStorage} from '@/utils/localStorage'
 import {getBranchAssignments} from '@/features/branches/api'
 
 const BranchContext = createContext({
   branches: undefined,
   defaultBranch: undefined,
-  setDefaultBranch: (any) => {},
+  selectBranch: (any) => {},
 })
 
 const BranchProvider = ({children}) => {
   const didRequest = useRef(false)
   const {logout, auth} = useAuth()
   const [branches, setBranches] = useState(undefined)
-  const [defaultBranch, setDefaultBranch] = useState(undefined)
+  const [defaultBranch, setDefaultBranch] = useState(getLocalStorage('defaultBranch'))
+
+  const selectBranch = (branch) => {
+    setDefaultBranch(branch)
+    setLocalStorage('defaultBranch', branch)
+  }
 
   useEffect(() => {
     const requestBranches = async () => {
@@ -23,7 +28,7 @@ const BranchProvider = ({children}) => {
           const data = await getBranchAssignments()
           if (data && data.branch.length > 0) {
             setBranches(data.branch)
-            setDefaultBranch(data.branch[0])
+            selectBranch(data.branch[0])
           }
         }
       } catch (error) {
@@ -39,7 +44,7 @@ const BranchProvider = ({children}) => {
   }, [auth])
 
   return (
-    <BranchContext.Provider value={{branches, defaultBranch, setDefaultBranch}}>
+    <BranchContext.Provider value={{branches, defaultBranch, selectBranch}}>
       {children}
     </BranchContext.Provider>
   )
