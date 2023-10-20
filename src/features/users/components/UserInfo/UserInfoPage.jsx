@@ -39,11 +39,11 @@ const BranchInfoPage = () => {
                     <></>
                   )}
                 </Tab>
-                <Tab eventKey='permissions' title='Permissions'>
+                {/* <Tab eventKey='permissions' title='Permissions'>
                   {tab == 'permissions' ? (
                     <>
                       <div className='d-flex flex-column flex-lg-row-fluid ms-lg-7 ms-xl-1 gap-7 gap-lg-10'>
-                        {/* <MemberCode /> */}
+                        <MemberCode />
                       </div>
                     </>
                   ) : (
@@ -51,8 +51,8 @@ const BranchInfoPage = () => {
                   )}
                 </Tab>
                 <Tab eventKey='logs' title='Logs'>
-                  {tab == 'logs' ? <>{/* <MemberActivitiesTable /> */}</> : <></>}
-                </Tab>
+                  {tab == 'logs' ? <><MemberActivitiesTable /></> : <></>}
+                </Tab> */}
               </CustomTabs>
             </div>
           </div>
