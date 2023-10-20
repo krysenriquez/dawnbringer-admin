@@ -25,7 +25,7 @@ const UserDetails = () => {
           <div className='py-5 fs-6'>
             <div className='fw-bold'>Display Name</div>
             <div className='text-gray-600'>{userInfo.displayName}</div>
-            <div className='fw-bold mt-5'>Username</div>a
+            <div className='fw-bold mt-5'>Username</div>
             <div className='text-gray-600'>{userInfo.username}</div>
             <div className='fw-bold mt-5'>Email Address</div>
             <div className='text-gray-600'>{userInfo.emailAddress}</div>

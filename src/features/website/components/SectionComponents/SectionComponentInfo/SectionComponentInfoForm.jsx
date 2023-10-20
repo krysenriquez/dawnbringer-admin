@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {Formik, Form} from 'formik'
-import humps from 'humps'
+import humps, {decamelize} from 'humps'
 import {toast} from 'react-toastify'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -61,6 +61,7 @@ const SectionComponentInfoForm = () => {
         return {...prevState, ...sectionComponentInfo}
       })
     }
+    console.log(decamelize('description1', {split: /(?=[A-Z0-9])/}))
   }, [sectionComponentInfo, isLoading])
 
   const [pageComponentOptions, setPageComponentOptions] = useState([])
@@ -99,6 +100,7 @@ const SectionComponentInfoForm = () => {
             toast.error(ex.response.data.detail)
           } finally {
             actions.resetForm()
+            refetch()
           }
         }
       })
@@ -110,7 +112,7 @@ const SectionComponentInfoForm = () => {
   const transformToFormData = (values) => {
     const formData = new FormData()
     const thumbnail = values.image
-    const decamelizedValues = humps.decamelizeKeys(values)
+    const decamelizedValues = humps.decamelizeKeys(values, {split: /(?=[A-Z0-9])/})
 
     for (var keys in decamelizedValues) {
       if (keys != 'image') {
